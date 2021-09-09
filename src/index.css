@@ -1,1 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 
+/* Setting up a root with css variables for all the colors being used */
+:root {
+    --dark-blue: #213368;
+    --light-blue: #159CFE;
+    --white: #ffffff;
+    --dark-gray: #686868;
+    --light-gray: #f6f6f6;
+    --black: #000;
+
+    --pill-border-radius: 100px;
+}
+
+/* Reset Styling */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+body {
+    background-color: var(--white);
+    font-family: 'Inter', sans-serif;
+}
+
+input {
+    width: 100%;
+    display: block;
+    padding: 1rem;
+    background-color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: var(--pill-border-radius);
+}
+input::placeholder {
+    color: var(--dark-gray);
+}
+
+form {
+    width: 100%;
+}
+/* 
+button {
+    cursor: pointer;
+} */
+
+button.pill-btn {
+    border-radius: var(--pill-border-radius);
+    border: none;
+    outline: none;
+    padding: 1rem 2rem;
+}
+
+button.blue {
+    background-color: var(--light-blue);
+    color: var(--white);
+}
+
+.container {
+    width: 90%;
+    max-width: 650px;
+    margin: 0 auto;
+    /* height: 90%; */
+}
+
+/* Sign In */
+.sign-in {
+    background-color: var(--dark-blue);
+    width: 100%;
+}
+
+.sign-in-container {
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.sign-in-h1 {
+    display: inline-block;
+    color: var(--white);
+    margin: 2rem 0;
+    position: relative;
+}
+.sign-in-container h1::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 3px;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+}
+.sign-in-container input {
+    margin: 0.5rem 0;
+}
+.sign-in-container button {
+    width: 100%;
+    margin: 1rem 0;
+}
