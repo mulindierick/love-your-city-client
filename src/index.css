@@ -4,6 +4,7 @@
 :root {
     --dark-blue: #213368;
     --light-blue: #159CFE;
+    --light-blue-accent: #1181d1;
     --white: #ffffff;
     --dark-gray: #686868;
     --light-gray: #f6f6f6;
@@ -60,6 +61,10 @@ button.blue {
     background-color: var(--light-blue);
     color: var(--white);
 }
+button.blue:hover {
+    background-color: var(--light-blue-accent);
+    color: var(--white);
+}
 
 .container {
     width: 90%;
@@ -69,12 +74,12 @@ button.blue {
 }
 
 /* Sign In */
-.sign-in {
+.log-in, .sign-up {
     background-color: var(--dark-blue);
     width: 100%;
 }
 
-.sign-in-container {
+.log-in-container, .sign-up-container {
     padding: 4rem 0;
     display: flex;
     flex-direction: column;
@@ -82,13 +87,13 @@ button.blue {
     text-align: center;
 }
 
-.sign-in-h1 {
+.log-in-h1, .sign-up-h1 {
     display: inline-block;
     color: var(--white);
     margin: 2rem 0;
     position: relative;
 }
-.sign-in-container h1::after {
+.log-in-container h1::after, .sign-up-container h1::after {
     content: "";
     position: absolute;
     display: block;
@@ -99,10 +104,11 @@ button.blue {
     transform: translateX(-50%);
     background-color: var(--white);
 }
-.sign-in-container input {
+.log-in-container input, .sign-up-container input {
     margin: 0.5rem 0;
 }
-.sign-in-container button {
+
+.log-in-container button, .sign-up-container button {
     width: 100%;
     margin: 1rem 0;
 }

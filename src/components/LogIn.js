@@ -1,18 +1,18 @@
 import React from 'react'
 
-const SignIn = () => {
+const LogIn = () => {
     return (
-        <section className="sign-in">
-            <div className="container sign-in-container">
-                <h1 className="sign-in-h1">Sign in</h1>
+        <section className="log-in">
+            <div className="container log-in-container">
+                <h1 className="log-in-h1">Log in</h1>
                 <form action="#">
                     <input type="text" placeholder="Username" name="username" required />
                     <input type="password" placeholder="Password" name="psw" required />
-                    <button type="submit" class="pill-btn blue">Sign in</button>
+                    <button type="submit" class="pill-btn blue">Log in</button>
                 </form>
             </div>
         </section>
     )
 }
 
-export default SignIn
+export default LogIn
