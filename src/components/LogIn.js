@@ -8,7 +8,7 @@ const LogIn = () => {
                 <form action="#">
                     <input type="text" placeholder="Username" name="username" required />
                     <input type="password" placeholder="Password" name="psw" required />
-                    <button type="submit" class="pill-btn blue">Log in</button>
+                    <button type="submit" className="pill-btn blue">Log in</button>
                 </form>
             </div>
         </section>
