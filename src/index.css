@@ -73,7 +73,7 @@ button.blue:hover {
     /* height: 90%; */
 }
 
-/* Sign In */
+/* Sign In/ Log In */
 .log-in, .sign-up {
     background-color: var(--dark-blue);
     width: 100%;
@@ -110,5 +110,11 @@ button.blue:hover {
 
 .log-in-container button, .sign-up-container button {
     width: 100%;
+    margin: 1rem 0;
+}
+
+.valid-details {
+    color: var(--white);
+    display: block;
     margin: 1rem 0;
 }
