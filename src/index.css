@@ -238,3 +238,48 @@ ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
   height: 4px;
   width: 80%;
 }
+/* Sign In/ Log In */
+.log-in, .sign-up {
+    background-color: var(--dark-blue);
+    width: 100%;
+}
+
+.log-in-container, .sign-up-container {
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.log-in-h1, .sign-up-h1 {
+    display: inline-block;
+    color: var(--white);
+    margin: 2rem 0;
+    position: relative;
+}
+.log-in-container h1::after, .sign-up-container h1::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 3px;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+}
+.log-in-container input, .sign-up-container input {
+    margin: 0.5rem 0;
+}
+
+.log-in-container button, .sign-up-container button {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.valid-details {
+    color: var(--white);
+    display: block;
+    margin: 1rem 0;
+}

@@ -1,17 +1,24 @@
 import React from "react";
 import { useState } from "react";
-import { Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
+import { useGlobalContext } from '../context'
 
 const SignUp = () => {
-  let [username, setUsername] = useState("");
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  let [url, setUrl] = useState("error");
+  const history = useHistory()
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { isValidForm, displayFormNotValid } = useGlobalContext()
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Sending data to server");
-    fetch("https://love-your-city-app.herokuapp.com/users", {
+
+    if (!email || !password || !username) {
+      return displayFormNotValid()
+    }
+
+    const res = await fetch("https://love-your-city-app.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify({
         name: username,
@@ -22,21 +29,21 @@ const SignUp = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
-      .then((data) => {
-        setEmail("");
-        setPassword("");
-        setUsername("");
-        console.log("done");
-        console.log(Object.keys(data)[0]);
-        setUrl(Object.keys(data)[0]);
-      })
-      .catch((e) => console.log(e));
+
+    try {
+      // const data = await res.json()
+      if (res.status === 200) {
+        history.push("/log-in")
+      }
+    } catch(e) {
+      console.log(e);
+    }
   }
   return (
     <section className="sign-up">
       <div className="container sign-up-container">
         <h1 className="sign-up-h1">Sign Up</h1>
+        { !isValidForm && <p className="valid-details">Please provide valid details </p> }
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -44,7 +51,6 @@ const SignUp = () => {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
           <input
             type="text"
@@ -52,7 +58,6 @@ const SignUp = () => {
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
           <input
             type="password"
@@ -60,14 +65,12 @@ const SignUp = () => {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
           <button type="submit" className="pill-btn blue">
             Sign Up
           </button>
         </form>
       </div>
-      {url === "error" ? <Redirect to="/sign-up" /> : <Redirect to="/" />}
     </section>
   );
 };
