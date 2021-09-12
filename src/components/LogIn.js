@@ -1,18 +1,70 @@
-import React from 'react'
-
+import React from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 const LogIn = () => {
-    return (
-        <section className="log-in">
-            <div className="container log-in-container">
-                <h1 className="log-in-h1">Log in</h1>
-                <form action="#">
-                    <input type="text" placeholder="Username" name="username" required />
-                    <input type="password" placeholder="Password" name="psw" required />
-                    <button type="submit" className="pill-btn blue">Log in</button>
-                </form>
-            </div>
-        </section>
-    )
-}
+  const history = useHistory();
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
 
-export default LogIn
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("Sending data to server");
+    fetch("https://love-your-city-app.herokuapp.com/login", {
+      method: "POST",
+      body: JSON.stringify({
+        password: password,
+        email: email,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setEmail("");
+        setPassword("");
+        console.log("done");
+        console.log(data);
+        console.log(data["user"]);
+        sessionStorage.setItem(
+          "accessToken",
+          JSON.stringify(`${data["token"]["accessToken"]}`)
+        );
+        sessionStorage.setItem("user", JSON.stringify(data["user"]));
+        history.push("/campaigns");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  return (
+    <section className="log-in">
+      <div className="container log-in-container">
+        <h1 className="log-in-h1">Log in</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" className="pill-btn blue">
+            Log in
+          </button>
+        </form>
+      </div>
+    </section>
+  );
+};
+
+export default LogIn;
