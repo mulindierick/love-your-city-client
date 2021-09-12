@@ -1,49 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 /* Setting up a root with css variables for all the colors being used */
 :root {
-    --dark-blue: #213368;
-    --light-blue: #159CFE;
-    --light-blue-accent: #1181d1;
-    --white: #ffffff;
-    --dark-gray: #686868;
-    --light-gray: #f6f6f6;
-    --black: #000;
+  --dark-blue: #213368;
+  --light-blue: #159cfe;
+  --light-blue-accent: #1181d1;
+  --white: #ffffff;
+  --dark-gray: #686868;
+  --light-gray: #f6f6f6;
+  --black: #000;
 
-    --pill-border-radius: 100px;
+  --pill-border-radius: 100px;
 }
 
 /* Reset Styling */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body, #root {
-    height: 100%;
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
-    background-color: var(--white);
-    font-family: 'Inter', sans-serif;
+  background-color: var(--white);
+  font-family: "Inter", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 input {
-    width: 100%;
-    display: block;
-    padding: 1rem;
-    background-color: var(--white);
-    border: none;
-    outline: none;
-    border-radius: var(--pill-border-radius);
+  width: 100%;
+  display: block;
+  padding: 1rem;
+  background-color: var(--white);
+  border: none;
+  outline: none;
+  border-radius: var(--pill-border-radius);
 }
 input::placeholder {
-    color: var(--dark-gray);
+  color: var(--dark-gray);
 }
 
 form {
-    width: 100%;
+  width: 100%;
 }
 /* 
 button {
@@ -51,64 +56,185 @@ button {
 } */
 
 button.pill-btn {
-    border-radius: var(--pill-border-radius);
-    border: none;
-    outline: none;
-    padding: 1rem 2rem;
+  border-radius: var(--pill-border-radius);
+  border: none;
+  outline: none;
+  padding: 1rem 2rem;
 }
 
 button.blue {
-    background-color: var(--light-blue);
-    color: var(--white);
+  background-color: var(--light-blue);
+  color: var(--white);
 }
 button.blue:hover {
-    background-color: var(--light-blue-accent);
-    color: var(--white);
+  background-color: var(--light-blue-accent);
+  color: var(--white);
 }
 
 .container {
-    width: 90%;
-    max-width: 650px;
-    margin: 0 auto;
-    /* height: 90%; */
+  width: 90%;
+  max-width: 650px;
+  margin: 0 auto;
+  /* height: 90%; */
 }
 
 /* Sign In */
-.log-in, .sign-up {
-    background-color: var(--dark-blue);
-    width: 100%;
+.log-in,
+.sign-up {
+  background-color: var(--dark-blue);
+  width: 100%;
 }
 
-.log-in-container, .sign-up-container {
-    padding: 4rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+.log-in-container,
+.sign-up-container {
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
-.log-in-h1, .sign-up-h1 {
-    display: inline-block;
-    color: var(--white);
-    margin: 2rem 0;
-    position: relative;
+.log-in-h1,
+.sign-up-h1 {
+  display: inline-block;
+  color: var(--white);
+  margin: 2rem 0;
+  position: relative;
 }
-.log-in-container h1::after, .sign-up-container h1::after {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 40px;
-    height: 3px;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--white);
+.log-in-container h1::after,
+.sign-up-container h1::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 3px;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--white);
 }
-.log-in-container input, .sign-up-container input {
-    margin: 0.5rem 0;
+.log-in-container input,
+.sign-up-container input {
+  margin: 0.5rem 0;
 }
 
-.log-in-container button, .sign-up-container button {
-    width: 100%;
-    margin: 1rem 0;
+.log-in-container button,
+.sign-up-container button {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+.campaigns-page {
+  background-color: #e5e5e5;
+}
+.campaigns-header {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2%;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.campaigns-header div p {
+  color: rgba(164, 161, 161, 1);
+}
+.campaigns-header div h4 {
+  font-size: 25px;
+}
+.ch-1 {
+  flex-basis: 60%;
+}
+.campaigns-header button {
+  padding: 1% 4% 1% 4%;
+  border-radius: 50px;
+  margin: 0.5%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  color: white;
+  background-color: #159cfe;
+}
+
+.all-your-campaigns {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.campaign-grouping {
+  box-shadow: 0px 1px 4px rgb(19 126 199 / 20%);
+  background-color: white;
+  padding: 2%;
+  margin: 2%;
+}
+.progress-group {
+  display: flex;
+  margin-bottom: 9%;
+}
+
+.pg-1 {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-right: 0.4rem;
+  text-align: center;
+  border: 1px solid #159cfe;
+  border-radius: 100%;
+  color: rgba(255, 255, 255, 1);
+  background-color: #159cfe;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pg-2 {
+  margin-right: 2%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.pg-2-2 {
+  color: rgba(164, 161, 161, 1);
+}
+.pg-2-3 {
+  font-weight: bold;
+}
+.pg-3 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* buttons */
+.c-button-g {
+  display: flex;
+  justify-content: center;
+  margin-top: 6%;
+  padding: 2%;
+}
+.cb {
+  padding: 3% 12% 3% 12%;
+  border-radius: 50px;
+  margin: 0.5rem;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  color: white;
+}
+.cb-1 {
+  background-color: #159cfe;
+}
+.cb-2 {
+  background-color: rgb(231, 0, 0);
+}
+.c-progress-line {
+  background-color: #f1f1f1;
+  border-radius: 50px;
+}
+.c-progress-line-1 {
+  background-color: #159cfe;
+  height: 4px;
+  width: 80%;
 }
