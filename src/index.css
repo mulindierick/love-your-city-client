@@ -238,3 +238,98 @@ ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
   height: 4px;
   width: 80%;
 }
+/* ///////////////////////////////////////////////////// 
+Show campaign route 
+////////////////////////////////////////////////////*/
+
+.sh-group {
+  display: flex;
+  flex-direction: column;
+  padding: 0% 10% 10% 10%;
+}
+.sh-header {
+  padding: 2%;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #213368;
+}
+.sh-details-group {
+  display: flex;
+}
+@media screen and (max-width: 800px) {
+  .sh-details-group {
+    flex-direction: column;
+  }
+}
+.sh-desc {
+  flex-basis: 50%;
+  font-size: 1.2rem;
+  padding: 2%;
+}
+.sh-desc h3 {
+  margin: 1%;
+  text-align: center;
+}
+.sh-details {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.sh-details button {
+  padding: 2% 4% 2% 4%;
+  margin: 10%;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  color: white;
+  background-color: #159cfe;
+}
+
+.sh-table {
+  border-collapse: collapse;
+  width: 80%;
+}
+.sh-table-2 {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.sh-table td,
+.sh-table th {
+  padding: 8px;
+}
+
+.sh-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+.table-group {
+  padding: 2%;
+  border: 1px solid;
+}
+.table-group-2 {
+  margin-top: 5%;
+}
+.sh-details {
+  padding: 2%;
+}
+.sh-details h2 {
+  text-align: center;
+  margin: 2%;
+}
+.share-1 {
+  margin: 2%;
+  color: #213368;
+  font-weight: bold;
+}
+.share-2 {
+  border: 1px solid;
+  word-wrap: break-word;
+}
+.share-3 {
+  margin-top: 2%;
+  border: 1px solid;
+  width: fit-content;
+}

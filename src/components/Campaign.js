@@ -1,12 +1,12 @@
 import React from "react";
-
-function Campaign() {
+function Campaign({ campaign }) {
   return (
     <div className="campaign-grouping">
+      {/* add general stats tab */}
       <div className="progress-group">
         <p className=" pg pg-1">80%</p>
         <div className="pg  pg-2">
-          <p className="pg-2-3">Save Capetown</p>
+          <p className="pg-2-3">{campaign.campaign_title}</p>
           <p className="pg-2-2">1,273 of 2,000 items raised</p>
         </div>
         <div className=" pg pg-3">
@@ -18,8 +18,9 @@ function Campaign() {
         <div className="c-progress-line-1"></div>
       </div>
       <div className="c-button-g">
-        <button className="cb cb-1">Edit</button>
-        <button className="cb cb-2">Delete</button>
+        <button className="cb cb-1">Stats</button>
+        <button className="cb cb-2">View</button>
+        {/* //stats, view or a manage button */}
       </div>
     </div>
   );
