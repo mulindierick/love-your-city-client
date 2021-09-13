@@ -36,7 +36,7 @@ const Campaigns = () => {
           <h4>Your campaigns</h4>
           <p>Monitor and track your campaign progress</p>
         </div>
-        <button className="ch-2">+ Add Camapaign</button>
+        <button className="ch-2">+ Add Campaign</button>
       </div>
       <div className="all-your-campaigns">
         {campaigns ? (

@@ -339,13 +339,14 @@ Show campaign route
 }
 
 /* ///////////////////////////////////////////////////// 
-Create Campaign
+Register Campaign
 ////////////////////////////////////////////////////*/
 .create-campaign-section {
   background-color: var(--white);
 }
 
-.create-campaign-header {
+.create-campaign-header,
+.age-native-label-placeholder {
   position: relative;
   display: flex;
   flex-direction: column;
