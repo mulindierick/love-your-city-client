@@ -34,7 +34,7 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-input {
+input, textarea {
   width: 100%;
   display: block;
   padding: 1rem;
@@ -45,6 +45,10 @@ input {
 }
 input::placeholder {
   color: var(--dark-gray);
+}
+
+textarea {
+  resize: none;
 }
 
 form {
@@ -332,4 +336,52 @@ Show campaign route
   margin-top: 2%;
   border: 1px solid;
   width: fit-content;
+}
+
+/* ///////////////////////////////////////////////////// 
+Create Campaign
+////////////////////////////////////////////////////*/
+.create-campaign-section {
+  background-color: var(--white);
+}
+
+.create-campaign-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+.create-campaign-header > * {
+  margin: 0.5rem 0.5rem;
+}
+.create-campaign-header::after {
+  content: '';
+  position: absolute;
+  display: block;
+  background-color: var(--light-blue);
+  bottom: 0;
+  left: 50%;
+  height: 4px;
+  width: 10%;
+  border-radius: 4px;
+  transform: translateX(-50%);
+}
+
+.input-div {
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.input-div label {
+  /* color: var(--dark-blue); */
+  font-weight: 500;
+}
+.campaign-input {
+  border-radius: 5px;
+  background-color: #e0e0e0;
 }
