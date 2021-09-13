@@ -1,11 +1,10 @@
 import React from 'react'
-
-const CreateCampaign = () => {
+const RegisterCampaign = () => {
     return (
         <section className="create-campaign-section"> 
             <div className="create-campaign-header">
-                <h1>Create A Campaign</h1>
-                <p>Create a campaign to help others in need of essential items</p>
+                <h1>Register A Campaign</h1>
+                <p>Register a campaign to help others in need of essential items</p>
             </div>
             <div className="container">
                 <form id="create-campaign-form">
@@ -43,10 +42,23 @@ const CreateCampaign = () => {
                             type="text"
                         />
                     </div>
+                    <div className="input-div">
+                        <label htmlFor="end-date">Delivery address for donations</label>
+                        <input
+                            className="campaign-input"
+                            name="end-date"
+                            type="text"
+                        />
+                    </div>
+                    <div>
+                        <button type="submit" className="pill-btn blue">
+                        Go Live
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>
     )
 }
 
-export default CreateCampaign
+export default RegisterCampaign
