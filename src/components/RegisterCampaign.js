@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 // import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,34 +17,55 @@ import Select from '@material-ui/core/Select';
 //     },
 //   }));
 
-
 const RegisterCampaign = () => {
-    //Dropdown State
-    const [type, campType] = React.useState('');
+    // Form Item State
+    const [campName, setCampName] = useState('')
+    const [campDesc, setCampDesc] = useState('')
+    const [type, campType] = useState('');
+    const [endDate, setEndDate] = useState('')
+    const [deliveryAddress, setDeliveryAddress] = useState('')
+    const [startDate, setStartDate] = useState(moment().format('DD MMMM YYYY'))
+    const [returnedEndDate, setReturnedEndDate] = useState(null)
 
-    const handleChange = (event) => campType(event.target.value);
-
-    // Gift Registry State 
+    // Registry State
     const [item, setItem] = useState('')
     const [quantity, setQuantity] = useState(1)
     const [campaignItems, setCampaignItems] = useState([])
 
+    // Validation State
+    const [isValid, setIsValid] = useState(false)
+
+    // Handle CampType Input
+    const handleChange = (event) => campType(event.target.value);
+    
     // Add Item to Registry
     const addRegistryItem = (e) => {
         e.preventDefault()
-
+        
         if (item && quantity) setCampaignItems([...campaignItems, {item, quantity}])
         setItem('')
         setQuantity(1)
     }
-
+    
     // Delete Registry Item
     const deleteRegistryItem = (e) => {
         e.preventDefault()
-
+        
         const id = e.target.id
         setCampaignItems([...campaignItems.filter((item, index) => index !== parseInt(id)) ])
     }
+    
+    // Use effect to validate that all the data has been inputed correctly on the front end
+    useEffect(() => {
+        if (campName && campDesc && endDate && deliveryAddress && campaignItems.length > 0 && returnedEndDate !== null && startDate) setIsValid(true)
+        else setIsValid(false)
+    }, [campName, campDesc, endDate, deliveryAddress, campaignItems, startDate, returnedEndDate])
+
+    // Validation for returning date string in correct format
+    useEffect(() => {
+        if (endDate.length === 10) setReturnedEndDate(moment(endDate).format('DD MMMM YYYY'))
+        else setReturnedEndDate(null)
+    }, [endDate])
 
     return (
         <section className="create-campaign-section"> 
@@ -58,6 +81,8 @@ const RegisterCampaign = () => {
                             className="campaign-input"
                             name="name"
                             type="text"
+                            value={campName}
+                            onChange={(e) => setCampName(e.target.value)}
                         />
                     </div>
                     <div className="input-div">
@@ -68,6 +93,8 @@ const RegisterCampaign = () => {
                             type="text"
                             rows="3"
                             maxLength="300"
+                            value={campDesc}
+                            onChange={(e) => setCampDesc(e.target.value)}
                         />
                     </div>
                     <div>
@@ -76,15 +103,15 @@ const RegisterCampaign = () => {
                       Campaign Type
                     </InputLabel>
                         <Select
-                        labelId="demo-simple-select-placeholder-label-label"
-                        id="demo-simple-select-placeholder-label"
-                        value={type}
-                        onChange={handleChange}
-                        displayEmpty
-                        // className={classes.selectEmpty}
+                            labelId="demo-simple-select-placeholder-label-label"
+                            id="demo-simple-select-placeholder-label"
+                            value={type}
+                            onChange={handleChange}
+                            displayEmpty
+                            // className={classes.selectEmpty}
                         >
                             <MenuItem value="">
-                                <label>--Select Campaign Type--</label>
+                                <label>Select Campaign Type</label>
                             </MenuItem>
                             <MenuItem value="Type 1">Campaign Type 1</MenuItem>
                             <MenuItem value="Type 2">Campaign Type 2</MenuItem>
@@ -93,19 +120,13 @@ const RegisterCampaign = () => {
                     {/* </FormControl> */}
                     </div>
                     <div className="input-div">
-                        <label htmlFor="start-date">Start Date</label>
-                        <input
-                            className="campaign-input"
-                            name="start-date"
-                            type="text"
-                        />
-                    </div>
-                    <div className="input-div">
                         <label htmlFor="end-date">End Date</label>
                         <input
                             className="campaign-input"
                             name="end-date"
-                            type="text"
+                            type="date"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
                         />
                     </div>
                     <div className="input-div">
@@ -114,6 +135,8 @@ const RegisterCampaign = () => {
                             className="campaign-input"
                             name="end-date"
                             type="text"
+                            value={deliveryAddress}
+                            onChange={(e) => setDeliveryAddress(e.target.value)}
                         />
                     </div>
 
@@ -182,9 +205,17 @@ const RegisterCampaign = () => {
                     </div>
 
                     <div>
-                        <button type="submit" form="create-campaign-form" className="pill-btn blue" onClick={(e) => {e.preventDefault()}}>
-                            Go Live
-                        </button>
+                        {
+                            isValid ? (
+                                <button type="submit" form="create-campaign-form" className="pill-btn blue" onClick={(e) => {e.preventDefault()}}>
+                                    Go Live
+                                </button>
+                            ) : (
+                                <button disabled className="pill-btn disabled">
+                                    Please Complete Form
+                                </button>
+                            )
+                        }
                     </div>
                 </form>
             </div>

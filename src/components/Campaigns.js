@@ -36,11 +36,7 @@ const Campaigns = () => {
           <h4>Your campaigns</h4>
           <p>Monitor and track your campaign progress</p>
         </div>
-<<<<<<< Updated upstream
-        <button className="ch-2">+ Add Campaign</button>
-=======
-        <button className="ch-2" onClick={() => history.push('/register-campaign')}>+ Add Camapaign</button>
->>>>>>> Stashed changes
+        <button className="ch-2" onClick={() => history.push('/register-campaign')}>+ Add Campaign</button>
       </div>
       <div className="all-your-campaigns">
         {campaigns ? (

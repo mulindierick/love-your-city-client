@@ -69,6 +69,11 @@ button.pill-btn {
   padding: 1rem 2rem;
 }
 
+button.disabled {
+  background-color: var(--dark-gray);
+  color: var(--white);
+}
+
 button.blue {
   background-color: var(--light-blue);
   color: var(--white);
@@ -346,6 +351,7 @@ Register Campaign
 ////////////////////////////////////////////////////*/
 .create-campaign-section {
   background-color: var(--white);
+  padding-bottom: 4rem;
 }
 
 .create-campaign-header,
@@ -453,9 +459,9 @@ Register Campaign
 .delete-item {
   width: 100%;
   padding: 0.3rem 0;
-  background-color: yellow;
-  color: var(--black);
+  background-color: var(--black-accent);
+  color: var(--white);
   border: none;
-  border-radius: 5px;
+  border-radius: 100px;
   font-weight: 600;
 }
