@@ -169,6 +169,7 @@ user campaigns page
   font-size: 18px;
   color: white;
   background-color: #159cfe;
+  cursor: pointer;
 }
 
 .all-your-campaigns {
