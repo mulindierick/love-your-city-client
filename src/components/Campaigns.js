@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import Campaign from "../components/Campaign";
 
 const Campaigns = () => {
@@ -36,7 +36,7 @@ const Campaigns = () => {
           <h4>Your campaigns</h4>
           <p>Monitor and track your campaign progress</p>
         </div>
-        <button className="ch-2">+ Add Camapaign</button>
+        <button className="ch-2" onClick={() => history.push('/register-campaign')}>+ Add Campaign</button>
       </div>
       <div className="all-your-campaigns">
         {campaigns ? (
