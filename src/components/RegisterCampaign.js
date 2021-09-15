@@ -1,27 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
-// import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
+import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-// import FormControl from '@material-ui/core/FormControl';
+import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-// const useStyles = makeStyles((theme) => ({
-//     formControl: {
-//       margin: theme.spacing(1),
-//       minWidth: 120,
-//     },
-//     selectEmpty: {
-//       marginTop: theme.spacing(2),
-//     },
-//   }));
+const useStyles = makeStyles(() => ({
+    formControl: {
+      borderRadius: '4%',
+      minWidth: '100%',
+      fontSize: 10
+    },
+    selectEmpty: {
+      borderRadius: 5,
+      backgroundColor: "#e0e0e0",
+      padding: 16
+    },
+    selectItem: {
+        backgroundColor: 'transparent',
+        // color: 'red'
+    }
+  }));
 
 const RegisterCampaign = () => {
+    const classes = useStyles()
+
     // Form Item State
     const [campName, setCampName] = useState('')
     const [campDesc, setCampDesc] = useState('')
-    const [type, campType] = useState('');
+    const [campType, setCampType] = useState('');
     const [endDate, setEndDate] = useState('')
     const [deliveryAddress, setDeliveryAddress] = useState('')
     const [startDate, setStartDate] = useState(moment().format('DD MMMM YYYY'))
@@ -34,9 +42,6 @@ const RegisterCampaign = () => {
 
     // Validation State
     const [isValid, setIsValid] = useState(false)
-
-    // Handle CampType Input
-    const handleChange = (event) => campType(event.target.value);
     
     // Add Item to Registry
     const addRegistryItem = (e) => {
@@ -86,7 +91,7 @@ const RegisterCampaign = () => {
                         />
                     </div>
                     <div className="input-div">
-                        <label htmlFor="name">Campaign Description</label>
+                        <label htmlFor="description">Campaign Description</label>
                         <textarea
                             className="campaign-input"
                             name="description"
@@ -98,26 +103,25 @@ const RegisterCampaign = () => {
                         />
                     </div>
                     <div>
-                    {/* <FormControl className={classes.formControl}> */}
-                    <InputLabel shrink htmlFor="age-native-label-placeholder">
-                      Campaign Type
-                    </InputLabel>
+
+                    <label htmlFor="demo-simple-select-placeholder-label">Campaign Type</label>
+                    <FormControl className={classes.formControl}>
                         <Select
                             labelId="demo-simple-select-placeholder-label-label"
                             id="demo-simple-select-placeholder-label"
-                            value={type}
-                            onChange={handleChange}
+                            value={campType}
+                            onChange={(e) => setCampType(e.target.value)}
                             displayEmpty
-                            // className={classes.selectEmpty}
+                            className={classes.selectEmpty}
                         >
-                            <MenuItem value="">
-                                <label>Select Campaign Type</label>
+                            <MenuItem value="" className={classes.selectItem}>
+                                
                             </MenuItem>
-                            <MenuItem value="Type 1">Campaign Type 1</MenuItem>
-                            <MenuItem value="Type 2">Campaign Type 2</MenuItem>
-                            <MenuItem value="Type 3">Campaign Type 3</MenuItem>
+                            <MenuItem value="Type 1" className={classes.selectItem}>Campaign Type 1</MenuItem>
+                            <MenuItem value="Type 2" className={classes.selectItem}>Campaign Type 2</MenuItem>
+                            <MenuItem value="Type 3" className={classes.selectItem}>Campaign Type 3</MenuItem>
                         </Select>
-                    {/* </FormControl> */}
+                    </FormControl>
                     </div>
                     <div className="input-div">
                         <label htmlFor="end-date">End Date</label>
