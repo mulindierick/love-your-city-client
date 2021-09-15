@@ -188,8 +188,8 @@ ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
 }
 
 .pg-1 {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   margin-right: 0.4rem;
   text-align: center;
   border: 1px solid #159cfe;
@@ -222,9 +222,14 @@ ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
 /* buttons */
 .c-button-g {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin-top: 6%;
+  font-weight: bold;
+  color: rgba(33, 51, 104, 1);
   padding: 2%;
+  cursor: pointer;
 }
 .cb {
   padding: 3% 12% 3% 12%;
@@ -247,7 +252,7 @@ ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
 }
 .c-progress-line-1 {
   background-color: #159cfe;
-  height: 4px;
+  height: 3px;
   width: 80%;
 }
 /* ///////////////////////////////////////////////////// 
