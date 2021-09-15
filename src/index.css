@@ -125,7 +125,7 @@ button.blue:hover {
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-user campaigns
+user campaigns page
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 .campaigns-page {
   background-color: #e5e5e5;
@@ -338,3 +338,4 @@ Show campaign route
   border: 1px solid;
   width: fit-content;
 }
+
