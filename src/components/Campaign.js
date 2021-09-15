@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Campaign({ campaign }) {
   let history = useHistory();
