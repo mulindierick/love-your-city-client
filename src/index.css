@@ -125,7 +125,7 @@ button.blue:hover {
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
+user campaigns page
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 .campaigns-page {
   background-color: #e5e5e5;
@@ -338,6 +338,4 @@ Show campaign route
   border: 1px solid;
   width: fit-content;
 }
-.sh-hide{
-  display: none
-}
+
