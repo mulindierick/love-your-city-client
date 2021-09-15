@@ -137,7 +137,7 @@ button.blue:hover {
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
+show all campaigns a user has/campaigns page
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 .campaigns-page {
   background-color: #e5e5e5;
@@ -169,6 +169,7 @@ ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
   font-size: 18px;
   color: white;
   background-color: #159cfe;
+  cursor: pointer;
 }
 
 .all-your-campaigns {

@@ -10,7 +10,6 @@ const SignUp = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Sending data to server");
     fetch("https://love-your-city-app.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify({
@@ -27,8 +26,6 @@ const SignUp = () => {
         setEmail("");
         setPassword("");
         setUsername("");
-        console.log("done");
-        console.log(Object.keys(data)[0]);
         setUrl(Object.keys(data)[0]);
       })
       .catch((e) => console.log(e));
