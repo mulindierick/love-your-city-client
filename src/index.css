@@ -37,7 +37,8 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   display: block;
   padding: 1rem;
@@ -295,7 +296,7 @@ Show campaign route
 }
 .sh-details button {
   padding: 2% 4% 2% 4%;
-  margin: 10%;
+  margin: 7%;
   border-radius: 50px;
   border: none;
   outline: none;
@@ -311,6 +312,7 @@ Show campaign route
 .sh-table-2 {
   border-collapse: collapse;
   width: 100%;
+  margin: 5%;
 }
 
 .sh-table td,
@@ -328,7 +330,7 @@ Show campaign route
   border: 1px solid;
 }
 .table-group-2 {
-  margin-top: 5%;
+  margin-top: 4%;
 }
 .sh-details {
   padding: 2%;
@@ -342,15 +344,29 @@ Show campaign route
   color: #213368;
   font-weight: bold;
 }
-.share-2 {
+/* .share-2 {
   border: 1px solid;
   word-wrap: break-word;
-}
+  padding: 1%;
+} */
 .share-3 {
   margin-top: 2%;
   border: 1px solid;
   width: fit-content;
+  padding: 1%;
+  cursor: pointer;
 }
+.share-3:active {
+  background-color: #213368;
+  color: white;
+}
+/* .social-share{
+  color: #213368;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-around;
+  padding: 2%;
+} */
 
 /* ///////////////////////////////////////////////////// 
 Register Campaign
@@ -376,7 +392,7 @@ Register Campaign
   margin: 0.5rem 0.5rem;
 }
 .create-campaign-header::after {
-  content: '';
+  content: "";
   position: absolute;
   display: block;
   background-color: var(--light-blue);

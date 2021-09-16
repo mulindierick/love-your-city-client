@@ -32,7 +32,7 @@ const RegisterCampaign = () => {
   const [campType, setCampType] = useState("");
   const [endDate, setEndDate] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
-  const [startDate, setStartDate] = useState(moment().format("DD MMMM YYYY"));
+  // const [startDate, setStartDate] = useState(moment().format("DD MMMM YYYY"));
   const [returnedEndDate, setReturnedEndDate] = useState(null);
 
   // Registry State
@@ -71,8 +71,7 @@ const RegisterCampaign = () => {
       endDate &&
       deliveryAddress &&
       campaignItems.length > 0 &&
-      returnedEndDate !== null &&
-      startDate
+      returnedEndDate !== null
     )
       setIsValid(true);
     else setIsValid(false);
@@ -82,7 +81,6 @@ const RegisterCampaign = () => {
     endDate,
     deliveryAddress,
     campaignItems,
-    startDate,
     returnedEndDate,
   ]);
 

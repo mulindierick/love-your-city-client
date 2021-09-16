@@ -2,14 +2,11 @@ import React, { useEffect } from "react";
 import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import { useHistory } from "react-router-dom";
-// import FacebookIcon from "@material-ui/icons/Facebook";
-// import TwitterIcon from "@material-ui/icons/Twitter";
-// import LinkedInIcon from "@material-ui/icons/LinkedIn";
-// import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import { useParams } from "react-router-dom";
 
-const ShowCampaign = () => {
+const DonateToCampaign = () => {
   const { campaign, setCampaign } = useContext(CampaignContext);
-  let cId = JSON.parse(sessionStorage.getItem("cId"));
+  let { id } = useParams();
   let history = useHistory();
 
   useEffect(() => {
@@ -18,7 +15,7 @@ const ShowCampaign = () => {
 
     !user
       ? history.push("/")
-      : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${cId}`, {
+      : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,7 +29,7 @@ const ShowCampaign = () => {
             history.push("/campaigns");
             console.log(error);
           });
-  }, [history, setCampaign, cId]);
+  }, [history, setCampaign, id]);
 
   return (
     <div className="sh-group">
@@ -103,17 +100,17 @@ const ShowCampaign = () => {
               </tbody>
             </table>
           </div>
-          {/* <button>Support this Campaign</button> */}
+          <button>Support this Campaign</button>
           <div>
             <p className="share-1">Share this Campaign:</p>
-            <a href={`donate/${cId}`} className="share-2">
-              {cId}
-            </a>
+            <p className="share-2">
+              {id}
+            </p>
             <p
               className="share-3"
               onClick={() => {
                 navigator.clipboard.writeText(
-                  `https://www.loveyourcity.app/donate/${cId}`
+                  `https://www.loveyourcity.app/donate/${id}`
                 );
                 alert("Link Copied");
               }}
@@ -121,17 +118,10 @@ const ShowCampaign = () => {
               Copy link
             </p>
           </div>
-          {/* <p className="share-1">Social Share:</p>
-          <div className="social-share">
-            <FacebookIcon style={{ fontSize: 40 }} />
-            <TwitterIcon style={{ fontSize: 40 }} />
-            <LinkedInIcon style={{ fontSize: 40 }} />
-            <WhatsAppIcon style={{ fontSize: 40 }} />
-          </div> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default ShowCampaign;
+export default DonateToCampaign;
