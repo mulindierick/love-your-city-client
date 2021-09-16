@@ -5,7 +5,7 @@ import Campaigns from "./components/Campaigns";
 import RegisterCampaign from "./components/RegisterCampaign";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ShowCampaign from "./components/ShowCampaign";
-// edit campaign, delete campaign, get campaign stats
+
 function App() {
   return (
     <Router>

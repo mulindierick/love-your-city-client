@@ -1,15 +1,15 @@
-import React from "react";
 import { useHistory } from "react-router";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 function Campaign({ campaign }) {
   let history = useHistory();
   function handlClick() {
+    sessionStorage.setItem("cId", JSON.stringify(`${campaign.campaign_id}`));
     history.push("/show-campaign");
   }
+
   return (
     <div className="campaign-grouping">
-      {/* add general stats tab */}
       <div className="progress-group">
         <p className=" pg pg-1">80%</p>
         <div className="pg  pg-2">
@@ -27,11 +27,6 @@ function Campaign({ campaign }) {
       <div className="c-button-g" onClick={handlClick}>
         <p>Manage</p>
         <ExpandMoreIcon />
-
-        {/* <ExpandMoreIcon /> */}
-        {/* <button className="cb cb-1">Stats</button>
-        <button className="cb cb-2">View</button> */}
-        {/* //stats, view or a manage button */}
       </div>
     </div>
   );

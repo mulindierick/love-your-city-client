@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Campaign from "../components/Campaign";
+import { useContext } from "react";
+import { CampaignContext } from "../contexts/CampaignContext";
 
 const Campaigns = () => {
-  let [campaigns, setCampaigns] = useState(null);
+  const { campaigns, setCampaigns } = useContext(CampaignContext);
   let history = useHistory();
-
   useEffect(() => {
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
     let user = JSON.parse(sessionStorage.getItem("user"));
@@ -23,11 +24,10 @@ const Campaigns = () => {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log(res);
             setCampaigns(res);
           })
           .catch((error) => console.log(error));
-  }, [history]);
+  }, [history, setCampaigns]);
 
   return (
     <div className="campaigns-page">
@@ -36,7 +36,12 @@ const Campaigns = () => {
           <h4>Your campaigns</h4>
           <p>Monitor and track your campaign progress</p>
         </div>
-        <button className="ch-2" onClick={() => history.push('/register-campaign')}>+ Add Campaign</button>
+        <button
+          className="ch-2"
+          onClick={() => history.push("/register-campaign")}
+        >
+          + Add Campaign
+        </button>
       </div>
       <div className="all-your-campaigns">
         {campaigns ? (

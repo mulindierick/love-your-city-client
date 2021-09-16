@@ -8,7 +8,6 @@ const LogIn = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Sending data to server");
     fetch("https://love-your-city-app.herokuapp.com/login", {
       method: "POST",
       body: JSON.stringify({
@@ -23,9 +22,6 @@ const LogIn = () => {
       .then((data) => {
         setEmail("");
         setPassword("");
-        console.log("done");
-        console.log(data);
-        console.log(data["user"]);
         sessionStorage.setItem(
           "accessToken",
           JSON.stringify(`${data["token"]["accessToken"]}`)

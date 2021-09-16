@@ -1,10 +1,41 @@
-import React from "react";
-// edit, delete
+import React, { useEffect } from "react";
+import { useContext } from "react";
+import { CampaignContext } from "../contexts/CampaignContext";
+import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 const ShowCampaign = () => {
+  const { campaign, setCampaign } = useContext(CampaignContext);
+  let cId = JSON.parse(sessionStorage.getItem("cId"));
+  let { id } = useParams();
+  let history = useHistory();
+
+  useEffect(() => {
+    let token = JSON.parse(sessionStorage.getItem("accessToken"));
+    let user = JSON.parse(sessionStorage.getItem("user"));
+
+    !user
+      ? history.push("/")
+      : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${cId}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            setCampaign(res);
+          })
+          .catch((error) => {
+            history.push("/campaigns");
+            console.log(error);
+          });
+  }, [history, setCampaign, cId]);
+
   return (
     <div className="sh-group">
       <div className="sh-header">
-        <h1>Save Cape Town</h1>
+        <h1> {campaign ? campaign[0].campaign_title : ""}</h1>
         <h4>Hosted by: Erick Mulindi</h4>
       </div>
       <div className="sh-details-group">
@@ -32,46 +63,48 @@ const ShowCampaign = () => {
           <h2>Needed items</h2>
           <div className="table-group">
             <table className="sh-table">
-              <tr>
-                <th>No.</th>
-                <th>Item name</th>
-                <th>Quantity</th>
-              </tr>
-              <tr>
-                <td>1.</td>
-                <td>Blankets</td>
-                <td>34</td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>Tin and Beans</td>
-                <td>292</td>
-              </tr>
-              <tr>
-                <td>3.</td>
-                <td>Baby beds</td>
-                <td>21</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <th>No.</th>
+                  <th>Item name</th>
+                  <th>Quantity</th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Blankets</td>
+                  <td>34</td>
+                </tr>
+                <tr>
+                  <td>2.</td>
+                  <td>Tin and Beans</td>
+                  <td>292</td>
+                </tr>
+                <tr>
+                  <td>3.</td>
+                  <td>Baby beds</td>
+                  <td>21</td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <div className="table-group-2">
             <table className="sh-table-2">
-              <tr>
-                <th>Delivery Date </th>
-                <th>Delivery Address</th>
-              </tr>
-              <tr>
-                <td> 12/03/2023</td>
-                <td>Rondebosch, Cape Town, 7700, South Africa</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <th>Delivery Date </th>
+                  <th>Delivery Address</th>
+                </tr>
+                <tr>
+                  <td> 12/03/2023</td>
+                  <td>Rondebosch, Cape Town, 7700, South Africa</td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <button>Support this Campaign</button>
           <div>
             <p className="share-1">Share this Campaign</p>
-            <p className="share-2">
-              https://love-your-city-app.herokuapp.com/campaigns/0bf4ff72-00b5-4245-afde-8fb107110053
-            </p>
+            <p className="share-2">http://localhost:3000/show-campaign/{id}</p>
             <p className="share-3">Copy link</p>
           </div>
         </div>
