@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import { useHistory } from "react-router-dom";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 const ShowCampaign = () => {
   const { campaign, setCampaign } = useContext(CampaignContext);
   let cId = JSON.parse(sessionStorage.getItem("cId"));
-  let { id } = useParams();
+  // let { id } = useParams();
   let history = useHistory();
 
   useEffect(() => {
@@ -104,7 +104,7 @@ const ShowCampaign = () => {
           <button>Support this Campaign</button>
           <div>
             <p className="share-1">Share this Campaign</p>
-            <p className="share-2">http://localhost:3000/show-campaign/{id}</p>
+            <p className="share-2">http://localhost:3000/show-campaign/{cId}</p>
             <p className="share-3">Copy link</p>
           </div>
         </div>
