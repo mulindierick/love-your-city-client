@@ -105,9 +105,8 @@ const ShowCampaign = () => {
           </div>
           {/* <button>Support this Campaign</button> */}
           <div>
-            <p className="share-1">Share this Campaign:</p>
             <a href={`donate/${cId}`} className="share-2">
-              {cId}
+            Preview Campaign
             </a>
             <p
               className="share-3"
