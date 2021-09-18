@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import { useHistory } from "react-router-dom";
+import LoopRoundedIcon from "@material-ui/icons/LoopRounded";
 // import FacebookIcon from "@material-ui/icons/Facebook";
 // import TwitterIcon from "@material-ui/icons/Twitter";
 // import LinkedInIcon from "@material-ui/icons/LinkedIn";
@@ -12,6 +13,31 @@ const ShowCampaign = () => {
   let cId = JSON.parse(sessionStorage.getItem("cId"));
   let history = useHistory();
 
+  // delete campaign by id
+
+  function deleteCampaign(e) {
+    let token = JSON.parse(sessionStorage.getItem("accessToken"));
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    e.preventDefault();
+    !user
+      ? history.push("/")
+      : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${cId}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            console.log("deleted");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+  }
+
+  // get campaign by id
   useEffect(() => {
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
     let user = JSON.parse(sessionStorage.getItem("user"));
@@ -37,8 +63,28 @@ const ShowCampaign = () => {
   return (
     <div className="sh-group">
       <div className="sh-header">
-        <h1> {campaign ? campaign[0].campaign_title : ""}</h1>
-        <h4>Hosted by: Erick Mulindi</h4>
+        <h3> {campaign ? campaign[0].campaign_title : <LoopRoundedIcon />}</h3>
+        {/* <h4>Hosted by: Erick Mulindi</h4> */}
+      </div>
+      <div className="sc-buttons">
+        <button
+          className="cb cb-1 share-3"
+          onClick={() => {
+            navigator.clipboard.writeText(
+              `https://www.loveyourcity.app/donate/${cId}`
+            );
+            alert("Link Copied");
+          }}
+        >
+          Copy Sharable link
+        </button>
+        <a href={`donate/${cId}`} className="cb cb-2">
+          Preview Campaign
+        </a>
+        <button className="cb cb-2">Edit</button>
+        <button className="cb cb-2 share-3" onClick={deleteCampaign}>
+          Delete
+        </button>
       </div>
       <div className="sh-details-group">
         <div className="sh-desc">
@@ -102,23 +148,6 @@ const ShowCampaign = () => {
                 </tr>
               </tbody>
             </table>
-          </div>
-          {/* <button>Support this Campaign</button> */}
-          <div>
-            <a href={`donate/${cId}`} className="share-2">
-            Preview Campaign
-            </a>
-            <p
-              className="share-3"
-              onClick={() => {
-                navigator.clipboard.writeText(
-                  `https://www.loveyourcity.app/donate/${cId}`
-                );
-                alert("Link Copied");
-              }}
-            >
-              Copy link
-            </p>
           </div>
           {/* <p className="share-1">Social Share:</p>
           <div className="social-share">

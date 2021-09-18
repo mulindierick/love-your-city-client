@@ -58,11 +58,10 @@ textarea {
 form {
   width: 100%;
 }
-/* 
-button {
-    cursor: pointer;
-} */
-
+a {
+  text-decoration: none;
+  font-weight: normal;
+}
 button.pill-btn {
   border-radius: var(--pill-border-radius);
   border: none;
@@ -96,6 +95,7 @@ button.blue:hover {
 .sign-up {
   background-color: var(--dark-blue);
   width: 100%;
+  height: 100vh;
 }
 
 .log-in-container,
@@ -233,20 +233,32 @@ user campaigns page
   padding: 2%;
   cursor: pointer;
 }
+.sc-buttons {
+  padding-bottom: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: rgba(33, 51, 104, 1);
+  flex-wrap: wrap;
+}
 .cb {
-  padding: 3% 12% 3% 12%;
+  padding: 1% 4% 1% 4%;
   border-radius: 50px;
   margin: 0.5rem;
   border: none;
   outline: none;
   font-size: 18px;
   color: white;
+  cursor: pointer;
 }
 .cb-1 {
   background-color: #159cfe;
 }
 .cb-2 {
-  background-color: rgb(231, 0, 0);
+  background-color: var(--input-gray);
+  border: 1px solid;
+  color: var(--dark-gray);
 }
 .c-progress-line {
   background-color: #f1f1f1;
@@ -266,7 +278,12 @@ Show campaign route
   flex-direction: column;
   padding: 0% 10% 10% 10%;
 }
+.sh-header,
+.sc-buttons {
+  background-color: var(--input-gray);
+}
 .sh-header {
+  margin-top: 2%;
   padding: 2%;
   font-size: 1.5rem;
   text-align: center;
@@ -274,6 +291,7 @@ Show campaign route
 }
 .sh-details-group {
   display: flex;
+  color: var(--dark-gray);
 }
 @media screen and (max-width: 800px) {
   .sh-details-group {
@@ -344,21 +362,16 @@ Show campaign route
   color: #213368;
   font-weight: bold;
 }
-/* .share-2 {
-  border: 1px solid;
-  word-wrap: break-word;
-  padding: 1%;
-} */
-.share-3 {
-  margin-top: 2%;
-  border: 1px solid;
-  width: fit-content;
-  padding: 1%;
-  cursor: pointer;
-}
 .share-3:active {
   background-color: #213368;
   color: white;
+}
+.share-4{
+  border: 1px solid;
+  padding: 1%;
+  width: fit-content;
+  margin-top: 1%;
+  cursor: pointer;
 }
 /* .social-share{
   color: #213368;

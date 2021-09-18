@@ -107,7 +107,7 @@ const DonateToCampaign = () => {
               {id}
             </p>
             <p
-              className="share-3"
+              className="share-3 share-4"
               onClick={() => {
                 navigator.clipboard.writeText(
                   `https://www.loveyourcity.app/donate/${id}`
