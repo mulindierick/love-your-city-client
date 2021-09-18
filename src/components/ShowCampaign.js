@@ -22,15 +22,15 @@ const ShowCampaign = () => {
     !user
       ? history.push("/")
       : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${cId}`, {
-          method: "POST",
+          method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-            console.log("deleted");
+            alert("campaign deleted");
+            history.push("/campaigns");
           })
           .catch((e) => {
             console.log(e);
