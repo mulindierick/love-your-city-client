@@ -366,7 +366,7 @@ Show campaign route
   background-color: #213368;
   color: white;
 }
-.share-4{
+.share-4 {
   border: 1px solid;
   padding: 1%;
   width: fit-content;
@@ -500,3 +500,79 @@ Register Campaign
   border-radius: 100px;
   font-weight: 600;
 }
+
+/* LANDING PAGE CSS START */
+
+/* body {
+  background: #213368;
+  color: white;
+} */
+
+.heading {
+  height: 18px;
+  bottom: 236px;
+  color: rgb(255, 255, 255, 1);
+  font-family: Ubuntu;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.01px;
+  text-align: center;
+}
+
+.page-title {
+  background: #213368;
+  color: white;
+  padding: 4rem 0;
+  top: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.signIn-btn {
+  margin-top: 50px;
+  height: 51px;
+  width: 328px;
+  left: 16px;
+  border-radius: 100px;
+  padding: 16px, 32px, 16px, 32px;
+  background: rgba(21, 156, 254, 1);
+  border: 2px solid rgba(33, 51, 104, 1);
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  font-family: Montserrat;
+}
+
+.signUp-btn {
+  height: 51px;
+  width: 328px;
+  left: 16px;
+  border-radius: 100px;
+  padding: 16px, 32px, 16px, 32px;
+  background: rgba(255, 255, 255, 1);
+  border: 2px solid rgba(33, 51, 104, 1);
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  font-family: Montserrat;
+}
+
+.paragraph-2 {
+  color: rgb(154, 181, 231);
+}
+
+.footer {
+  color: rgba(255, 255, 255, 1);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  text-decoration: underline;
+}
+/* LANDING PAGE CSS END */

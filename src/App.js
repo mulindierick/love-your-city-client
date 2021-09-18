@@ -6,12 +6,14 @@ import RegisterCampaign from "./components/RegisterCampaign";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ShowCampaign from "./components/ShowCampaign";
 import Donate from "./components/DonateToCampaign";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={LogIn} />
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/log-in" component={LogIn} />
         <Route exact path="/sign-up" component={SignUp} />
         <Route exact path="/campaigns" component={Campaigns} />
         <Route exact path="/show-campaign" component={ShowCampaign} />

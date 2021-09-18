@@ -96,15 +96,7 @@ const ShowCampaign = () => {
             lobortis nulla iaculis ac. Quisque eget nisi blandit, pulvinar augue
             vitae, efficitur ex. Nullam venenatis lorem sed lorem molestie
             consectetur. Duis nec lectus quis risus dapibus tempor non et eros.
-            Aenean ut tincidunt ipsum, ac tempor erat. Pellentesque porttitor
-            lectus semper justo convallis ullamcorper. Aenean eros sem, euismod
-            non efficitur ut, ornare tincidunt metus. Etiam cursus placerat
-            erat, a tempus neque pellentesque non. Sed convallis justo non urna
-            volutpat, a maximus magna auctor. Fusce vestibulum aliquet mauris
-            non auctor. In dapibus lectus a sagittis facilisis. Proin finibus et
-            arcu nec elementum. Vestibulum ante ipsum primis in faucibus orci
-            luctus et ultrices posuere cubilia curae; Nam sed lacus malesuada,
-            maximus mauris nec, egestas tellus.
+            Aenean ut tincidunt ipsum, ac tempor erat. 
           </p>
         </div>
         <div className="sh-details">
