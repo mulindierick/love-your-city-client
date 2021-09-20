@@ -270,13 +270,13 @@ user campaigns page
   width: 80%;
 }
 /* ///////////////////////////////////////////////////// 
-Show campaign route 
+Show campaign route and donate
 ////////////////////////////////////////////////////*/
 
 .sh-group {
   display: flex;
   flex-direction: column;
-  padding: 0% 10% 10% 10%;
+  padding: 0% 5% 5% 5%;
 }
 .sh-header,
 .sc-buttons {
@@ -289,30 +289,71 @@ Show campaign route
   text-align: center;
   color: #213368;
 }
-.sh-details-group {
+.donate-and-campaign {
   display: flex;
-  color: var(--dark-gray);
+  flex-wrap: wrap;
 }
 @media screen and (max-width: 800px) {
-  .sh-details-group {
+  .donate-and-campaign {
     flex-direction: column;
   }
 }
-.sh-desc {
-  flex-basis: 50%;
-  font-size: 1.2rem;
-  padding: 2%;
-}
-.sh-desc h3 {
-  margin: 1%;
-  text-align: center;
-}
-.sh-details {
-  flex-basis: 50%;
+.donate {
+  flex-basis: 40%;
   display: flex;
   flex-direction: column;
+  color: var(--dark-gray);
+  padding: 2%;
+  justify-content: center;
 }
-.sh-details button {
+.donate h3 {
+  text-align: center;
+  margin-bottom: 8%;
+}
+.choose-donation {
+  background-color: white;
+  box-shadow: 1px 1px 1px 0.1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 2% 0% 2% 0%;
+  margin-bottom: 3%;
+  display: flex;
+  color: var(--dark-gray);
+  justify-content: space-around;
+}
+.your-donation-count {
+  display: flex;
+}
+.donation-goal,
+.donation-count {
+  font-weight: bold;
+  color: #000;
+}
+.donation-count {
+  margin: 4%;
+  padding-left: 4%;
+  padding-right: 4%;
+}
+.donation-name h4,
+.your-donation h4 {
+  margin-bottom: 7%;
+}
+.your-donation h4{
+  color: #159cfe;
+}
+.donate-btn {
+  border: 1px solid;
+  border-radius: 5px;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  color: var(--dark-gray);
+}
+.donate-btn-plus{
+  border: none;
+  background-color: #159cfe;
+  color: white;
+}
+.donate-button {
   padding: 2% 4% 2% 4%;
   margin: 7%;
   border-radius: 50px;
@@ -321,6 +362,31 @@ Show campaign route
   font-size: 18px;
   color: white;
   background-color: #159cfe;
+}
+
+.sh-details-group {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  color: var(--dark-gray);
+  border-right: 1px solid rgb(236, 236, 236);
+}
+@media screen and (max-width: 800px) {
+  .sh-details-group {
+    flex-direction: column;
+  }
+}
+.sh-desc {
+  font-size: 1.2rem;
+  padding: 2%;
+}
+.sh-desc h3 {
+  margin: 1%;
+  text-align: center;
+}
+.sh-details {
+  display: flex;
+  flex-direction: column;
 }
 
 .sh-table {
@@ -348,14 +414,14 @@ Show campaign route
   border: 1px solid;
 }
 .table-group-2 {
-  margin-top: 4%;
+  margin-top: 1%;
 }
 .sh-details {
   padding: 2%;
 }
-.sh-details h2 {
+.sh-details h3 {
   text-align: center;
-  margin: 2%;
+  margin: 1%;
 }
 .share-1 {
   margin: 2%;
