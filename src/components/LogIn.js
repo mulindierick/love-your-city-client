@@ -24,6 +24,7 @@ const LogIn = () => {
         setEmail("");
         setPassword("");
         console.log("done");
+        console.log("beofre data")
         console.log(data);
         console.log(data["user"]);
         sessionStorage.setItem(

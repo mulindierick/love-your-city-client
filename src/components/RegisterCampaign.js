@@ -27,13 +27,13 @@ const RegisterCampaign = () => {
     const classes = useStyles()
 
     // Form Item State
+    const today = new Date()
     const [campName, setCampName] = useState('')
     const [campDesc, setCampDesc] = useState('')
-    const [campType, setCampType] = useState('');
+    const [campType, setCampType] = useState('General Support');
     const [endDate, setEndDate] = useState('')
-    const [deliveryAddress, setDeliveryAddress] = useState('')
-    const [startDate, setStartDate] = useState(moment().format('DD MMMM YYYY'))
     const [returnedEndDate, setReturnedEndDate] = useState(null)
+    const [deliveryAddress, setDeliveryAddress] = useState('')
 
     // Registry State
     const [item, setItem] = useState('')
@@ -59,16 +59,55 @@ const RegisterCampaign = () => {
         const id = e.target.id
         setCampaignItems([...campaignItems.filter((item, index) => index !== parseInt(id)) ])
     }
+
+    // Handle Submit
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const initialNumItems = campaignItems.reduce((acc,cur) => acc + cur.quantity, 0)
+        const userId = JSON.parse(sessionStorage.getItem("user"))["user_id"]
+        const accessToken = sessionStorage.getItem('accessToken')
+        console.log(accessToken)
+
+        let campaign = {
+            userId,
+            campName,
+            campDesc,
+            campType,
+            returnedEndDate,
+            campaignItems,
+            initialNumItems,
+        }
+
+        console.log(campaign)
+
+        // https://love-your-city-app.herokuapp.com
+
+        fetch( `http://localhost:3000/campaigns`,
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(campaign)
+            }
+        ).then(res => res.json())
+        .then(data => {
+            console.log(data)
+            alert('Posted')
+        })
+    }
     
     // Use effect to validate that all the data has been inputed correctly on the front end
     useEffect(() => {
-        if (campName && campDesc && endDate && deliveryAddress && campaignItems.length > 0 && returnedEndDate !== null && startDate) setIsValid(true)
+        if (campName && campDesc && endDate && deliveryAddress && campaignItems.length > 0 && returnedEndDate !== null) setIsValid(true)
         else setIsValid(false)
-    }, [campName, campDesc, endDate, deliveryAddress, campaignItems, startDate, returnedEndDate])
+    }, [campName, campDesc, endDate, deliveryAddress, campaignItems, returnedEndDate])
 
     // Validation for returning date string in correct format
     useEffect(() => {
-        if (endDate.length === 10) setReturnedEndDate(moment(endDate).format('DD MMMM YYYY'))
+        if (endDate.length === 10) setReturnedEndDate(moment(endDate).format('YYYY-MM-DD'))
         else setReturnedEndDate(null)
     }, [endDate])
 
@@ -114,12 +153,30 @@ const RegisterCampaign = () => {
                             displayEmpty
                             className={classes.selectEmpty}
                         >
-                            <MenuItem value="" className={classes.selectItem}>
-                                
+                            <MenuItem value="General Support" className={classes.selectItem}>
+                                General Support
                             </MenuItem>
-                            <MenuItem value="Type 1" className={classes.selectItem}>Campaign Type 1</MenuItem>
-                            <MenuItem value="Type 2" className={classes.selectItem}>Campaign Type 2</MenuItem>
-                            <MenuItem value="Type 3" className={classes.selectItem}>Campaign Type 3</MenuItem>
+                            <MenuItem value="Disaster Relief" className={classes.selectItem}>
+                                Disaster Relief
+                            </MenuItem>
+                            <MenuItem value="Educational Resources" className={classes.selectItem}>
+                                Educational Resources
+                            </MenuItem>
+                            <MenuItem value="Helping the Homeless" className={classes.selectItem}>
+                                Helping the Homeless
+                            </MenuItem>
+                            <MenuItem value="Hunger and Malnutrition" className={classes.selectItem}>
+                                Hunger and Malnutrition
+                            </MenuItem>
+                            <MenuItem value="Animal Welfare" className={classes.selectItem}>
+                                Animal Welfare
+                            </MenuItem>
+                            <MenuItem value="Child Welfare" className={classes.selectItem}>
+                                Child Welfare
+                            </MenuItem>
+                            <MenuItem value="Elder Care" className={classes.selectItem}>
+                                Elder Care
+                            </MenuItem>
                         </Select>
                     </FormControl>
                     </div>
@@ -130,7 +187,9 @@ const RegisterCampaign = () => {
                             name="end-date"
                             type="date"
                             value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
+                            onChange={(e) => {
+                                if (moment(e.target.value).toDate() > today) setEndDate(e.target.value)
+                            }}
                         />
                     </div>
                     <div className="input-div">
@@ -166,7 +225,7 @@ const RegisterCampaign = () => {
                                     min="0"
                                     placeholder="Quantity"
                                     value={quantity}
-                                    onChange={(e) => setQuantity(e.target.value)}
+                                    onChange={(e) => setQuantity(parseInt(e.target.value))}
                                 />
                             </div>
                             <button className="btn-add-item" onClick={(e) => addRegistryItem(e)}>Add</button>
@@ -211,7 +270,7 @@ const RegisterCampaign = () => {
                     <div>
                         {
                             isValid ? (
-                                <button type="submit" form="create-campaign-form" className="pill-btn blue" onClick={(e) => {e.preventDefault()}}>
+                                <button type="submit" form="create-campaign-form" className="pill-btn blue" onClick={(e) => handleSubmit(e)}>
                                     Go Live
                                 </button>
                             ) : (

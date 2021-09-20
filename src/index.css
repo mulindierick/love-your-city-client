@@ -78,9 +78,9 @@ button.blue {
   background-color: var(--light-blue);
   color: var(--white);
 }
-button.blue:hover {
+button.blue:hover,
+button.blue:focus {
   background-color: var(--light-blue-accent);
-  color: var(--white);
 }
 
 .container {
@@ -163,7 +163,7 @@ ERICK CREATED THESE STYLES. PLEASE DO NOT EDIT THEM
 .campaigns-header button {
   padding: 1% 4% 1% 4%;
   border-radius: 50px;
-  margin: 0.5%;
+  margin: 2rem 0.5rem;
   border: none;
   outline: none;
   font-size: 18px;
