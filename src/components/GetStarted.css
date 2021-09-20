@@ -1,0 +1,16 @@
+img {
+ /* height: 152.13414001464844px; */
+ width: 75.7042236328125px;
+ border-radius: 100%;
+ margin-left: 5px;
+      
+}
+
+.get_started_header {
+    background: rgba(33, 51, 104, 1);
+    color: white;
+    height: 71px;
+    display: flex; 
+	align-items: center; 
+}
+

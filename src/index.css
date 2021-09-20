@@ -508,6 +508,14 @@ Register Campaign
   color: white;
 } */
 
+.landing_logo {
+   height: 152.13414001464844px;
+            width: 175.7042236328125px;
+            border-radius: 100%;
+            background: white;
+}
+
+
 .heading {
   height: 18px;
   bottom: 236px;
@@ -542,9 +550,10 @@ Register Campaign
   background: rgba(21, 156, 254, 1);
   border: 2px solid rgba(33, 51, 104, 1);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   font-family: Montserrat;
+  line-height: 22px;
 }
 
 .signUp-btn {
@@ -556,16 +565,13 @@ Register Campaign
   background: rgba(255, 255, 255, 1);
   border: 2px solid rgba(33, 51, 104, 1);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   font-family: Montserrat;
+  line-height: 22px;
 }
 
-.paragraph-2 {
-  color: rgb(154, 181, 231);
-}
-
-.footer {
+.learn_more {
   color: rgba(255, 255, 255, 1);
   font-family: Inter;
   font-size: 14px;
