@@ -30,7 +30,7 @@ const DonateToCampaign = () => {
             history.push("/campaigns");
             console.log(error);
           });
-  }, [history, setCampaign, id]);
+  }, [history, setCampaign, id, setPrevUrl]);
 
   return (
     <div className="sh-group">
