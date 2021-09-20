@@ -86,7 +86,7 @@ const Form = () => {
 const Footer = () => {
   return (
     <div>
-      <Link to="/#">
+      <Link to="/get-started">
         <p className="footer">Learn More</p>
       </Link>
     </div>

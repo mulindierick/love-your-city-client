@@ -12,7 +12,7 @@ const Campaigns = () => {
     let user = JSON.parse(sessionStorage.getItem("user"));
 
     !user
-      ? history.push("/")
+      ? history.push("/log-in")
       : fetch(
           `https://love-your-city-app.herokuapp.com/users/${user["user_id"]}`,
           {

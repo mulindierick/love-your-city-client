@@ -525,6 +525,7 @@ Register Campaign
   color: white;
   padding: 4rem 0;
   top: 36px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

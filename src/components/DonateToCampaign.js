@@ -5,16 +5,17 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const DonateToCampaign = () => {
-  const { campaign, setCampaign } = useContext(CampaignContext);
+  const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
   let { id } = useParams();
   let history = useHistory();
 
   useEffect(() => {
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
     let user = JSON.parse(sessionStorage.getItem("user"));
+    setPrevUrl(window.location.href.length)
 
     !user
-      ? history.push("/")
+      ? history.push("/log-in")
       : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
           method: "GET",
           headers: {
@@ -95,9 +96,7 @@ const DonateToCampaign = () => {
           <button>Support this Campaign</button>
           <div>
             <p className="share-1">Share this Campaign:</p>
-            <p className="share-2">
-              {id}
-            </p>
+            <p className="share-2">{id}</p>
             <p
               className="share-3 share-4"
               onClick={() => {

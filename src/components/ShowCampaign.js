@@ -20,7 +20,7 @@ const ShowCampaign = () => {
     let user = JSON.parse(sessionStorage.getItem("user"));
     e.preventDefault();
     !user
-      ? history.push("/")
+      ? history.push("/log-in")
       : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${cId}`, {
           method: "DELETE",
           headers: {
@@ -43,7 +43,7 @@ const ShowCampaign = () => {
     let user = JSON.parse(sessionStorage.getItem("user"));
 
     !user
-      ? history.push("/")
+      ? history.push("/log-in")
       : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${cId}`, {
           method: "GET",
           headers: {
@@ -96,7 +96,7 @@ const ShowCampaign = () => {
             lobortis nulla iaculis ac. Quisque eget nisi blandit, pulvinar augue
             vitae, efficitur ex. Nullam venenatis lorem sed lorem molestie
             consectetur. Duis nec lectus quis risus dapibus tempor non et eros.
-            Aenean ut tincidunt ipsum, ac tempor erat. 
+            Aenean ut tincidunt ipsum, ac tempor erat.
           </p>
         </div>
         <div className="sh-details">

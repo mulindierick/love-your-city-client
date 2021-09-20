@@ -1,7 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useContext } from "react";
+import { CampaignContext } from "../contexts/CampaignContext";
+
 const LogIn = () => {
+  const { prevUrl } = useContext(CampaignContext);
   const history = useHistory();
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
@@ -27,7 +31,7 @@ const LogIn = () => {
           JSON.stringify(`${data["token"]["accessToken"]}`)
         );
         sessionStorage.setItem("user", JSON.stringify(data["user"]));
-        history.push("/campaigns");
+        prevUrl > 50 ? history.go(-1) : history.push("/campaigns");
       })
       .catch((e) => {
         console.log(e);
