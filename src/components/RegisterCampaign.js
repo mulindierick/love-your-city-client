@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles(() => ({
     formControl: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles(() => ({
 
 const RegisterCampaign = () => {
     const classes = useStyles()
+    const history = useHistory()
 
     // Form Item State
     const today = new Date()
@@ -97,6 +99,7 @@ const RegisterCampaign = () => {
         .then(data => {
             console.log(data)
             alert('Posted')
+            history.push("/campaigns")
         })
     }
     
