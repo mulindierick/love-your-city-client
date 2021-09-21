@@ -26,6 +26,10 @@ const LogIn = () => {
       .then((data) => {
         setEmail("");
         setPassword("");
+        console.log("done");
+        console.log("beofre data")
+        console.log(data);
+        console.log(data["user"]);
         sessionStorage.setItem(
           "accessToken",
           JSON.stringify(`${data["token"]["accessToken"]}`)
