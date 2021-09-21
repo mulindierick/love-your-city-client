@@ -66,7 +66,7 @@ const RegisterCampaign = () => {
 
         const initialNumItems = campaignItems.reduce((acc,cur) => acc + cur.quantity, 0)
         const userId = JSON.parse(sessionStorage.getItem("user"))["user_id"]
-        const accessToken = sessionStorage.getItem('accessToken')
+        const accessToken = JSON.parse(sessionStorage.getItem('accessToken'))
         console.log(accessToken)
 
         let campaign = {
@@ -75,6 +75,7 @@ const RegisterCampaign = () => {
             campDesc,
             campType,
             returnedEndDate,
+            deliveryAddress,
             campaignItems,
             initialNumItems,
         }
