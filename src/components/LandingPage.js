@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const LandingPage = () => {
   return (
     <div className="page-title">
@@ -12,11 +11,7 @@ const LandingPage = () => {
       <br />
       <br />
       <div>
-
         <img className="landing_logo" src="LYC-primary.svg" alt="Logo" />
-
-
-        
       </div>
       <br />
       <Paragraph />
@@ -34,7 +29,7 @@ const Paragraph = () => {
         Do you have a charitable campaign you want to start?
       </p>
       <br />
-      
+
       <p>I'll help you create, launch and coordinate it.</p>
     </section>
   );

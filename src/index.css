@@ -509,12 +509,11 @@ Register Campaign
 } */
 
 .landing_logo {
-   height: 152.13414001464844px;
-            width: 175.7042236328125px;
-            border-radius: 100%;
-            background: white;
+  height: 152.13414001464844px;
+  width: 175.7042236328125px;
+  border-radius: 100%;
+  background: white;
 }
-
 
 .heading {
   height: 18px;

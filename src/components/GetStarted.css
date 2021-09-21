@@ -9,8 +9,54 @@ img {
 .get_started_header {
     background: rgba(33, 51, 104, 1);
     color: white;
-    height: 71px;
+
     display: flex; 
-	align-items: center; 
+	align-items: center;
+    
+    height: 61px;
+
+
+ /* get started h1 (love your city css below)  */
+font-family: Ubuntu;
+font-size: 22px;
+font-style: normal;
+letter-spacing: em;
 }
+
+.get_started_logo {
+height: 700px;
+width: 90px;
+border-radius: 100px;
+margin-left: 0px;
+margin-right: 10px;
+margin-left: -9px;
+
+}
+ .how-it-works {
+
+
+/* margin-left: 244px; */
+margin-top: 30px;
+text-align: center;
+color: rgba(33, 51, 104, 1);
+font-family: Montserrat;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 29px;
+letter-spacing: 0em;
+text-align: center;
+ }
+
+ /* .one {
+     font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 22px;
+letter-spacing: 0em;
+padding-left: 10%;
+
+ }
+ */
 
