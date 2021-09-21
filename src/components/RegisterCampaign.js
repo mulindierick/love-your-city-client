@@ -84,7 +84,7 @@ const RegisterCampaign = () => {
 
         // https://love-your-city-app.herokuapp.com
 
-        fetch( `http://localhost:3000/campaigns`,
+        fetch( `https://love-your-city-app.herokuapp.com/campaigns`,
             {
               method: "POST",
               headers: {
