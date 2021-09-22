@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
     <div className="page-title">
       <section className="heading">
-        <h1>Love your City</h1>
+        <h1>Love Your City</h1>
       </section>
 
       <br />
@@ -16,7 +16,7 @@ const LandingPage = () => {
       <br />
       <Paragraph />
       <br />
-      <Footer />
+      <LearnMore />
       <Form />
     </div>
   );
@@ -30,7 +30,7 @@ const Paragraph = () => {
       </p>
       <br />
 
-      <p>I'll help you create, launch and coordinate it.</p>
+      <p>Love Your City will help you create, launch and coordinate it.</p>
     </section>
   );
 };
@@ -57,7 +57,7 @@ const Form = () => {
   );
 };
 
-const Footer = () => {
+const LearnMore = () => {
   return (
     <div>
       <Link to="/get-started">
