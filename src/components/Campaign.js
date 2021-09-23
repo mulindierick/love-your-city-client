@@ -1,8 +1,18 @@
+import React, { useState } from "react";
 import { useHistory } from "react-router";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import moment from 'moment'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Campaign({ campaign }) {
-  let history = useHistory();
+  console.log(campaign)
+  const history = useHistory();
+  const { campaign_id: campId, campaign_title: title, end_date: endDate, required_item_total: totalItems } = campaign
+  const [campaignItems, setCampaignItems] = useState(null)
+
+  // const fetchItems = async () => {
+  //   const res = await fetch()
+  // }
+
   function handlClick() {
     sessionStorage.setItem("cId", JSON.stringify(`${campaign.campaign_id}`));
     history.push("/show-campaign");
@@ -13,11 +23,11 @@ function Campaign({ campaign }) {
       <div className="progress-group">
         <p className=" pg pg-1">80%</p>
         <div className="pg  pg-2">
-          <p className="pg-2-3">{campaign.campaign_title}</p>
-          <p className="pg-2-2">1,273 of 2,000 items raised</p>
+          <p className="pg-2-3">{title}</p>
+          <p className="pg-2-2">5 of {totalItems} items raised</p>
         </div>
         <div className=" pg pg-3">
-          <p className="pg-2-3">23/05/2021</p>
+          <p className="pg-2-3">{moment().format('DD/MM/YYYY')}</p>
           <p className="pg-2-2">End Date</p>
         </div>
       </div>
