@@ -182,10 +182,16 @@ const DonateToCampaign = () => {
                           <td>{index + 1}.</td>
                           <td>{item.campaign_item_name}</td>
                           <td>{item.campaign_item_quantity}</td>
-                          <td>{campaign["donations"][index].total}</td>
                           <td>
-                            {item.campaign_item_quantity -
-                              campaign["donations"][index].total}
+                            {campaign["donations"]
+                              ? campaign["donations"][index].total
+                              : 0}
+                          </td>
+                          <td>
+                            {campaign["donations"]
+                              ? item.campaign_item_quantity -
+                                campaign["donations"][index].total
+                              : 0}
                           </td>
                         </tr>
                       );
@@ -246,10 +252,10 @@ const DonateToCampaign = () => {
                     <p>
                       Still Needed:{" "}
                       <span className="donation-goal">
-                        {campaign
+                        {campaign["donations"]
                           ? campaign["campaign"][index].campaign_item_quantity -
                             campaign["donations"][index].total
-                          : ""}
+                          : campaign["campaign"][index].campaign_item_quantity}
                       </span>
                     </p>
                   </div>
