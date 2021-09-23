@@ -8,7 +8,7 @@ const DonateToCampaign = () => {
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
   let { id } = useParams();
   let history = useHistory();
-  
+
   // fetch campaign imformation
   useEffect(() => {
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
