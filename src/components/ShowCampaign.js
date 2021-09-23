@@ -64,7 +64,7 @@ const ShowCampaign = () => {
   return (
     <div className="sh-group">
       <div className="sh-header">
-        <h3> {campaign ? campaign[0].campaign_title : <LoopRoundedIcon />}</h3>
+        <h3> {campaign ? campaign["campaign"][0].campaign_title : <LoopRoundedIcon />}</h3>
         {/* <h4>Hosted by: Erick Mulindi</h4> */}
       </div>
       <div className="sc-buttons">
