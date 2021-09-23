@@ -69,7 +69,7 @@ const DonateToCampaign = () => {
     console.log("incr", e.currentTarget.dataset.item);
     let itemName = e.currentTarget.dataset.item;
     let tempItems = campaignItems.map((item, index) => {
-      if (campaign) {
+      if (campaign["donations"]) {
         if (
           item.campaign_item_name === itemName &&
           item.campaign_item_quantity !==
@@ -88,8 +88,14 @@ const DonateToCampaign = () => {
         } else {
           return item;
         }
+      } else {
+        if (item.campaign_item_name === itemName) {
+          item.donation++;
+          return item;
+        } else {
+          return item;
+        }
       }
-      return true;
     });
     setCampaignItems(tempItems);
     console.log(tempItems[0].quantity);
