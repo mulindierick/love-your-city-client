@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 const DonateToCampaign = () => {
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
+  console.log(campaign);
   let { id } = useParams();
   let history = useHistory();
 
@@ -69,7 +70,7 @@ const DonateToCampaign = () => {
     console.log("incr", e.currentTarget.dataset.item);
     let itemName = e.currentTarget.dataset.item;
     let tempItems = campaignItems.map((item, index) => {
-      if (campaign["donations"]) {
+      if (campaign && campaign["donations"].length > 0) {
         if (
           item.campaign_item_name === itemName &&
           item.campaign_item_quantity !==
@@ -89,7 +90,10 @@ const DonateToCampaign = () => {
           return item;
         }
       } else {
-        if (item.campaign_item_name === itemName) {
+        if (
+          item.campaign_item_name === itemName &&
+          item.campaign_item_quantity !== item.donation
+        ) {
           item.donation++;
           return item;
         } else {
@@ -123,10 +127,16 @@ const DonateToCampaign = () => {
     campaignItems.forEach((item) => {
       delete item.campaign_item_quantity;
     });
-    campaignItems = campaignItems.filter((item) => {
-      return item.donation > 0;
-    });
-    console.log("donate items", campaignItems);
+
+    // check if donate items greate or equal to campaign items . left
+    //then filter, esle do not filter.
+    if (campaign["donations"].length >= campaign["campaign"].length) {
+      campaignItems = campaignItems.filter((item) => {
+        return item.donation > 0;
+      });
+    }
+
+    // console.log("donate items", campaignItems);
 
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
     let user = JSON.parse(sessionStorage.getItem("user"));
@@ -174,7 +184,7 @@ const DonateToCampaign = () => {
                     <th>Donated</th>
                     <th>Still needed</th>
                   </tr>
-                  {campaign ? (
+                  {campaign && campaign["donations"].length > 0 ? (
                     campaign["campaign"].map((item, index) => {
                       console.log(item);
                       return (
@@ -183,16 +193,29 @@ const DonateToCampaign = () => {
                           <td>{item.campaign_item_name}</td>
                           <td>{item.campaign_item_quantity}</td>
                           <td>
-                            {campaign["donations"]
+                            {campaign["donations"][index].total
                               ? campaign["donations"][index].total
                               : 0}
                           </td>
                           <td>
-                            {campaign["donations"]
-                              ? item.campaign_item_quantity -
-                                campaign["donations"][index].total
-                              : 0}
+                            {item.campaign_item_quantity -
+                              (campaign["donations"][index].total
+                                ? campaign["donations"][index].total
+                                : 0)}
                           </td>
+                        </tr>
+                      );
+                    })
+                  ) : campaign ? (
+                    campaign["campaign"].map((item, index) => {
+                      console.log(item);
+                      return (
+                        <tr key={index}>
+                          <td>{index + 1}.</td>
+                          <td>{item.campaign_item_name}</td>
+                          <td>{item.campaign_item_quantity}</td>
+                          <td></td>
+                          <td>{item.campaign_item_quantity}</td>
                         </tr>
                       );
                     })
@@ -252,10 +275,16 @@ const DonateToCampaign = () => {
                     <p>
                       Still Needed:{" "}
                       <span className="donation-goal">
-                        {campaign["donations"]
-                          ? campaign["campaign"][index].campaign_item_quantity -
-                            campaign["donations"][index].total
-                          : campaign["campaign"][index].campaign_item_quantity}
+                        {campaign && campaign["donations"].length > 0 ? (
+                          campaign["campaign"][index].campaign_item_quantity -
+                          (campaign["donations"][index].total
+                            ? campaign["donations"][index].total
+                            : 0)
+                        ) : campaign ? (
+                          campaign["campaign"][index].campaign_item_quantity
+                        ) : (
+                          <></>
+                        )}
                       </span>
                     </p>
                   </div>

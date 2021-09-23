@@ -29,7 +29,7 @@ const ShowCampaign = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data)
+            console.log(data);
             alert("campaign deleted");
             // history.push("/campaigns");
           })
@@ -64,7 +64,14 @@ const ShowCampaign = () => {
   return (
     <div className="sh-group">
       <div className="sh-header">
-        <h3> {campaign ? campaign["campaign"][0].campaign_title : <LoopRoundedIcon />}</h3>
+        <h3>
+          {" "}
+          {campaign ? (
+            campaign["campaign"][0].campaign_title
+          ) : (
+            <LoopRoundedIcon />
+          )}
+        </h3>
         {/* <h4>Hosted by: Erick Mulindi</h4> */}
       </div>
       <div className="sc-buttons">
