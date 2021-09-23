@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   let [username, setUsername] = useState("");
@@ -60,7 +61,9 @@ const SignUp = () => {
             required
           />
           <button type="submit" className="pill-btn blue">
+            <Link to="/get-started"> 
             Sign Up
+            </Link>
           </button>
         </form>
       </div>
