@@ -26,16 +26,12 @@ const LogIn = () => {
       .then((data) => {
         setEmail("");
         setPassword("");
-        console.log("done");
-        console.log("beofre data")
-        console.log(data);
-        console.log(data["user"]);
         sessionStorage.setItem(
           "accessToken",
           JSON.stringify(`${data["token"]["accessToken"]}`)
         );
         sessionStorage.setItem("user", JSON.stringify(data["user"]));
-        prevUrl > 50 ? history.go(-1) : history.push("/campaigns");
+        prevUrl > 50 ? history.go(-2) : history.push("/campaigns");
       })
       .catch((e) => {
         console.log(e);
