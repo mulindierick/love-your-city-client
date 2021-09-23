@@ -1,7 +1,7 @@
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import "./GetStarted.css";
+// import "./GetStarted.css";
 
 function GetStarted() {
   return (
