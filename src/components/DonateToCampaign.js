@@ -17,7 +17,7 @@ const DonateToCampaign = () => {
     // let user = JSON.parse(sessionStorage.getItem("user"));
     setPrevUrl(window.location.href.length);
 
-    fetch(`http://localhost:5000/campaigns/${id}`, {
+    fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ const DonateToCampaign = () => {
   useEffect(() => {
     // let token = JSON.parse(sessionStorage.getItem("accessToken"));
     // let user = JSON.parse(sessionStorage.getItem("user"));
-    fetch(`http://localhost:5000/campaigns/items/${id}`, {
+    fetch(`https://love-your-city-app.herokuapp.com/campaigns/items/${id}`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`,
