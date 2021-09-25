@@ -402,12 +402,13 @@ Show campaign route and donate
 .sh-table td,
 .sh-table th {
   padding: 8px;
+  text-align: center;
 }
 
 .sh-table th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: center;
 }
 .table-group {
   padding: 2%;
@@ -415,6 +416,7 @@ Show campaign route and donate
 }
 .table-group-2 {
   margin-top: 1%;
+  text-align: center;
 }
 .sh-details {
   padding: 2%;

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Campaign from "../components/Campaign";
 import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
+import Header from "./Header";
 
 const Campaigns = () => {
   const { campaigns, setCampaigns } = useContext(CampaignContext);
@@ -31,6 +32,7 @@ const Campaigns = () => {
 
   return (
     <div className="campaigns-page">
+       <Header/>
       <div className="campaigns-header">
         <div className="ch-1">
           <h4>Your campaigns</h4>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
+import Header from "./Header";
 
 const LogIn = () => {
   const { prevUrl } = useContext(CampaignContext);
@@ -31,7 +32,7 @@ const LogIn = () => {
           JSON.stringify(`${data["token"]["accessToken"]}`)
         );
         sessionStorage.setItem("user", JSON.stringify(data["user"]));
-        prevUrl > 50 ? history.go(-2) : history.push("/campaigns");
+        prevUrl > 50 ? history.go(-1) : history.push("/campaigns");
       })
       .catch((e) => {
         console.log(e);
@@ -39,6 +40,7 @@ const LogIn = () => {
   }
   return (
     <section className="log-in">
+      <Header/>
       <div className="container log-in-container">
         <h1 className="log-in-h1">Log in</h1>
         <form onSubmit={handleSubmit}>

@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 
 const SignUp = () => {
   let [username, setUsername] = useState("");
@@ -33,6 +34,7 @@ const SignUp = () => {
   }
   return (
     <section className="sign-up">
+      <Header />
       <div className="container sign-up-container">
         <h1 className="sign-up-h1">Sign Up</h1>
         <form onSubmit={handleSubmit}>
