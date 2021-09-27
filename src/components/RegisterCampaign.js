@@ -70,10 +70,10 @@ const RegisterCampaign = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const initialNumItems = campaignItems.reduce(
-      (acc, cur) => acc + cur.quantity,
-      0
-    );
+    // const initialNumItems = campaignItems.reduce(
+    //   (acc, cur) => acc + cur.quantity,
+    //   0
+    // );
     const userId = JSON.parse(sessionStorage.getItem("user"))["user_id"];
     const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
     console.log(accessToken);
@@ -86,7 +86,7 @@ const RegisterCampaign = () => {
       returnedEndDate,
       deliveryAddress,
       campaignItems,
-      initialNumItems,
+      // initialNumItems,
     };
 
     console.log(campaign);

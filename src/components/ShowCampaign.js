@@ -32,7 +32,7 @@ const ShowCampaign = () => {
           .then((data) => {
             console.log(data);
             alert("campaign deleted");
-            // history.push("/campaigns");
+            history.push("/campaigns");
           })
           .catch((e) => {
             console.log(e);
