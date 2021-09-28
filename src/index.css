@@ -29,6 +29,8 @@ html,
 body,
 #root {
   height: 100%;
+  font-family: "Inter", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -387,6 +389,8 @@ Show campaign route and donate
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  font-family: "Inter", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .sh-desc h3 {
   margin: 1%;
@@ -395,6 +399,8 @@ Show campaign route and donate
 .sh-desc p {
   /* max-width: 50ch; */
   text-align: center;
+  font-family: "Inter", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .sh-details {
   display: flex;
@@ -402,7 +408,7 @@ Show campaign route and donate
   margin-top: 2rem;
 }
 
-/* .sh-table {
+.sh-table {
   border-collapse: collapse;
   width: 80%;
 }
@@ -422,7 +428,10 @@ Show campaign route and donate
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-} */
+}
+
+
+
 .table-group {
   width: 100%;
   padding: 2%;
@@ -478,11 +487,13 @@ Show campaign route and donate
   }
 }
 
-/* .table-group-2 {
-  margin-top: 1%;
-  text-align: center;
+.table-group-3 {
+  width: 100%;
+  margin: 2rem 0;
+  display: flex;
 }
-.sh-details {
+
+/* .sh-details {
   padding: 2%;
 }
 .sh-details h3 {
@@ -654,7 +665,7 @@ Register Campaign
   height: 18px;
   bottom: 236px;
   color: rgb(255, 255, 255, 1);
-  font-family: Ubuntu;
+  /* font-family: Ubuntu; */
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
@@ -686,7 +697,7 @@ Register Campaign
   font-weight: 600;
   font-size: 18px;
   text-align: center;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   line-height: 22px;
 }
 
@@ -701,13 +712,13 @@ Register Campaign
   font-weight: 600;
   font-size: 18px;
   text-align: center;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   line-height: 22px;
 }
 
 .learn_more {
   color: white;
-  font-family: Inter;
+  /* font-family: Inter; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -729,7 +740,7 @@ Register Campaign
 
   height: 61px;
 
-  font-family: Ubuntu;
+  /* font-family: Ubuntu; */
   font-size: 22px;
   font-style: normal;
   letter-spacing: em;
@@ -748,7 +759,7 @@ Register Campaign
   text-align: center;
   margin-left: 44px;
   color: rgba(33, 51, 104, 1);
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
@@ -769,7 +780,7 @@ li {
 .get_started {
   text-align: center;
   color: #213368;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -783,7 +794,7 @@ li {
   margin-left: 40%;
   margin-top: 100px;
 
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-style: normal;
   font-weight: bold;
@@ -803,7 +814,7 @@ li {
   border: 1px solid #e20e0e;
   font-size: 18px;
   text-align: center;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   line-height: 22px;
 }
 

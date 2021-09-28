@@ -3,11 +3,12 @@ import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 import Header from "./Header";
 
 const DonateToCampaign = () => {
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
-  console.log(campaign);
+  // console.log(campaign);
   let { id } = useParams();
   let history = useHistory();
 
@@ -17,7 +18,7 @@ const DonateToCampaign = () => {
     // let user = JSON.parse(sessionStorage.getItem("user"));
     setPrevUrl(window.location.href.length);
 
-    fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
+    fetch(` https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`,
@@ -30,7 +31,7 @@ const DonateToCampaign = () => {
       })
       .catch((error) => {
         history.go(-2);
-        console.log(error);
+        // console.log(error);
       });
   }, [history, setCampaign, id, setPrevUrl]);
 
@@ -49,7 +50,7 @@ const DonateToCampaign = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("erick", res);
+        // console.log("erick", res);
         res.forEach((item) => {
           item["donation"] = 0;
         });
@@ -63,7 +64,7 @@ const DonateToCampaign = () => {
   // handle donation increase
   function incr(e) {
     e.preventDefault();
-    console.log("incr", e.currentTarget.dataset.item);
+    // console.log("incr", e.currentTarget.dataset.item);
     let itemName = e.currentTarget.dataset.item;
     let tempItems = campaignItems.map((item, index) => {
       if (campaign && campaign["donations"].length > 0) {
@@ -76,10 +77,10 @@ const DonateToCampaign = () => {
             Number(campaign["donations"][index].total) !==
             item.donation
         ) {
-          console.log(
-            item.campaign_item_quantity,
-            Number(campaign["donations"][index].total)
-          );
+          // console.log(
+          //   item.campaign_item_quantity,
+          //   Number(campaign["donations"][index].total)
+          // );
           item.donation++;
           return item;
         } else {
@@ -98,12 +99,12 @@ const DonateToCampaign = () => {
       }
     });
     setCampaignItems(tempItems);
-    console.log(tempItems[0].quantity);
+    // console.log(tempItems[0].quantity);
   }
   // handle donation decrease
   function decr(e) {
     e.preventDefault();
-    console.log("decr", e.currentTarget.dataset.item);
+    // console.log("decr", e.currentTarget.dataset.item);
     let itemName = e.currentTarget.dataset.item;
     let tempItems = campaignItems.map((item) => {
       if (item.campaign_item_name === itemName && item.donation > 0) {
@@ -115,12 +116,12 @@ const DonateToCampaign = () => {
       }
     });
     setCampaignItems(tempItems);
-    console.log(tempItems[0].quantity);
+    // console.log(tempItems[0].quantity);
   }
   // handle submit form for making a donation
   function handleSubmit(e) {
     setPrevUrl(window.location.href.length);
-    console.log(window.location.href.length);
+    // console.log(window.location.href.length);
     e.preventDefault();
     campaignItems.forEach((item) => {
       delete item.campaign_item_quantity;
@@ -150,7 +151,7 @@ const DonateToCampaign = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             alert("Thank you for your donation");
             window.location.reload();
           })
@@ -187,7 +188,7 @@ const DonateToCampaign = () => {
                     </tr>
                     {campaign && campaign["donations"].length > 0 ? (
                       campaign["campaign"].map((item, index) => {
-                        console.log(item);
+                        // console.log(item);
                         return (
                           <tr key={index}>
                             <td>{index + 1}.</td>
@@ -209,7 +210,7 @@ const DonateToCampaign = () => {
                       })
                     ) : campaign ? (
                       campaign["campaign"].map((item, index) => {
-                        console.log(item);
+                        // console.log(item);
                         return (
                           <tr key={index}>
                             <td>{index + 1}.</td>
@@ -226,7 +227,7 @@ const DonateToCampaign = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="table-group-2">
+              <div className="table-group-3">
                 <table className="sh-table-2">
                   <tbody>
                     <tr>
@@ -235,7 +236,13 @@ const DonateToCampaign = () => {
                       <th>Email Address</th>
                     </tr>
                     <tr>
-                      <td> 12/03/2023</td>
+                      <td>
+                        {campaign
+                          ? moment(campaign["campaign"][0].end_date).format(
+                              "DD MMMM YYYY"
+                            )
+                          : ""}
+                      </td>
                       <td>
                         {campaign
                           ? campaign["campaign"][0].delivery_address
@@ -253,7 +260,7 @@ const DonateToCampaign = () => {
                   className="share-3 share-4"
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      `https://love-your-city-app.herokuapp.com/campaigns/donate/${id}`
+                      `https://www.loveyourcity.app/donate/${id}`
                     );
                     alert("Link Copied");
                   }}

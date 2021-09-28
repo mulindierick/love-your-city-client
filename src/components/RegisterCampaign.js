@@ -76,7 +76,7 @@ const RegisterCampaign = () => {
     // );
     const userId = JSON.parse(sessionStorage.getItem("user"))["user_id"];
     const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
-    console.log(accessToken);
+    // console.log(accessToken);
 
     let campaign = {
       userId,
@@ -89,7 +89,7 @@ const RegisterCampaign = () => {
       // initialNumItems,
     };
 
-    console.log(campaign);
+    // console.log(campaign);
 
     // https://love-your-city-app.herokuapp.com
 
@@ -103,8 +103,8 @@ const RegisterCampaign = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        alert("Posted");
+        // console.log(data);
+        alert("Campaign Created");
         history.push("/campaigns");
       });
   };

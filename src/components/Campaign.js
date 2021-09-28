@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {useContext } from "react";
 import { useHistory } from "react-router";
 import { CampaignContext } from "../contexts/CampaignContext";
 import moment from 'moment'
@@ -9,7 +9,7 @@ function Campaign({ campaign }) {
   const { setCampaign } = useContext(CampaignContext);
   const history = useHistory();
   const { campaign_id: campId, campaign_title: title, end_date: endDate, totalItems, donationTotal } = campaign
-  const [campaignItems, setCampaignItems] = useState(campaign.campaignItems)
+  // const [campaignItems, setCampaignItems] = useState(campaign.campaignItems)
   const progressTotal = Math.ceil((donationTotal/totalItems)*100)
 
   function handlClick() {
