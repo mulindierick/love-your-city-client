@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/log-in" component={LogIn} />
         <Route exact path="/sign-up" component={SignUp} />
         <Route exact path="/campaigns" component={Campaigns} />
-        <Route exact path="/show-campaign" component={ShowCampaign} />
+        <Route exact path="/show-campaign/:id" component={ShowCampaign} />
         <Route exact path="/register-campaign" component={RegisterCampaign} />
         <Route exact path="/donate/:id" component={Donate} />
       </Switch>

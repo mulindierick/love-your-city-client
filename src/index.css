@@ -72,6 +72,7 @@ button.pill-btn {
 button.disabled {
   background-color: var(--dark-gray);
   color: var(--white);
+  cursor: unset;
 }
 
 button.blue {
@@ -234,12 +235,13 @@ user campaigns page
   cursor: pointer;
 }
 .sc-buttons {
-  padding-bottom: 3%;
+  /* padding-bottom: 3%; */
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: rgba(33, 51, 104, 1);
+  /* color: rgba(33, 51, 104, 1); */
+  color: var(--dark-blue);
   flex-wrap: wrap;
 }
 .cb {
@@ -256,9 +258,9 @@ user campaigns page
   background-color: #159cfe;
 }
 .cb-2 {
-  background-color: var(--input-gray);
+  background-color: transparent;
   border: 1px solid;
-  color: var(--dark-gray);
+  color: var(--black-accent);
 }
 .c-progress-line {
   background-color: #f1f1f1;
@@ -267,7 +269,7 @@ user campaigns page
 .c-progress-line-1 {
   background-color: #159cfe;
   height: 3px;
-  width: 80%;
+  /* width: 80%; */
 }
 /* ///////////////////////////////////////////////////// 
 Show campaign route and donate
@@ -276,18 +278,19 @@ Show campaign route and donate
 .sh-group {
   display: flex;
   flex-direction: column;
-  padding: 0% 5% 5% 5%;
+  padding: 2rem;
 }
-.sh-header,
+/* .sh-header,
 .sc-buttons {
   background-color: var(--input-gray);
-}
+} */
 .sh-header {
-  margin-top: 2%;
-  padding: 2%;
+  /* margin-top: 2%; */
+  margin: 1.5rem 0 2.5rem 0;
+  /* padding: 2%; */
   font-size: 1.5rem;
   text-align: center;
-  color: #213368;
+  color: var(--dark-blue);
 }
 .donate-and-campaign {
   display: flex;
@@ -378,18 +381,28 @@ Show campaign route and donate
 }
 .sh-desc {
   font-size: 1.2rem;
-  padding: 2%;
+  margin: 2rem 0;
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 .sh-desc h3 {
   margin: 1%;
   text-align: center;
 }
+.sh-desc p {
+  /* max-width: 50ch; */
+  text-align: center;
+}
 .sh-details {
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 }
 
-.sh-table {
+/* .sh-table {
   border-collapse: collapse;
   width: 80%;
 }
@@ -408,12 +421,63 @@ Show campaign route and donate
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-}
+} */
 .table-group {
+  width: 100%;
   padding: 2%;
-  border: 1px solid;
+  border: 1px solid var(--black-accent);
 }
+
+.table-group > .row {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+  text-align: left;
+}
+.table-group > .header-row {
+  margin: 1rem 0 2rem 0;
+  color: var(--black-accent);
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 500px) {
+  .table-group {
+    font-size: 10px;
+  }
+  .table-group > .header-row {
+    font-size: 0.6rem;
+  }
+}
+
 .table-group-2 {
+  width: 100%;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  column-gap: 2fr;
+}
+
+.table-group-2 > div {
+  margin: 1rem 0;
+}
+
+.table-group-2 .header {
+  color: var(--black-accent);
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 500px) {
+  .table-group-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* .table-group-2 {
   margin-top: 1%;
 }
 .sh-details {
@@ -422,7 +486,10 @@ Show campaign route and donate
 .sh-details h3 {
   text-align: center;
   margin: 1%;
-}
+} */
+
+
+
 .share-1 {
   margin: 2%;
   color: #213368;
