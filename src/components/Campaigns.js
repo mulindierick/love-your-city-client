@@ -12,6 +12,8 @@ const Campaigns = () => {
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
     let user = JSON.parse(sessionStorage.getItem("user"));
 
+    // https://love-your-city-app.herokuapp.com
+    // http://localhost:5000
     !user
       ? history.push("/log-in")
       : fetch(
@@ -24,8 +26,25 @@ const Campaigns = () => {
           }
         )
           .then((res) => res.json())
-          .then((res) => {
-            setCampaigns(res);
+          .then((data) => {
+            // console.log(data)
+
+            // Sorting Campaign Data on Front End
+            let fullCampaignData = data.campaigns
+
+            fullCampaignData.forEach(el => {
+              let specificItems = data.campaign_items.filter(item => item.campaign_title === el.campaign_title)
+              let specificDonations = data.donation_items.filter(item => item.campaign_title === el.campaign_title)
+              let specificDonationTotal = data.donations_total.filter(item => item.campaign_title === el.campaign_title)
+              let specificItemTotal = data.item_total.filter(item => item.campaign_title === el.campaign_title)
+
+              el["campaignItems"] = specificItems
+              el["donationItems"] = specificDonations
+              el["totalItems"] = parseInt(specificItemTotal[0].total)
+              el["donationTotal"] = specificDonationTotal.length !== 0 ? parseInt(specificDonationTotal[0].total) : 0
+            })
+
+            setCampaigns(fullCampaignData);
           })
           .catch((error) => console.log(error));
   }, [history, setCampaigns]);
