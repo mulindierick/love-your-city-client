@@ -4,6 +4,7 @@ import { CampaignContext } from "../contexts/CampaignContext";
 import { useHistory, useParams } from "react-router-dom";
 import LoopRoundedIcon from "@material-ui/icons/LoopRounded";
 import moment from "moment";
+import Header from "./Header";
 // import FacebookIcon from "@material-ui/icons/Facebook";
 // import TwitterIcon from "@material-ui/icons/Twitter";
 // import LinkedInIcon from "@material-ui/icons/LinkedIn";
@@ -84,7 +85,10 @@ const ShowCampaign = () => {
   }, [history, setCampaign, cId]);
 
   return (
+    <React.Fragment>
+       <Header />
     <div className="sh-group">
+     
       {campaign ? (
         <>
           <div className="sh-header">
@@ -209,6 +213,7 @@ const ShowCampaign = () => {
         <LoopRoundedIcon />
       )}
     </div>
+    </React.Fragment>
   );
 };
 
