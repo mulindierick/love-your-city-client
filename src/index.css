@@ -434,21 +434,28 @@ Show campaign route and donate
 
 .table-group {
   width: 100%;
-  padding: 2%;
-  border: 1px solid var(--black-accent);
+  /* padding: 2%; */
+  /* border: 1px solid var(--black-accent); */
+  border-radius: 5px;
 }
 
 .table-group > .row {
   display: grid;
   text-align: center;
-  grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1fr;
   gap: 1rem;
-  margin: 1rem 0;
-  text-align: left;
+  /* margin: 1rem 0; */
+  padding: 0.5rem;
+  text-align: center;
+  background-color: var(--light-gray);
+  color: var(--black-accent)
 }
 .table-group > .header-row {
-  margin: 1rem 0 2rem 0;
-  color: var(--black-accent);
+  /* margin: 1rem 0 2rem 0; */
+  /* color: var(--black-accent); */
+  background-color: var(--black-accent);
+  color: white;
+  border-radius: 5px 5px 0 0;
   font-weight: 500;
   font-size: 1.2rem;
 }
@@ -465,17 +472,28 @@ Show campaign route and donate
 .table-group-2 {
   width: 100%;
   margin: 2rem 0;
+  text-align: center;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  column-gap: 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1.5rem;
 }
 
 .table-group-2 > div {
   margin: 1rem 0;
+  /* padding: 1rem; */
+  background-color: var(--light-gray);
+  border-radius: 5px;
+  color: var(--black-accent)
+}
+.table-group-2 > div > p {
+  padding: 0.5rem;
 }
 
 .table-group-2 .header {
-  color: var(--black-accent);
+  /* color: var(--black-accent); */
+  background-color: var(--black-accent);
+  color: white;
+  border-radius: 5px 5px 0 0;
   font-weight: 500;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
@@ -828,4 +846,10 @@ li {
   .get_started_btn {
     margin-left: 25%;
   }
+}
+
+
+/* Preview Styling */
+.preview-data {
+  padding: 2rem;
 }

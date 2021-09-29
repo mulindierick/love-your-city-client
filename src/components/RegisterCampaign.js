@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { useHistory } from "react-router";
+import { CampaignContext } from '../contexts/CampaignContext'
 import Header from "./Header";
 
 const useStyles = makeStyles(() => ({
@@ -25,18 +26,40 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+// campName,
+//       campDesc,
+//       campType,
+//       returnedEndDate,
+//       deliveryAddress,
+//       campaignItems,
+
+// const storedName = sessionStorage.getItem("campName") || ''
+// const storedDesc = sessionStorage.getItem("campDesc") || ''
+// const storedType = sessionStorage.getItem("campType") || "General Support"
+// const storedAddress = sessionStorage.getItem("campAddress") || ''
+// const storedEndDate = sessionStorage.getItem("endDate") || ''
+// const storedItems = sessionStorage.getItem("campItems") || []
+
 const RegisterCampaign = () => {
+  const { setPreviewData } = useContext(CampaignContext)
   const classes = useStyles();
   const history = useHistory();
 
+  const storedName = sessionStorage.getItem("campName") || ''
+  const storedDesc = sessionStorage.getItem("campDesc") || ''
+  const storedType = sessionStorage.getItem("campType") || "General Support"
+  const storedAddress = sessionStorage.getItem("deliveryAddress") || ''
+  const storedEndDate = sessionStorage.getItem("endDate") || ''
+  // const storedItems = JSON.parse(sessionStorage.getItem("campaignItems")) || []
+
   // Form Item State
   const today = new Date();
-  const [campName, setCampName] = useState("");
-  const [campDesc, setCampDesc] = useState("");
-  const [campType, setCampType] = useState("General Support");
-  const [endDate, setEndDate] = useState("");
+  const [campName, setCampName] = useState(storedName);
+  const [campDesc, setCampDesc] = useState(storedDesc);
+  const [campType, setCampType] = useState(storedType);
+  const [endDate, setEndDate] = useState(storedEndDate);
   const [returnedEndDate, setReturnedEndDate] = useState(null);
-  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [deliveryAddress, setDeliveryAddress] = useState(storedAddress);
 
   // Registry State
   const [item, setItem] = useState("");
@@ -70,15 +93,10 @@ const RegisterCampaign = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const initialNumItems = campaignItems.reduce(
-    //   (acc, cur) => acc + cur.quantity,
-    //   0
-    // );
     const userId = JSON.parse(sessionStorage.getItem("user"))["user_id"];
-    const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
-    // console.log(accessToken);
+    // const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
 
-    let campaign = {
+    let campaignData = {
       userId,
       campName,
       campDesc,
@@ -86,27 +104,19 @@ const RegisterCampaign = () => {
       returnedEndDate,
       deliveryAddress,
       campaignItems,
-      // initialNumItems,
     };
 
-    // console.log(campaign);
+    setPreviewData(campaignData)
 
-    // https://love-your-city-app.herokuapp.com
-
-    fetch(`https://love-your-city-app.herokuapp.com/campaigns`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(campaign),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        alert("Campaign Created");
-        history.push("/campaigns");
-      });
+    sessionStorage.setItem("campName", campName)
+    sessionStorage.setItem("campDesc", campDesc)
+    sessionStorage.setItem("campType", campType)
+    sessionStorage.setItem("deliveryAddress", deliveryAddress)
+    sessionStorage.setItem("endDate", returnedEndDate)
+    // console.log(JSON.stringify([...campaignItems]))
+    // sessionStorage.setItem("campaignItems", JSON.stringify([...campaignItems]))
+    
+    history.push("/preview");
   };
 
   // Use effect to validate that all the data has been inputed correctly on the front end
@@ -333,7 +343,7 @@ const RegisterCampaign = () => {
                 className="pill-btn blue"
                 onClick={(e) => handleSubmit(e)}
               >
-                Go Live
+                Preview Campaign
               </button>
             ) : (
               <button disabled className="pill-btn disabled">
