@@ -343,11 +343,15 @@ const DonateToCampaign = () => {
               campaignItems.map((item, index) => {
                 return (
                   <div key={index} className="choose-donation">
-                    {Number(campaign["donations"][index].total) ===
-                    Number(
-                      campaign["campaign"][index].campaign_item_quantity
-                    ) ? (
-                      <StarIcon style={{ fontSize: 40, color: "#213368" }} />
+                    {campaign && campaign["donations"].length > 0 ? (
+                      Number(campaign["donations"][index].total) ===
+                      Number(
+                        campaign["campaign"][index].campaign_item_quantity
+                      ) ? (
+                        <StarIcon style={{ fontSize: 40, color: "#213368" }} />
+                      ) : (
+                        <></>
+                      )
                     ) : (
                       <></>
                     )}
