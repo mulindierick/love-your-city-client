@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { Redirect } from "react-router";
-import { Link } from "react-router-dom";
 import Header from "./Header";
 
 const SignUp = () => {
@@ -25,6 +24,7 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         setEmail("");
         setPassword("");
         setUsername("");
@@ -62,11 +62,7 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="pill-btn blue">
-            <Link to="/get-started"> 
-            Sign Up
-            </Link>
-          </button>
+          <button type="submit" className="pill-btn blue">Sign Up</button>
         </form>
       </div>
       {url === "error" ? <Redirect to="/sign-up" /> : <Redirect to="/" />}

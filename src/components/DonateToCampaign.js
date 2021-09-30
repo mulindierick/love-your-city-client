@@ -7,7 +7,8 @@ import moment from "moment";
 import Header from "./Header";
 
 const DonateToCampaign = () => {
-  const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
+  const { campaign, setCampaign, setPrevUrl} =
+    useContext(CampaignContext);
   // console.log(campaign);
   let { id } = useParams();
   let history = useHistory();
@@ -28,13 +29,13 @@ const DonateToCampaign = () => {
       .then((res) => res.json())
       .then((res) => {
         setCampaign(res);
-        console.log(campaign)
+        // console.log(campaign);
       })
       .catch((error) => {
         history.go(-2);
         // console.log(error);
       });
-  }, [history, setCampaign, id, setPrevUrl,campaign]);
+  }, [history, setCampaign, id, setPrevUrl]);
 
   // fetch campaign items only
   let [campaignItems, setCampaignItems] = useState([]);
@@ -78,10 +79,6 @@ const DonateToCampaign = () => {
             Number(campaign["donations"][index].total) !==
             item.donation
         ) {
-          // console.log(
-          //   item.campaign_item_quantity,
-          //   Number(campaign["donations"][index].total)
-          // );
           item.donation++;
           return item;
         } else {
@@ -237,42 +234,43 @@ const DonateToCampaign = () => {
                 </div>
 
                 {campaign && campaign["donations"].length > 0 ? (
-                      campaign["campaign"].map((item, index) => {
-                        // console.log(item);
-                        return (
-                          <div className="row" key={index}>
-                            <div className="col">{index + 1}.</div>
-                            <div className="col">{item.campaign_item_name}</div>
-                            <div className="col">{item.campaign_item_quantity}</div>
-                            <div className="col">
-                              {campaign["donations"][index].total
-                                ? campaign["donations"][index].total
-                                : 0}
-                            </div>
-                            <div className="col">
-                              {item.campaign_item_quantity -
-                                (campaign["donations"][index].total
-                                  ? campaign["donations"][index].total
-                                  : 0)}
-                            </div>
-                          </div>
-                        );
-                  })) : campaign ? (
-                    campaign["campaign"].map((item, index) => {
-                      // console.log(item);
-                      return (
-                        <div className="row" key={index}>
-                          <div className="col">{index + 1}.</div>
-                          <div className="col">{item.campaign_item_name}</div>
-                          <div className="col">{item.campaign_item_quantity}</div>
-                          <div className="col">0</div>
-                          <div className="col">{item.campaign_item_quantity}</div>
+                  campaign["campaign"].map((item, index) => {
+                    // console.log(item);
+                    return (
+                      <div className="row" key={index}>
+                        <div className="col">{index + 1}.</div>
+                        <div className="col">{item.campaign_item_name}</div>
+                        <div className="col">{item.campaign_item_quantity}</div>
+                        <div className="col">
+                          {campaign["donations"][index].total
+                            ? campaign["donations"][index].total
+                            : 0}
                         </div>
-                      );
-                    })
-                  ) : (
-                    <></>
-                  )}
+                        <div className="col">
+                          {item.campaign_item_quantity -
+                            (campaign["donations"][index].total
+                              ? campaign["donations"][index].total
+                              : 0)}
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : campaign ? (
+                  campaign["campaign"].map((item, index) => {
+                    // console.log(item);
+                    return (
+                      <div className="row" key={index}>
+                        <div className="col">{index + 1}.</div>
+                        <div className="col">{item.campaign_item_name}</div>
+                        <div className="col">{item.campaign_item_quantity}</div>
+                        <div className="col">0</div>
+                        <div className="col">{item.campaign_item_quantity}</div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
               </div>
               <div className="table-group-2">
                 {/* <table className="sh-table-2">
@@ -302,17 +300,19 @@ const DonateToCampaign = () => {
 
                 <div className="date">
                   <p className="header">End Date</p>
-                  <p>{campaign
-                          ? moment(campaign["campaign"][0].end_date).format(
-                              "DD MMMM YYYY"
-                            )
-                          : ""}</p>
+                  <p>
+                    {campaign
+                      ? moment(campaign["campaign"][0].end_date).format(
+                          "DD MMMM YYYY"
+                        )
+                      : ""}
+                  </p>
                 </div>
                 <div className="address">
                   <p className="header">Delivery Address</p>
-                  <p>{campaign
-                          ? campaign["campaign"][0].delivery_address
-                          : ""}</p>
+                  <p>
+                    {campaign ? campaign["campaign"][0].delivery_address : ""}
+                  </p>
                 </div>
                 <div className="email">
                   <p className="header">Campaign Owner Email</p>
