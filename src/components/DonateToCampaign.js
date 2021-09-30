@@ -381,13 +381,17 @@ const DonateToCampaign = () => {
                       </p>
                     </div>
                     <div className="your-donation">
-                      {Number(campaign["donations"][index].total) ===
-                      Number(
-                        campaign["campaign"][index].campaign_item_quantity
-                      ) ? (
-                        <h4>Goal Reached</h4>
+                      {campaign && campaign["donations"].length > 0 ? (
+                        Number(campaign["donations"][index].total) ===
+                        Number(
+                          campaign["campaign"][index].campaign_item_quantity
+                        ) ? (
+                          <h4>Goal Reached</h4>
+                        ) : (
+                          <h4>Your Donation</h4>
+                        )
                       ) : (
-                        <h4>Your Donation</h4>
+                        <></>
                       )}
 
                       <div className="your-donation-count">
