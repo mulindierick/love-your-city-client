@@ -530,6 +530,9 @@ Show campaign route and donate
 /* ///////////////////////////////////////////////////// 
 Register Campaign
 ////////////////////////////////////////////////////*/
+*{
+  font-family: Arial, Helvetica, sans-serif
+}
 .create-campaign-section {
   background-color: var(--white);
   padding-bottom: 4rem;

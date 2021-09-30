@@ -54,8 +54,7 @@ const Campaigns = () => {
        <Header/>
       <div className="campaigns-header">
         <div className="ch-1">
-          <h4>Your campaigns</h4>
-          <p>Monitor and track your campaign progress</p>
+          <h4>Monitor Your Campaigns</h4>
         </div>
         <button
           className="ch-2"
