@@ -303,6 +303,9 @@ Show campaign route and donate
   .donate-and-campaign {
     flex-direction: column;
   }
+  .donate {
+    margin-top: 2rem;
+  }
 }
 .donate {
   flex-basis: 40%;
