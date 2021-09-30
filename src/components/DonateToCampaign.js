@@ -34,7 +34,7 @@ const DonateToCampaign = () => {
         history.go(-2);
         // console.log(error);
       });
-  }, [history, setCampaign, id, setPrevUrl]);
+  }, [history, setCampaign, id, setPrevUrl,campaign]);
 
   // fetch campaign items only
   let [campaignItems, setCampaignItems] = useState([]);
