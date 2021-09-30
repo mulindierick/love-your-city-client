@@ -328,6 +328,7 @@ Show campaign route and donate
   display: flex;
   color: var(--dark-gray);
   justify-content: space-around;
+  align-items: center;
 }
 .your-donation-count {
   display: flex;

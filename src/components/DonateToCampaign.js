@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
+import StarIcon from "@material-ui/icons/Star";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import Header from "./Header";
 
 const DonateToCampaign = () => {
-  const { campaign, setCampaign, setPrevUrl} =
-    useContext(CampaignContext);
+  const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
   // console.log(campaign);
   let { id } = useParams();
   let history = useHistory();
@@ -343,6 +343,15 @@ const DonateToCampaign = () => {
               campaignItems.map((item, index) => {
                 return (
                   <div key={index} className="choose-donation">
+                    {Number(campaign["donations"][index].total) ===
+                    Number(
+                      campaign["campaign"][index].campaign_item_quantity
+                    ) ? (
+                      <StarIcon style={{ fontSize: 40, color: "#213368" }} />
+                    ) : (
+                      <></>
+                    )}
+
                     <div className="donation-name">
                       <h4>{item.campaign_item_name}</h4>
                       <p>
@@ -368,7 +377,15 @@ const DonateToCampaign = () => {
                       </p>
                     </div>
                     <div className="your-donation">
-                      <h4>Your Donation</h4>
+                      {Number(campaign["donations"][index].total) ===
+                      Number(
+                        campaign["campaign"][index].campaign_item_quantity
+                      ) ? (
+                        <h4>Goal Reached</h4>
+                      ) : (
+                        <h4>Your Donation</h4>
+                      )}
+
                       <div className="your-donation-count">
                         <button
                           className="donate-btn"
