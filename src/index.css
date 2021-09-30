@@ -10,7 +10,8 @@
   --light-gray: #f6f6f6;
   --input-gray: #e0e0e0;
 
-  --black-accent: rgb(44, 44, 44);
+  /* --black-accent: rgb(44, 44, 44); */
+  --black-accent:rgb(44, 44, 44);;
   --black: #000;
 
   --pill-border-radius: 100px;
@@ -355,7 +356,7 @@ Show campaign route and donate
 }
 .donate-btn-plus{
   border: none;
-  background-color: #159cfe;
+  background-color:var(--light-blue);
   color: white;
 }
 .donate-button {
@@ -366,7 +367,11 @@ Show campaign route and donate
   outline: none;
   font-size: 18px;
   color: white;
-  background-color: #159cfe;
+  background-color:var(--light-blue);
+}
+.donate-button:hover,
+.donate-btn-plus:hover {
+  background-color: var(--light-blue-accent);
 }
 
 .sh-details-group {
@@ -522,9 +527,12 @@ Show campaign route and donate
 
 
 .share-1 {
-  margin: 2%;
-  color: #213368;
+  /* margin: 0.5rem 0; */
+  color: var(--dark-blue);
   font-weight: bold;
+}
+.share-2 {
+  margin: 1rem 0;
 }
 .share-3:active {
   background-color: #213368;
