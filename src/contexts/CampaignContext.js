@@ -3,6 +3,7 @@ export const CampaignContext = createContext();
 
 function CampaignContextProvider(props) {
   const [campaigns, setCampaigns] = useState(null);
+  const [previewData, setPreviewData] = useState(null)
   const [campaign, setCampaign] = useState(null);
   const [prevUrl, setPrevUrl] = useState(0);
   const values = {
@@ -12,6 +13,8 @@ function CampaignContextProvider(props) {
     setCampaign,
     prevUrl,
     setPrevUrl,
+    previewData,
+    setPreviewData
   };
   return (
     <CampaignContext.Provider value={values}>

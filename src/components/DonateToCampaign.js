@@ -28,12 +28,13 @@ const DonateToCampaign = () => {
       .then((res) => res.json())
       .then((res) => {
         setCampaign(res);
+        console.log(campaign)
       })
       .catch((error) => {
         history.go(-2);
         // console.log(error);
       });
-  }, [history, setCampaign, id, setPrevUrl]);
+  }, [history, setCampaign, id, setPrevUrl,campaign]);
 
   // fetch campaign items only
   let [campaignItems, setCampaignItems] = useState([]);
@@ -177,7 +178,7 @@ const DonateToCampaign = () => {
             <div className="sh-details">
               <h3>Items Needed</h3>
               <div className="table-group">
-                <table className="sh-table">
+                {/* <table className="sh-table">
                   <tbody>
                     <tr>
                       <th>No.</th>
@@ -225,10 +226,56 @@ const DonateToCampaign = () => {
                       <></>
                     )}
                   </tbody>
-                </table>
+                </table> */}
+
+                <div className="row header-row">
+                  <div className="col">No.</div>
+                  <div className="col">Item Name</div>
+                  <div className="col">Campaign Goal</div>
+                  <div className="col">Donated</div>
+                  <div className="col">Still Needed</div>
+                </div>
+
+                {campaign && campaign["donations"].length > 0 ? (
+                      campaign["campaign"].map((item, index) => {
+                        // console.log(item);
+                        return (
+                          <div className="row" key={index}>
+                            <div className="col">{index + 1}.</div>
+                            <div className="col">{item.campaign_item_name}</div>
+                            <div className="col">{item.campaign_item_quantity}</div>
+                            <div className="col">
+                              {campaign["donations"][index].total
+                                ? campaign["donations"][index].total
+                                : 0}
+                            </div>
+                            <div className="col">
+                              {item.campaign_item_quantity -
+                                (campaign["donations"][index].total
+                                  ? campaign["donations"][index].total
+                                  : 0)}
+                            </div>
+                          </div>
+                        );
+                  })) : campaign ? (
+                    campaign["campaign"].map((item, index) => {
+                      // console.log(item);
+                      return (
+                        <div className="row" key={index}>
+                          <div className="col">{index + 1}.</div>
+                          <div className="col">{item.campaign_item_name}</div>
+                          <div className="col">{item.campaign_item_quantity}</div>
+                          <div className="col">0</div>
+                          <div className="col">{item.campaign_item_quantity}</div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <></>
+                  )}
               </div>
-              <div className="table-group-3">
-                <table className="sh-table-2">
+              <div className="table-group-2">
+                {/* <table className="sh-table-2">
                   <tbody>
                     <tr>
                       <th>Delivery Date </th>
@@ -251,13 +298,33 @@ const DonateToCampaign = () => {
                       <td>{campaign ? campaign["user"][0].email : ""}</td>
                     </tr>
                   </tbody>
-                </table>
+                </table> */}
+
+                <div className="date">
+                  <p className="header">End Date</p>
+                  <p>{campaign
+                          ? moment(campaign["campaign"][0].end_date).format(
+                              "DD MMMM YYYY"
+                            )
+                          : ""}</p>
+                </div>
+                <div className="address">
+                  <p className="header">Delivery Address</p>
+                  <p>{campaign
+                          ? campaign["campaign"][0].delivery_address
+                          : ""}</p>
+                </div>
+                <div className="email">
+                  <p className="header">Campaign Owner Email</p>
+                  <p>{campaign ? campaign["user"][0].email : ""}</p>
+                </div>
               </div>
               <div>
                 <p className="share-1">Share this Campaign:</p>
                 <p className="share-2">{id}</p>
-                <p
-                  className="share-3 share-4"
+                <button
+                  // className="share-3 share-4"
+                  className="pill-btn blue"
                   onClick={() => {
                     navigator.clipboard.writeText(
                       `https://www.loveyourcity.app/donate/${id}`
@@ -266,7 +333,7 @@ const DonateToCampaign = () => {
                   }}
                 >
                   Copy link
-                </p>
+                </button>
               </div>
             </div>
           </div>

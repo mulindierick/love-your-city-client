@@ -17,7 +17,7 @@ const ShowCampaign = () => {
   // console.log(campaign);
   // console.log(cId);
 
-  let itemInfo = "";
+  let itemInfo = null;
   if (!campaign) {
     history.push("/campaigns");
   } else {
