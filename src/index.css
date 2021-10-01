@@ -274,6 +274,7 @@ user campaigns page
   height: 3px;
   /* width: 80%; */
 }
+
 /* ///////////////////////////////////////////////////// 
 Show campaign route and donate
 ////////////////////////////////////////////////////*/
@@ -694,11 +695,17 @@ Register Campaign
 } */
 
 .landing_logo {
-  height: 170px;
+  height: 200px;
+    /* width: 300px; */
+    border-radius: 100px;
+    /* margin-left: 0px;
+    margin-right: 10px;
+    margin-left: -9px;
+    z-index: -99; */
+  /* height: 170px;
   border-radius: 100%;
   background: white;
-  /* background-image: url("/public/cyf-logo.svg"); */
-  border: solid 1px rgb(71, 61, 61)(71, 61, 61);
+  border: solid 1px rgb(71, 61, 61)(71, 61, 61); */
 }
 
 .heading {
