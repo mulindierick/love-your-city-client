@@ -121,7 +121,7 @@ const ShowCampaign = () => {
               <p>{campaign.campaign_desc}</p>
             </div>
             <div className="sh-details">
-              <h2>Items Needed</h2>
+              <h3 className="sh-desc">Table of items</h3>
               <div className="table-group">
                 {/* <table className="sh-table">
               <tbody>

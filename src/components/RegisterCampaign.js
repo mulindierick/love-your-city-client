@@ -6,8 +6,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { useHistory } from "react-router";
-import { CampaignContext } from '../contexts/CampaignContext'
+import { CampaignContext } from "../contexts/CampaignContext";
 import Header from "./Header";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const useStyles = makeStyles(() => ({
   formControl: {
@@ -41,15 +42,15 @@ const useStyles = makeStyles(() => ({
 // const storedItems = sessionStorage.getItem("campItems") || []
 
 const RegisterCampaign = () => {
-  const { setPreviewData } = useContext(CampaignContext)
+  const { setPreviewData } = useContext(CampaignContext);
   const classes = useStyles();
   const history = useHistory();
 
-  const storedName = sessionStorage.getItem("campName") || ''
-  const storedDesc = sessionStorage.getItem("campDesc") || ''
-  const storedType = sessionStorage.getItem("campType") || "General Support"
-  const storedAddress = sessionStorage.getItem("deliveryAddress") || ''
-  const storedEndDate = sessionStorage.getItem("endDate") || ''
+  const storedName = sessionStorage.getItem("campName") || "";
+  const storedDesc = sessionStorage.getItem("campDesc") || "";
+  const storedType = sessionStorage.getItem("campType") || "General Support";
+  const storedAddress = sessionStorage.getItem("deliveryAddress") || "";
+  const storedEndDate = sessionStorage.getItem("endDate") || "";
   // const storedItems = JSON.parse(sessionStorage.getItem("campaignItems")) || []
 
   // Form Item State
@@ -106,17 +107,17 @@ const RegisterCampaign = () => {
       campaignItems,
     };
 
-    console.log(campaignData)
-    setPreviewData(campaignData)
+    console.log(campaignData);
+    setPreviewData(campaignData);
 
-    sessionStorage.setItem("campName", campName)
-    sessionStorage.setItem("campDesc", campDesc)
-    sessionStorage.setItem("campType", campType)
-    sessionStorage.setItem("deliveryAddress", deliveryAddress)
-    sessionStorage.setItem("endDate", returnedEndDate)
+    sessionStorage.setItem("campName", campName);
+    sessionStorage.setItem("campDesc", campDesc);
+    sessionStorage.setItem("campType", campType);
+    sessionStorage.setItem("deliveryAddress", deliveryAddress);
+    sessionStorage.setItem("endDate", returnedEndDate);
     // console.log(JSON.stringify([...campaignItems]))
     // sessionStorage.setItem("campaignItems", JSON.stringify([...campaignItems]))
-    
+
     history.push("/preview");
   };
 
@@ -326,7 +327,7 @@ const RegisterCampaign = () => {
                           id={index}
                           onClick={(e) => deleteRegistryItem(e)}
                         >
-                          Delete
+                          <ClearIcon/> Remove
                         </button>
                       </div>
                     </div>

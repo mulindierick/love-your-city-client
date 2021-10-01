@@ -173,7 +173,7 @@ const DonateToCampaign = () => {
               <p>{campaign ? campaign["campaign"][0].campaign_desc : ""}</p>
             </div>
             <div className="sh-details">
-              <h3>Items Needed</h3>
+              <h3 className="sh-desc">Table of items</h3>
               <div className="table-group">
                 {/* <table className="sh-table">
                   <tbody>
@@ -348,7 +348,7 @@ const DonateToCampaign = () => {
                       Number(
                         campaign["campaign"][index].campaign_item_quantity
                       ) ? (
-                        <StarIcon style={{ fontSize: 40, color: "#213368" }} />
+                        <StarIcon style={{ fontSize: 40, color: "gold" }} />
                       ) : (
                         <></>
                       )

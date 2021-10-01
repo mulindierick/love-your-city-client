@@ -11,7 +11,7 @@ const LandingPage = () => {
       <br />
       <br />
       <div>
-        <img className="landing_logo" src="LYC-primary.svg" alt="Logo" />
+        <img className="landing_logo" src="cyf-logo.svg" alt="Logo" />
       </div>
       <br />
       <Paragraph />
