@@ -732,7 +732,7 @@ Register Campaign
   text-align: center;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-height: 600px) {
   .page-title {
     height: unset;
   }
