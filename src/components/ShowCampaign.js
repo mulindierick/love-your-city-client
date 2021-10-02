@@ -107,9 +107,7 @@ const ShowCampaign = () => {
             >
               Copy Sharable link
             </button>
-            {/* <a href={`donate/${cId}`} className="cb cb-2">
-          Preview Campaign
-        </a> */}
+  
             <button className="cb cb-2 share-3" onClick={deleteCampaign}>
               Delete
             </button>
@@ -123,44 +121,6 @@ const ShowCampaign = () => {
             <div className="sh-details">
               <h3 className="sh-desc">Table of items</h3>
               <div className="table-group">
-                {/* <table className="sh-table">
-              <tbody>
-                <tr>
-                  <th>No.</th>
-                  <th>Item name</th>
-                  <th>Quantity</th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Blankets</td>
-                  <td>34</td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>Tin and Beans</td>
-                  <td>292</td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>Baby beds</td>
-                  <td>21</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="table-group-2">
-            <table className="sh-table-2">
-              <tbody>
-                <tr>
-                  <th>Delivery Date </th>
-                  <th>Delivery Address</th>
-                </tr>
-                <tr>
-                  <td>{moment(campaign.end_date).format("DD/MM/YYYY")}</td>
-                  <td>{campaign.delivery_address}</td>
-                </tr>
-              </tbody>
-            </table> */}
 
                 <div className="row header-row">
                   <div className="col">No.</div>

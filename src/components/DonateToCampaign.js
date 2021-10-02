@@ -13,7 +13,7 @@ const DonateToCampaign = () => {
   let { id } = useParams();
   let history = useHistory();
 
-  // fetch campaign imformation
+  // fetch campaign information
   useEffect(() => {
     // let token = JSON.parse(sessionStorage.getItem("accessToken"));
     // let user = JSON.parse(sessionStorage.getItem("user"));
@@ -125,21 +125,33 @@ const DonateToCampaign = () => {
       delete item.campaign_item_quantity;
     });
 
-    // check if donate items greate or equal to campaign items . left
-    //then filter, esle do not filter.
+    // check if donate items greate or equal to campaign items.
+    // if not all donations of all items for the first time.
+    // else filter out all donations with zero donared items.
     if (campaign["donations"].length >= campaign["campaign"].length) {
       campaignItems = campaignItems.filter((item) => {
         return item.donation > 0;
       });
     }
 
+    let donationsTotal = 0;
+    if (campaignItems.length > 0) {
+      donationsTotal = campaignItems.map((item) => {
+        return item.donation;
+      });
+      // console.log(donationsTotal);
+      donationsTotal = donationsTotal.reduce((prev, curr) => prev + curr);
+    }
+
+    // console.log(donationsTotal);
     // console.log("donate items", campaignItems);
 
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
     let user = JSON.parse(sessionStorage.getItem("user"));
     !user
       ? history.push("/log-in")
-      : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
+      : campaignItems.length > 0 && donationsTotal > 0
+      ? fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
           method: "POST",
           body: JSON.stringify(campaignItems),
           headers: {
@@ -151,11 +163,13 @@ const DonateToCampaign = () => {
           .then((data) => {
             // console.log(data);
             alert("Thank you for your donation");
+
             window.location.reload();
           })
           .catch((e) => {
             console.log(e);
-          });
+          })
+      : alert("Your donations is empty") || window.location.reload();
   }
 
   return (
@@ -175,56 +189,6 @@ const DonateToCampaign = () => {
             <div className="sh-details">
               <h3 className="sh-desc">Table of items</h3>
               <div className="table-group">
-                {/* <table className="sh-table">
-                  <tbody>
-                    <tr>
-                      <th>No.</th>
-                      <th>Item Name</th>
-                      <th>Campaign Goal</th>
-                      <th>Donated</th>
-                      <th>Still needed</th>
-                    </tr>
-                    {campaign && campaign["donations"].length > 0 ? (
-                      campaign["campaign"].map((item, index) => {
-                        // console.log(item);
-                        return (
-                          <tr key={index}>
-                            <td>{index + 1}.</td>
-                            <td>{item.campaign_item_name}</td>
-                            <td>{item.campaign_item_quantity}</td>
-                            <td>
-                              {campaign["donations"][index].total
-                                ? campaign["donations"][index].total
-                                : 0}
-                            </td>
-                            <td>
-                              {item.campaign_item_quantity -
-                                (campaign["donations"][index].total
-                                  ? campaign["donations"][index].total
-                                  : 0)}
-                            </td>
-                          </tr>
-                        );
-                      })
-                    ) : campaign ? (
-                      campaign["campaign"].map((item, index) => {
-                        // console.log(item);
-                        return (
-                          <tr key={index}>
-                            <td>{index + 1}.</td>
-                            <td>{item.campaign_item_name}</td>
-                            <td>{item.campaign_item_quantity}</td>
-                            <td></td>
-                            <td>{item.campaign_item_quantity}</td>
-                          </tr>
-                        );
-                      })
-                    ) : (
-                      <></>
-                    )}
-                  </tbody>
-                </table> */}
-
                 <div className="row header-row">
                   <div className="col">No.</div>
                   <div className="col">Item Name</div>
@@ -273,31 +237,6 @@ const DonateToCampaign = () => {
                 )}
               </div>
               <div className="table-group-2">
-                {/* <table className="sh-table-2">
-                  <tbody>
-                    <tr>
-                      <th>Delivery Date </th>
-                      <th>Delivery Address</th>
-                      <th>Email Address</th>
-                    </tr>
-                    <tr>
-                      <td>
-                        {campaign
-                          ? moment(campaign["campaign"][0].end_date).format(
-                              "DD MMMM YYYY"
-                            )
-                          : ""}
-                      </td>
-                      <td>
-                        {campaign
-                          ? campaign["campaign"][0].delivery_address
-                          : ""}
-                      </td>
-                      <td>{campaign ? campaign["user"][0].email : ""}</td>
-                    </tr>
-                  </tbody>
-                </table> */}
-
                 <div className="date">
                   <p className="header">End Date</p>
                   <p>
@@ -391,7 +330,7 @@ const DonateToCampaign = () => {
                           <h4>Your Donation</h4>
                         )
                       ) : (
-                        <></>
+                        <h4>Your Donation</h4>
                       )}
 
                       <div className="your-donation-count">
