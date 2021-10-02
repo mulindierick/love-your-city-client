@@ -733,13 +733,7 @@ Register Campaign
 }
 
 @media screen and (max-height: 600px) {
-  .page-title {
-    height: unset;
-  }
-}
-
-@media screen and (max-height: 600px) {
-  .log-in {
+  .page-title, .log-in {
     height: unset;
   }
 }
