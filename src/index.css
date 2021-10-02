@@ -635,7 +635,7 @@ Register Campaign
 .btn-add-item {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background-color:#213368;
+  background-color:rgba(21, 156, 254, 1);
   border: none;
   border-radius: 5px;
   color: white;
