@@ -738,6 +738,12 @@ Register Campaign
   }
 }
 
+@media screen and (max-height: 600px) {
+  .log-in {
+    height: unset;
+  }
+}
+
 .signIn-btn {
   margin-top: 50px;
   height: 51px;
