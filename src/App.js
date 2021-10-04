@@ -10,6 +10,7 @@ import Donate from "./components/DonateToCampaign";
 import LandingPage from "./components/LandingPage";
 import GetStarted from "./components/GetStarted";
 
+
 function App() {
   return (
     <Router>

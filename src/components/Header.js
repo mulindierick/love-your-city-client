@@ -1,5 +1,9 @@
 import React from "react";
+import "./Header.css";
+import { NavLink } from "react-router-dom"
 // import MenuIcon from "@mui/icons-material/Menu";
+
+
 const Header = () => {
   return (
     <section className="get_started_header">
@@ -16,6 +20,10 @@ const Header = () => {
             marginRight: "6px",
           }}
         /> */}
+
+        <nav className="navbar navbar-expand-lg navbar-mainbg">
+          
+        </nav>
     </section>
   );
 };
