@@ -940,7 +940,7 @@ button.btn-back {
   margin: 0 1rem 0 auto;
 }
 
-@media screen and (max-height: 700px) {
+@media screen and (max-width: 700px) {
   button.btn-back {
     display: none;
   }
