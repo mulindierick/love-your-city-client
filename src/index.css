@@ -469,7 +469,8 @@ Show campaign route and donate
 }
 
 @media screen and (max-width: 500px) {
-  .table-group, .table-group-donations {
+  .table-group,
+  .table-group-donations {
     font-size: 10px;
   }
   .table-group > .header-row,
@@ -636,7 +637,7 @@ Register Campaign
 .btn-add-item {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background-color:rgba(21, 156, 254, 1);
+  background-color: rgba(21, 156, 254, 1);
   border: none;
   border-radius: 5px;
   color: white;
@@ -660,7 +661,7 @@ Register Campaign
   /* border-bottom: 1px solid var(--dark-gray); */
 }
 .registry-display > .header-row {
-  background-color:#213368;
+  background-color: #213368;
   color: white;
   border-radius: 5px 5px 0 0;
   /* border-left: 1px solid var(--dark-blue);
@@ -668,7 +669,8 @@ Register Campaign
   border-top: 1px solid var(--dark-blue); */
 }
 
-.col-quan, .col-name{
+.col-quan,
+.col-name {
   display: flex;
   align-items: center;
 }
@@ -678,7 +680,7 @@ Register Campaign
   padding: 0.3rem 0;
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   /* background-color: var(--black-accent); */
   /* color: var(--white); */
   border: none;
@@ -697,9 +699,9 @@ Register Campaign
 
 .landing_logo {
   height: 200px;
-    /* width: 300px; */
-    border-radius: 100px;
-    /* margin-left: 0px;
+  /* width: 300px; */
+  border-radius: 100px;
+  /* margin-left: 0px;
     margin-right: 10px;
     margin-left: -9px;
     z-index: -99; */
@@ -739,7 +741,8 @@ Register Campaign
   }
 }
 @media screen and (max-height: 500px) {
- .log-in, .sign-up {
+  .log-in,
+  .sign-up {
     height: unset;
   }
 }
@@ -917,7 +920,7 @@ Register Campaign
   padding: 0.5rem;
   text-align: center;
   background-color: var(--light-gray);
-  color: var(--black-accent)
+  color: var(--black-accent);
 }
 
 .table-group-donations > .header-row {
@@ -939,6 +942,6 @@ button.btn-back {
 
 @media screen and (max-height: 700px) {
   button.btn-back {
-     font-size: 10px;
-   }
- }
+    display: none;
+  }
+}
