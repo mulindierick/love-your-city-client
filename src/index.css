@@ -384,7 +384,7 @@ Show campaign route and donate
   display: flex;
   flex-direction: column;
   color: var(--dark-gray);
-  border-right: 1px solid rgb(236, 236, 236);
+  /* border-right: 1px solid rgb(236, 236, 236); */
 }
 @media screen and (max-width: 800px) {
   .sh-details-group {
@@ -469,10 +469,11 @@ Show campaign route and donate
 }
 
 @media screen and (max-width: 500px) {
-  .table-group {
+  .table-group, .table-group-donations {
     font-size: 10px;
   }
-  .table-group > .header-row {
+  .table-group > .header-row,
+  .table-group-donations > .header-row {
     font-size: 0.6rem;
   }
 }
@@ -733,7 +734,12 @@ Register Campaign
 }
 
 @media screen and (max-height: 600px) {
-  .page-title, .log-in {
+  .page-title {
+    height: unset;
+  }
+}
+@media screen and (max-height: 500px) {
+ .log-in, .sign-up {
     height: unset;
   }
 }
@@ -890,4 +896,43 @@ Register Campaign
 /* Preview Styling */
 .preview-data {
   padding: 2rem;
+}
+
+/* Donations styles on the show campaign page */
+.donations-h2 {
+  margin-top: 2rem;
+}
+
+.table-group-donations {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.table-group-donations > .row {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  /* margin: 1rem 0; */
+  padding: 0.5rem;
+  text-align: center;
+  background-color: var(--light-gray);
+  color: var(--black-accent)
+}
+
+.table-group-donations > .header-row {
+  background-color: var(--light-blue-accent);
+  color: white;
+  border-radius: 5px 5px 0 0;
+  font-weight: 500;
+  /* font-size: 1.2rem; */
+}
+button.btn-back {
+  border: none;
+  outline: none;
+  color: var(--white);
+  background-color: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 0 1rem 0 auto;
 }

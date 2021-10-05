@@ -1,6 +1,8 @@
 import React from "react";
+import {useHistory} from 'react-router-dom'
 // import MenuIcon from "@mui/icons-material/Menu";
 const Header = () => {
+  const history = useHistory()
   return (
     <section className="get_started_header">
       <img className="get_started_logo" src="/LYC-primary.svg" alt="logo" />
@@ -16,6 +18,7 @@ const Header = () => {
             marginRight: "6px",
           }}
         /> */}
+         <button onClick={() => history.goBack()} className="btn-back">Go Back</button>
     </section>
   );
 };
