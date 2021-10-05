@@ -936,3 +936,9 @@ button.btn-back {
   cursor: pointer;
   margin: 0 1rem 0 auto;
 }
+
+@media screen and (max-height: 700px) {
+  button.btn-back {
+     font-size: 10px;
+   }
+ }
