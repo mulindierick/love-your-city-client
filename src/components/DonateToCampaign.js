@@ -187,7 +187,7 @@ const DonateToCampaign = () => {
               <p>{campaign ? campaign["campaign"][0].campaign_desc : ""}</p>
             </div>
             <div className="sh-details">
-              <h3 className="sh-desc">Table of items</h3>
+              <h3 className="sh-desc">List of items needed</h3>
               <div className="table-group">
                 <div className="row header-row">
                   <div className="col">No.</div>

@@ -55,7 +55,7 @@ const Preview = () => {
                             <p>{previewData.campDesc}</p>
                         </div>
                         <div className="sh-details">
-                            <h2>Items Needed</h2>
+                            <h3 className="sh-desc">List of items needed</h3>
                             <div className="table-group">
                                 <div className="row header-row">
                                     <div className="col">No.</div>
