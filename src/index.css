@@ -70,6 +70,7 @@ button.pill-btn {
   border: none;
   outline: none;
   padding: 1rem 2rem;
+  cursor: pointer;
 }
 
 button.disabled {
@@ -145,7 +146,8 @@ button.blue:focus {
 user campaigns page
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 .campaigns-page {
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
+  background-color: var(--white);
 }
 .campaigns-header {
   background-color: white;
@@ -183,7 +185,8 @@ user campaigns page
   flex-wrap: wrap;
 }
 .campaign-grouping {
-  box-shadow: 0px 1px 4px rgb(19 126 199 / 20%);
+  /* box-shadow: 0px 1px 4px rgb(19 126 199 / 20%); */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: white;
   padding: 2%;
   margin: 2%;
@@ -643,7 +646,7 @@ Register Campaign
   color: white;
 }
 .btn-add-item:hover {
-  background-color: var(--black);
+  background-color: var(--light-blue-accent);
 }
 
 .registry-display {
@@ -938,6 +941,32 @@ button.btn-back {
   font-size: 20px;
   cursor: pointer;
   margin: 0 1rem 0 auto;
+}
+
+.modal-bg {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal {
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 500px;
+  background-color: var(--white);
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.modal h1 {
+  margin-bottom: 2rem;
 }
 
 @media screen and (max-width: 700px) {
