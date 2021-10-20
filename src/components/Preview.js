@@ -34,9 +34,6 @@ export const Preview = () => {
             })
             .then((res) => res.json())
             .then((data) => {
-                // console.log(data);
-                // alert("Campaign Created");
-                // history.push("/campaigns");
                 setModalOpen(true)
         });
     }
