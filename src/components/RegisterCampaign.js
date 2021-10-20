@@ -74,8 +74,15 @@ const RegisterCampaign = () => {
   const addRegistryItem = (e) => {
     e.preventDefault();
 
-    if (item && quantity)
-      setCampaignItems([...campaignItems, { item, quantity }]);
+    if (campaignItems.map(el => el.item).includes(item)) {
+      setItem("");
+      setQuantity(1);
+      return
+    }
+
+    if (item && quantity) setCampaignItems([...campaignItems, { item, quantity }]);
+
+
     setItem("");
     setQuantity(1);
   };

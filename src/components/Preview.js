@@ -1,12 +1,24 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {useHistory} from 'react-router-dom'
 import Header from './Header'
 import moment from 'moment'
 import { CampaignContext } from '../contexts/CampaignContext'
 
-const Preview = () => {
+const Modal = () => {
+    const history = useHistory()
+
+    return <div className="modal-bg">
+        <div className="modal">
+            <h1>Your Campaign has been created</h1>
+            <button className="pill-btn blue" onClick={() => history.push("/campaigns")}>Return</button>
+        </div>
+    </div>
+}
+
+export const Preview = () => {
     const { previewData } = useContext(CampaignContext)
     const history = useHistory()
+    const [modalOpen, setModalOpen] = useState(false)
     const email = JSON.parse(sessionStorage.getItem("user")).email
 
     const goLive = () => {
@@ -23,8 +35,9 @@ const Preview = () => {
             .then((res) => res.json())
             .then((data) => {
                 // console.log(data);
-                alert("Campaign Created");
-                history.push("/campaigns");
+                // alert("Campaign Created");
+                // history.push("/campaigns");
+                setModalOpen(true)
         });
     }
 
@@ -34,6 +47,7 @@ const Preview = () => {
 
     return (
         <div className="preview">
+            { modalOpen && <Modal />}
             <Header />
             
             { previewData !== null ? (
@@ -102,4 +116,4 @@ const Preview = () => {
     )
 }
 
-export default Preview
+// export {Preview}
