@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import { useHistory, useParams } from "react-router-dom";
@@ -10,12 +10,41 @@ import Header from "./Header";
 // import LinkedInIcon from "@material-ui/icons/LinkedIn";
 // import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 
+
+
+
+
 const ShowCampaign = () => {
   let history = useHistory();
   let { id: cId } = useParams();
   const { campaign, setCampaign } = useContext(CampaignContext);
-  // console.log(campaign);
-  // console.log(cId);
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen2, setModalOpen2] = useState(false)
+
+
+
+  const Modal = () => {
+    const history = useHistory()
+  
+    return <div className="modal-bg">
+        <div className="modal">
+            <h1>Campaign Deleted</h1>
+            <button className="pill-btn blue" onClick={() => history.push("/campaigns")}>Ok</button>
+        </div>
+    </div>
+  }
+
+  const Modal2 = () => {
+    // const history = useHistory()
+  
+    return <div className="modal-bg">
+        <div className="modal">
+            <h1>Link Copied</h1>
+            <button className="pill-btn blue" onClick={() => setModalOpen2(false)}>Ok</button>
+        </div>
+    </div>
+  }
+
 
   let itemInfo = null;
   if (!campaign) {
@@ -52,9 +81,7 @@ const ShowCampaign = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            // console.log(data)
-            alert("campaign deleted");
-            history.push("/campaigns");
+            setModalOpen(true)
           })
           .catch((e) => {
             console.log(e);
@@ -86,6 +113,8 @@ const ShowCampaign = () => {
 
   return (
     <React.Fragment>
+      { modalOpen && <Modal />}
+      {modalOpen2 && <Modal2 />}
       <Header />
       <div className="sh-group">
         {campaign ? (
@@ -101,7 +130,8 @@ const ShowCampaign = () => {
                   navigator.clipboard.writeText(
                     `https://www.loveyourcity.app/donate/${cId}`
                   );
-                  alert("Link Copied");
+                  setModalOpen2(true)
+                  // alert("Link Copied");
                 }}
               >
                 Copy Sharable link

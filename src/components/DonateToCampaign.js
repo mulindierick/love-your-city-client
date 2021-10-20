@@ -7,9 +7,47 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import Header from "./Header";
 
+
+const Modal = () => {
+  // const history = useHistory()
+
+  return <div className="modal-bg">
+      <div className="modal">
+          <h1>Thank you for your donation</h1>
+          <button className="pill-btn blue" onClick={() => window.location.reload()}>Ok</button>
+      </div>
+  </div>
+}
+const Modal2 = () => {
+  // const history = useHistory()
+
+  return <div className="modal-bg">
+      <div className="modal">
+          <h1>Your Donation is empty</h1>
+          <button className="pill-btn blue" onClick={() => window.location.reload()}>Ok</button>
+      </div>
+  </div>
+}
+
 const DonateToCampaign = () => {
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
-  // console.log(campaign);
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen2, setModalOpen2] = useState(false)
+  const [modalOpen3, setModalOpen3] = useState(false)
+
+
+
+  const Modal3 = () => {
+    // const history = useHistory()
+  
+    return <div className="modal-bg">
+        <div className="modal">
+            <h1>Link Copied</h1>
+            <button className="pill-btn blue" onClick={() => setModalOpen3(false)}>Ok</button>
+        </div>
+    </div>
+  }
+
   let { id } = useParams();
   let history = useHistory();
 
@@ -161,19 +199,20 @@ const DonateToCampaign = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            // console.log(data);
-            alert("Thank you for your donation");
-
-            window.location.reload();
+            setModalOpen(true)
+            
           })
           .catch((e) => {
             console.log(e);
           })
-      : alert("Your donations is empty") || window.location.reload();
+      : setModalOpen2(true);
   }
 
   return (
     <React.Fragment>
+      { modalOpen3 && <Modal3 />}
+      { modalOpen2 && <Modal2 />}
+      { modalOpen && <Modal />}
       <Header />
 
       <div className="sh-group">
@@ -268,7 +307,8 @@ const DonateToCampaign = () => {
                     navigator.clipboard.writeText(
                       `https://www.loveyourcity.app/donate/${id}`
                     );
-                    alert("Link Copied");
+                    setModalOpen3(true)
+                    
                   }}
                 >
                   Copy link
