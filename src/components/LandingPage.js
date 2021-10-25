@@ -18,6 +18,9 @@ const LandingPage = () => {
       <br />
       <LearnMore />
       <Form />
+      <br />
+      <br />
+      <p>A default Login is provided for you to test the app</p>
     </div>
   );
 };

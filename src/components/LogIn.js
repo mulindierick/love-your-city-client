@@ -8,8 +8,8 @@ import Header from "./Header";
 const LogIn = () => {
   const { prevUrl } = useContext(CampaignContext);
   const history = useHistory();
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
+  let [email, setEmail] = useState("default@gmail.com");
+  let [password, setPassword] = useState("default");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -49,6 +49,7 @@ const LogIn = () => {
             placeholder="email"
             name="email"
             value={email}
+            onClick={() => setEmail("")}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -57,6 +58,7 @@ const LogIn = () => {
             placeholder="password"
             name="password"
             value={password}
+            onClick={() => setPassword("")}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
