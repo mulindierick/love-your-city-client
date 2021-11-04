@@ -202,7 +202,7 @@ const DonateToCampaign = () => {
     //   ? history.push("/log-in")
     //   :
     campaignItems.length > 0 && donationsTotal > 0
-      ? fetch(`http://localhost:5000/campaigns/${id}`, {
+      ? fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
           method: "POST",
           body: JSON.stringify(campaignItems),
           headers: {
