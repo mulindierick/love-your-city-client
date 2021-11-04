@@ -20,12 +20,16 @@ const Header = () => {
             marginRight: "6px",
           }}
         /> */}
-
-        <nav className="navbar navbar-expand-lg navbar-mainbg">
-          
-        </nav>
     </section>
   );
 };
+
+const Navbar = () => {
+  return (
+    <div>
+      
+    </div>
+  )
+}
 
 export default Header;
