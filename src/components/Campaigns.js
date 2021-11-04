@@ -17,7 +17,7 @@ const Campaigns = () => {
     !user
       ? history.push("/log-in")
       : fetch(
-          `https://love-your-city-app.herokuapp.com/users/${user["user_id"]}`,
+          `http://localhost:5000/users/${user["user_id"]}`,
           {
             method: "GET",
             headers: {

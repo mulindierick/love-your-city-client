@@ -12,7 +12,7 @@ const DonateToCampaign = () => {
   let [firstName, setFirstName] = useState("");
   let [secondName, setSecondName] = useState("");
   let [email, setEmail] = useState("");
- 
+
   // console.log(campaign);
   let { id } = useParams();
   let history = useHistory();
@@ -127,16 +127,16 @@ const DonateToCampaign = () => {
     e.preventDefault();
     campaignItems.forEach((item) => {
       delete item.campaign_item_quantity;
-      item["firstName"] = firstName
-      item["secondName"] = secondName
-      item["email"] = email
+      item["firstName"] = firstName;
+      item["secondName"] = secondName;
+      item["email"] = email;
     });
 
-    console.log(campaignItems)
+    console.log(campaignItems);
 
     // check if donate items greate or equal to campaign items.
     // if not all donations of all items for the first time.
-    // else filter out all donations with zero donared items.
+    // else filter out all donations with zero donated items.
     if (campaign["donations"].length >= campaign["campaign"].length) {
       campaignItems = campaignItems.filter((item) => {
         return item.donation > 0;
@@ -159,10 +159,9 @@ const DonateToCampaign = () => {
     // let user = JSON.parse(sessionStorage.getItem("user"));
     // !user
     //   ? history.push("/log-in")
-    //   : 
-      campaignItems.length > 0 && donationsTotal > 0
-      ? 
-      fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
+    //   :
+    campaignItems.length > 0 && donationsTotal > 0
+      ? fetch(`http://localhost:5000/campaigns/${id}`, {
           method: "POST",
           body: JSON.stringify(campaignItems),
           headers: {
@@ -172,15 +171,15 @@ const DonateToCampaign = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            // console.log(data);
+            console.log(data);
             alert("Thank you for your donation");
 
-            window.location.reload();
+            //window.location.reload();
           })
           .catch((e) => {
             console.log(e);
           })
-      : alert("Your donations is empty") || window.location.reload();
+      : alert("Your donations is empty") //|| window.location.reload();
   }
 
   return (
