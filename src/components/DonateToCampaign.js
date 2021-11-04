@@ -31,6 +31,10 @@ const Modal2 = () => {
 
 const DonateToCampaign = () => {
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
+  let [firstName, setFirstName] = useState("");
+  let [secondName, setSecondName] = useState("");
+  let [email, setEmail] = useState("");
+  
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpen2, setModalOpen2] = useState(false)
   const [modalOpen3, setModalOpen3] = useState(false)
@@ -48,6 +52,9 @@ const DonateToCampaign = () => {
     </div>
   }
 
+
+
+  // console.log(campaign);
   let { id } = useParams();
   let history = useHistory();
 
@@ -161,11 +168,16 @@ const DonateToCampaign = () => {
     e.preventDefault();
     campaignItems.forEach((item) => {
       delete item.campaign_item_quantity;
+      item["firstName"] = firstName;
+      item["secondName"] = secondName;
+      item["email"] = email;
     });
+
+    console.log(campaignItems);
 
     // check if donate items greate or equal to campaign items.
     // if not all donations of all items for the first time.
-    // else filter out all donations with zero donared items.
+    // else filter out all donations with zero donated items.
     if (campaign["donations"].length >= campaign["campaign"].length) {
       campaignItems = campaignItems.filter((item) => {
         return item.donation > 0;
@@ -182,19 +194,20 @@ const DonateToCampaign = () => {
     }
 
     // console.log(donationsTotal);
-    // console.log("donate items", campaignItems);
+    console.log("donate items", campaignItems);
 
-    let token = JSON.parse(sessionStorage.getItem("accessToken"));
-    let user = JSON.parse(sessionStorage.getItem("user"));
-    !user
-      ? history.push("/log-in")
-      : campaignItems.length > 0 && donationsTotal > 0
-      ? fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
+    // let token = JSON.parse(sessionStorage.getItem("accessToken"));
+    // let user = JSON.parse(sessionStorage.getItem("user"));
+    // !user
+    //   ? history.push("/log-in")
+    //   :
+    campaignItems.length > 0 && donationsTotal > 0
+      ? fetch(`http://localhost:5000/campaigns/${id}`, {
           method: "POST",
           body: JSON.stringify(campaignItems),
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            // Authorization: `Bearer ${token}`,
           },
         })
           .then((res) => res.json())
@@ -397,6 +410,41 @@ const DonateToCampaign = () => {
             ) : (
               <></>
             )}
+
+            {/* protected */}
+
+            <div className="choose-donation">
+              <input
+                style={{ textAlign: "center" }}
+                type="text"
+                placeholder="First Name"
+                name="firstname"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+              <input
+                style={{ textAlign: "center" }}
+                type="text"
+                placeholder="Second Name"
+                name="secondname"
+                value={secondName}
+                onChange={(e) => setSecondName(e.target.value)}
+                required
+              />
+              <input
+                style={{ textAlign: "center" }}
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* protected */}
+
             <button className="donate-button">Donate</button>
           </form>
         </div>
