@@ -7,52 +7,68 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import Header from "./Header";
 
-
 const Modal = () => {
   // const history = useHistory()
 
-  return <div className="modal-bg">
+  return (
+    <div className="modal-bg">
       <div className="modal">
-          <h1>Thank you for your donation</h1>
-          <button className="pill-btn blue" onClick={() => window.location.reload()}>Ok</button>
+        <h1>Thank you for your donation</h1>
+        <button
+          className="pill-btn blue"
+          onClick={() => window.location.reload()}
+        >
+          Ok
+        </button>
       </div>
-  </div>
-}
+    </div>
+  );
+};
 const Modal2 = () => {
   // const history = useHistory()
 
-  return <div className="modal-bg">
+  return (
+    <div className="modal-bg">
       <div className="modal">
-          <h1>Your Donation is empty</h1>
-          <button className="pill-btn blue" onClick={() => window.location.reload()}>Ok</button>
+        <h1>Your Donation is empty</h1>
+        <button
+          className="pill-btn blue"
+          onClick={() => window.location.reload()}
+        >
+          Ok
+        </button>
       </div>
-  </div>
-}
+    </div>
+  );
+};
 
 const DonateToCampaign = () => {
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
   let [firstName, setFirstName] = useState("");
   let [secondName, setSecondName] = useState("");
   let [email, setEmail] = useState("");
-  
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalOpen2, setModalOpen2] = useState(false)
-  const [modalOpen3, setModalOpen3] = useState(false)
 
-
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen2, setModalOpen2] = useState(false);
+  const [modalOpen3, setModalOpen3] = useState(false);
 
   const Modal3 = () => {
     // const history = useHistory()
-  
-    return <div className="modal-bg">
+
+    return (
+      <div className="modal-bg">
         <div className="modal">
-            <h1>Link Copied</h1>
-            <button className="pill-btn blue" onClick={() => setModalOpen3(false)}>Ok</button>
+          <h1>Link Copied</h1>
+          <button
+            className="pill-btn blue"
+            onClick={() => setModalOpen3(false)}
+          >
+            Ok
+          </button>
         </div>
-    </div>
-  }
-
-
+      </div>
+    );
+  };
 
   // console.log(campaign);
   let { id } = useParams();
@@ -212,8 +228,7 @@ const DonateToCampaign = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            setModalOpen(true)
-            
+            setModalOpen(true);
           })
           .catch((e) => {
             console.log(e);
@@ -223,9 +238,9 @@ const DonateToCampaign = () => {
 
   return (
     <React.Fragment>
-      { modalOpen3 && <Modal3 />}
-      { modalOpen2 && <Modal2 />}
-      { modalOpen && <Modal />}
+      {modalOpen3 && <Modal3 />}
+      {modalOpen2 && <Modal2 />}
+      {modalOpen && <Modal />}
       <Header />
 
       <div className="sh-group">
@@ -310,7 +325,7 @@ const DonateToCampaign = () => {
                   <p>{campaign ? campaign["user"][0].email : ""}</p>
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <p className="share-1">Share this Campaign:</p>
                 <p className="share-2">{id}</p>
                 <button
@@ -326,7 +341,7 @@ const DonateToCampaign = () => {
                 >
                   Copy link
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <form className="donate" onSubmit={handleSubmit}>
@@ -417,7 +432,7 @@ const DonateToCampaign = () => {
               <input
                 style={{ textAlign: "center" }}
                 type="text"
-                placeholder="First Name"
+                placeholder="Name"
                 name="firstname"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -426,7 +441,7 @@ const DonateToCampaign = () => {
               <input
                 style={{ textAlign: "center" }}
                 type="text"
-                placeholder="Second Name"
+                placeholder="Surname"
                 name="secondname"
                 value={secondName}
                 onChange={(e) => setSecondName(e.target.value)}
@@ -445,7 +460,34 @@ const DonateToCampaign = () => {
 
             {/* protected */}
 
-            <button className="donate-button">Donate</button>
+            <button className="donate-button" style={{ cursor: "pointer" }}>
+              Donate
+            </button>
+            <div
+              style={{
+                textAlign: "center",
+                cursor: "pointer",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <p className="share-1">Share this Campaign:</p>
+              {/* <p className="share-2">{id}</p> */}
+              <div
+                // className="share-3 share-4"
+                className="donate-button"
+                style={{ backgroundColor: "#213368", width: "fit-content" }}
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `https://www.loveyourcity.app/donate/${id}`
+                  );
+                  setModalOpen3(true);
+                }}
+              >
+                Copy link
+              </div>
+            </div>
           </form>
         </div>
       </div>
