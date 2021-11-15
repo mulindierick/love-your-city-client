@@ -8,6 +8,16 @@ const SignUp = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [url, setUrl] = useState("error");
+  let [modalOpen, setModalOpen] = useState(false)
+  
+  const Modal = () => {
+    return <div className="modal-bg">
+        <div className="modal">
+            <h1>Please input different values for your email and username</h1>
+            <button className="pill-btn blue" onClick={() => setModalOpen(false)}>Ok</button>
+        </div>
+    </div>
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,12 +39,14 @@ const SignUp = () => {
         setPassword("");
         setUsername("");
         setUrl(Object.keys(data)[0]);
+        if (Object.keys(data)[0] === "error") setModalOpen(true)
       })
       .catch((e) => console.log(e));
   }
   return (
     <section className="sign-up">
       <Header />
+      { modalOpen && <Modal /> }
       <div className="container sign-up-container">
         <h1 className="sign-up-h1">Sign Up</h1>
         <form onSubmit={handleSubmit}>

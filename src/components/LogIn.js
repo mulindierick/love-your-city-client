@@ -8,8 +8,19 @@ import Header from "./Header";
 const LogIn = () => {
   const { prevUrl } = useContext(CampaignContext);
   const history = useHistory();
-  let [email, setEmail] = useState("default@gmail.com");
-  let [password, setPassword] = useState("default");
+  let [email, setEmail] = useState("demo@gmail.com");
+  let [password, setPassword] = useState("demo");
+  let [modalOpen, setModalOpen] = useState(false)
+
+  const Modal = () => {
+    return <div className="modal-bg">
+        <div className="modal">
+            <h1>Username and/or password incorrect. Please provide correct credentials.</h1>
+            <button className="pill-btn blue" onClick={() => setModalOpen(false)}>Ok</button>
+        </div>
+    </div>
+  }
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -36,11 +47,13 @@ const LogIn = () => {
       })
       .catch((e) => {
         console.log(e);
+        setModalOpen(true)
       });
   }
   return (
     <section className="log-in">
       <Header/>
+      { modalOpen && <Modal /> }
       <div className="container log-in-container">
         <h1 className="log-in-h1">Log in</h1>
         <form onSubmit={handleSubmit}>
@@ -49,7 +62,9 @@ const LogIn = () => {
             placeholder="email"
             name="email"
             value={email}
-            onClick={() => setEmail("")}
+            onClick={() => {
+              if (email === "demo@gmail.com") setEmail("")
+            }}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -58,7 +73,9 @@ const LogIn = () => {
             placeholder="password"
             name="password"
             value={password}
-            onClick={() => setPassword("")}
+            onClick={() => {
+              if (password === "demo") setPassword("")
+            }}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
