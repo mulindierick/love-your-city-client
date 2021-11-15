@@ -19,7 +19,17 @@ export const Preview = () => {
     const { previewData } = useContext(CampaignContext)
     const history = useHistory()
     const [modalOpen, setModalOpen] = useState(false)
+    const [modal2Open, setModal2Open] = useState(false)
     const email = JSON.parse(sessionStorage.getItem("user")).email
+
+    const Modal2 = () => {
+        return <div className="modal-bg">
+            <div className="modal">
+                <h1>Your campaign name is already in use. Please provide a new one.</h1>
+                <button className="pill-btn blue" onClick={() => history.push("/register-campaign")}>Return</button>
+            </div>
+        </div>
+    }
 
     const goLive = () => {
         const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
@@ -35,7 +45,10 @@ export const Preview = () => {
             .then((res) => res.json())
             .then((data) => {
                 setModalOpen(true)
-        });
+            })
+            .catch((e) => {
+                setModal2Open(true)
+            })
     }
 
     useEffect(() => {
@@ -45,6 +58,7 @@ export const Preview = () => {
     return (
         <div className="preview">
             { modalOpen && <Modal />}
+            { modal2Open && <Modal2 />}
             <Header />
             
             { previewData !== null ? (

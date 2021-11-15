@@ -13,7 +13,7 @@ const SignUp = () => {
   const Modal = () => {
     return <div className="modal-bg">
         <div className="modal">
-            <h1>Please input different values for your email and username</h1>
+            <h1>Username and email are already in use. Please provide a different username and email.</h1>
             <button className="pill-btn blue" onClick={() => setModalOpen(false)}>Ok</button>
         </div>
     </div>
