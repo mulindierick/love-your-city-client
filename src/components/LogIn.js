@@ -9,7 +9,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const LogIn = () => {
-  console.log(">>>", process.env.REACT_APP_CLIENT_ID);
   const { prevUrl } = useContext(CampaignContext);
   const history = useHistory();
   let [email, setEmail] = useState("");
@@ -91,9 +90,7 @@ const LogIn = () => {
 
         <GoogleLogin
           width={10}
-          clientId={
-            "653745629109-dguc0iu5j22uua4o57uubt32ju7nv4g9.apps.googleusercontent.com"
-          }
+          clientId={process.env.REACT_APP_CLIENT_ID}
           buttonText="Log In with Google"
           onSuccess={handleLogin}
           onFailure={handleLogin}
