@@ -20,7 +20,7 @@ const LandingPage = () => {
       <Form />
       <br />
       <br />
-      <p>A default Login is provided for you to test the app</p>
+      <p>A demo login is provided for you to test the app.</p>
     </div>
   );
 };

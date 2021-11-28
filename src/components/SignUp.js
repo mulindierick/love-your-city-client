@@ -10,6 +10,16 @@ const SignUp = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [url, setUrl] = useState("error");
+  let [modalOpen, setModalOpen] = useState(false)
+  
+  const Modal = () => {
+    return <div className="modal-bg">
+        <div className="modal">
+            <h1>Username and email are already in use. Please provide a different username and email.</h1>
+            <button className="pill-btn blue" onClick={() => setModalOpen(false)}>Ok</button>
+        </div>
+    </div>
+  }
 
   const handleSignUp = async (googleData) => {
     const res = await fetch("https://love-your-city-app.herokuapp.com/users/google", {
@@ -49,12 +59,14 @@ const SignUp = () => {
         setPassword("");
         setUsername("");
         setUrl(Object.keys(data)[0]);
+        if (Object.keys(data)[0] === "error") setModalOpen(true)
       })
       .catch((e) => console.log(e));
   }
   return (
     <section className="sign-up">
       <Header />
+      { modalOpen && <Modal /> }
       <div className="container sign-up-container">
         <h1 className="sign-up-h1">Sign Up</h1>
         <GoogleLogin

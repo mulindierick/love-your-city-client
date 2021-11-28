@@ -5,13 +5,16 @@ import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import Header from "./Header";
 import GoogleLogin from "react-google-login";
+import dotenv from "dotenv";
+dotenv.config();
 
 const LogIn = () => {
+  console.log(">>>", process.env.REACT_APP_CLIENT_ID);
   const { prevUrl } = useContext(CampaignContext);
   const history = useHistory();
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [modalOpen, setModalOpen] = useState(false)
+  let [modalOpen, setModalOpen] = useState(false);
 
   const Modal = () => {
     return (
@@ -76,7 +79,7 @@ const LogIn = () => {
       })
       .catch((e) => {
         console.log(e);
-        setModalOpen(true)
+        setModalOpen(true);
       });
   }
   return (
@@ -88,7 +91,9 @@ const LogIn = () => {
 
         <GoogleLogin
           width={10}
-          clientId={process.env.CLIENT_ID}
+          clientId={
+            "653745629109-dguc0iu5j22uua4o57uubt32ju7nv4g9.apps.googleusercontent.com"
+          }
           buttonText="Log In with Google"
           onSuccess={handleLogin}
           onFailure={handleLogin}
@@ -101,7 +106,9 @@ const LogIn = () => {
             placeholder="Enter email"
             name="email"
             value={email}
-            onClick={() => setEmail("")}
+            onClick={() => {
+              if (email === "demo@gmail.com") setEmail("");
+            }}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -110,7 +117,9 @@ const LogIn = () => {
             placeholder="Enter password"
             name="password"
             value={password}
-            onClick={() => setPassword("")}
+            onClick={() => {
+              if (password === "demo") setPassword("");
+            }}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
