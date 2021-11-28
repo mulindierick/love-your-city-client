@@ -5,8 +5,7 @@ import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import Header from "./Header";
 import GoogleLogin from "react-google-login";
-import dotenv from "dotenv";
-dotenv.config();
+
 
 const LogIn = () => {
   const { prevUrl } = useContext(CampaignContext);

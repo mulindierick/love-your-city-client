@@ -9,6 +9,7 @@ import ShowCampaign from "./components/ShowCampaign";
 import Donate from "./components/DonateToCampaign";
 import LandingPage from "./components/LandingPage";
 import GetStarted from "./components/GetStarted";
+require('dotenv').config()
 
 function App() {
   return (
