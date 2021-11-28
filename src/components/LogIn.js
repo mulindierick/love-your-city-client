@@ -53,7 +53,6 @@ const LogIn = () => {
       }
     );
     const data = await res.json();
-    console.log(data);
     if (data["error"]) {
       setLoader(["none", "block", "none"]);
       if (data["error"] === "some account details are not correct") {
@@ -74,7 +73,8 @@ const LogIn = () => {
   };
 
   function handleSubmit(e) {
-    // e.preventDefault();
+    e.preventDefault();
+    setLoader(["none", "none", "block"]);
     fetch("https://love-your-city-app.herokuapp.com/login", {
       method: "POST",
       body: JSON.stringify({
@@ -139,7 +139,7 @@ const LogIn = () => {
           <div style={{ color: "white" }}>Logging in...</div>
         </div>
 
-        <form style={{ display: loader[1] }}>
+        <form onSubmit={handleSubmit} style={{ display: loader[1] }}>
           <input
             type="email"
             placeholder="Enter email"
@@ -162,14 +162,7 @@ const LogIn = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button
-            onClick={() => {
-              handleSubmit();
-              setLoader(["none", "none", "block"]);
-            }}
-            type="submit"
-            className="pill-btn blue"
-          >
+          <button type="submit" className="pill-btn blue">
             Log in
           </button>
 

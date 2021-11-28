@@ -60,12 +60,12 @@ const SignUp = () => {
       );
       setModalOpen(true);
       setLoader(["none", "block", "none"]);
-      console.log("there was an error bro");
     }
   };
 
   function handleSubmit(e) {
-    // e.preventDefault();
+    e.preventDefault();
+    setLoader(["none", "none", "block"]);
     fetch("https://love-your-city-app.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify({
@@ -79,7 +79,6 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setEmail("");
         setPassword("");
         setUsername("");
@@ -122,7 +121,7 @@ const SignUp = () => {
           <CircularProgress />
           <div style={{ color: "white" }}>Signing up...</div>
         </div>
-        <form style={{ display: loader[1] }}>
+        <form onSubmit={handleSubmit} style={{ display: loader[1] }}>
           <input
             type="text"
             placeholder="email"
@@ -147,14 +146,7 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button
-            onClick={() => {
-              handleSubmit();
-              setLoader(["none", "none", "block"]);
-            }}
-            type="submit"
-            className="pill-btn blue"
-          >
+          <button type="submit" className="pill-btn blue">
             Sign Up
           </button>
           <Link to="/log-in">
@@ -167,7 +159,11 @@ const SignUp = () => {
           </Link>
         </form>
       </div>
-      {url === "error" ? <Redirect to="/sign-up" /> : <Redirect to="/log-in" />}
+      {url === "error" ? (
+        <Redirect to="/sign-up" />
+      ) : (
+        <Redirect to="/campaigns" />
+      )}
     </section>
   );
 };
