@@ -114,7 +114,7 @@ const RegisterCampaign = () => {
       campaignItems,
     };
 
-    console.log(campaignData);
+    // console.log(campaignData);
     setPreviewData(campaignData);
 
     sessionStorage.setItem("campName", campName);

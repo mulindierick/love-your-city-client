@@ -189,7 +189,7 @@ const DonateToCampaign = () => {
       item["email"] = email;
     });
 
-    console.log(campaignItems);
+    // console.log(campaignItems);
 
     // check if donate items greate or equal to campaign items.
     // if not all donations of all items for the first time.
@@ -210,7 +210,7 @@ const DonateToCampaign = () => {
     }
 
     // console.log(donationsTotal);
-    console.log("donate items", campaignItems);
+    // console.log("donate items", campaignItems);
 
     // let token = JSON.parse(sessionStorage.getItem("accessToken"));
     // let user = JSON.parse(sessionStorage.getItem("user"));

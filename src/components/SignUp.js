@@ -1,13 +1,33 @@
 import React from "react";
 import { useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import Header from "./Header";
+import GoogleLogin from "react-google-login";
 
 const SignUp = () => {
+  let history = useHistory();
   let [username, setUsername] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [url, setUrl] = useState("error");
+
+  const handleSignUp = async (googleData) => {
+    const res = await fetch("https://love-your-city-app.herokuapp.com/users/google", {
+      method: "POST",
+      body: JSON.stringify({
+        token: googleData.tokenId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (data["msg"]) {
+      history.push("/log-in");
+    } else {
+      history.push("/sign-up");
+    }
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,7 +44,7 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         setEmail("");
         setPassword("");
         setUsername("");
@@ -37,7 +57,14 @@ const SignUp = () => {
       <Header />
       <div className="container sign-up-container">
         <h1 className="sign-up-h1">Sign Up</h1>
-        <form onSubmit={handleSubmit}>
+        <GoogleLogin
+          clientId={process.env.CLIENT_ID}
+          buttonText="Sign Up with Google"
+          onSuccess={handleSignUp}
+          onFailure={handleSignUp}
+          cookiePolicy={"single_host_origin"}
+        />
+        <form>
           <input
             type="text"
             placeholder="email"
@@ -62,10 +89,16 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="pill-btn blue">Sign Up</button>
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="pill-btn blue"
+          >
+            Sign Up
+          </button>
         </form>
       </div>
-      {url === "error" ? <Redirect to="/sign-up" /> : <Redirect to="/" />}
+      {url === "error" ? <Redirect to="/sign-up" /> : <Redirect to="/log-in" />}
     </section>
   );
 };

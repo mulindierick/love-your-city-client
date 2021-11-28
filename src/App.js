@@ -3,7 +3,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import Campaigns from "./components/Campaigns";
 import RegisterCampaign from "./components/RegisterCampaign";
-import {Preview} from "./components/Preview";
+import { Preview } from "./components/Preview";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ShowCampaign from "./components/ShowCampaign";
 import Donate from "./components/DonateToCampaign";
