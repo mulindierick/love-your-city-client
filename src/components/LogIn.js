@@ -11,17 +11,37 @@ const LogIn = () => {
   const history = useHistory();
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  let [modalOpen, setModalOpen] = useState(false)
+
+  const Modal = () => {
+    return (
+      <div className="modal-bg">
+        <div className="modal">
+          <h1>
+            Username and/or password incorrect. Please provide correct
+            credentials.
+          </h1>
+          <button className="pill-btn blue" onClick={() => setModalOpen(false)}>
+            Ok
+          </button>
+        </div>
+      </div>
+    );
+  };
 
   const handleLogin = async (googleData) => {
-    const res = await fetch("https://love-your-city-app.herokuapp.com/login/google", {
-      method: "POST",
-      body: JSON.stringify({
-        googleToken: googleData.tokenId,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      "https://love-your-city-app.herokuapp.com/login/google",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          googleToken: googleData.tokenId,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const data = await res.json();
     sessionStorage.setItem(
       "accessToken",
@@ -56,11 +76,13 @@ const LogIn = () => {
       })
       .catch((e) => {
         console.log(e);
+        setModalOpen(true)
       });
   }
   return (
     <section className="log-in">
       <Header />
+      {modalOpen && <Modal />}
       <div className="container log-in-container">
         <h1 className="log-in-h1">Log In</h1>
 
