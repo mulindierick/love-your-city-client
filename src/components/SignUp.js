@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Redirect, useHistory } from "react-router";
 import Header from "./Header";
 import GoogleLogin from "react-google-login";
+import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   let history = useHistory();
@@ -11,16 +14,23 @@ const SignUp = () => {
   let [password, setPassword] = useState("");
   let [url, setUrl] = useState("error");
   let [modalOpen, setModalOpen] = useState(false);
+  let [loader, setLoader] = useState(["none", "block", "none"]);
+  let [modelContent, setModelContent] =
+    useState(`An account with similar username or email already exists. Please
+  provide a different username and email`);
 
   const Modal = () => {
     return (
       <div className="modal-bg">
         <div className="modal">
-          <h1>
-            Username and email are already in use. Please provide a different
-            username and email.
-          </h1>
-          <button className="pill-btn blue" onClick={() => setModalOpen(false)}>
+          <h2>{modelContent}</h2>
+          <button
+            className="pill-btn blue"
+            onClick={() => {
+              setModalOpen(false);
+              setLoader(["none", "block", "none"]);
+            }}
+          >
             Ok
           </button>
         </div>
@@ -43,14 +53,19 @@ const SignUp = () => {
     );
     const data = await res.json();
     if (data["msg"]) {
-      history.push("/log-in");
+      history.push("/campaigns");
     } else {
-      history.push("/sign-up");
+      setModelContent(
+        `An account with a similar email already exists. Log In instead`
+      );
+      setModalOpen(true);
+      setLoader(["none", "block", "none"]);
+      console.log("there was an error bro");
     }
   };
 
   function handleSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     fetch("https://love-your-city-app.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify({
@@ -79,14 +94,35 @@ const SignUp = () => {
       {modalOpen && <Modal />}
       <div className="container sign-up-container">
         <h1 className="sign-up-h1">Sign Up</h1>
-        <GoogleLogin
-          clientId={process.env.REACT_APP_CLIENT_ID}
-          buttonText="Sign Up with Google"
-          onSuccess={handleSignUp}
-          onFailure={handleSignUp}
-          cookiePolicy={"single_host_origin"}
-        />
-        <form>
+        <div style={{ display: loader[0] }}>
+          <LinearProgress />
+        </div>
+        <div style={{ display: loader[0] }}>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            buttonText="Signing up ..."
+            onSuccess={handleSignUp}
+            onFailure={handleSignUp}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
+        <div
+          onClick={() => setLoader(["block", "none", "none"])}
+          style={{ display: loader[1] }}
+        >
+          <GoogleLogin
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            buttonText="Sign Up with Google"
+            onSuccess={handleSignUp}
+            onFailure={handleSignUp}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
+        <div style={{ display: loader[2] }}>
+          <CircularProgress />
+          <div style={{ color: "white" }}>Signing up...</div>
+        </div>
+        <form style={{ display: loader[1] }}>
           <input
             type="text"
             placeholder="email"
@@ -112,12 +148,23 @@ const SignUp = () => {
             required
           />
           <button
-            onClick={handleSubmit}
+            onClick={() => {
+              handleSubmit();
+              setLoader(["none", "none", "block"]);
+            }}
             type="submit"
             className="pill-btn blue"
           >
             Sign Up
           </button>
+          <Link to="/log-in">
+            <p style={{ color: "white" }}>
+              Already have an account?{" "}
+              <span style={{ color: "#159CFE", textDecoration: "underline" }}>
+                Login here
+              </span>
+            </p>
+          </Link>
         </form>
       </div>
       {url === "error" ? <Redirect to="/sign-up" /> : <Redirect to="/log-in" />}

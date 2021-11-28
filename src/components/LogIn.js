@@ -5,7 +5,9 @@ import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import Header from "./Header";
 import GoogleLogin from "react-google-login";
-
+import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Link } from "react-router-dom";
 
 const LogIn = () => {
   const { prevUrl } = useContext(CampaignContext);
@@ -13,16 +15,23 @@ const LogIn = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [modalOpen, setModalOpen] = useState(false);
+  let [modelContent, setModelContent] =
+    useState(`Your username or password is incorrect. Please provide correct
+  credentials`);
+  let [loader, setLoader] = useState(["none", "block", "none"]);
 
   const Modal = () => {
     return (
       <div className="modal-bg">
         <div className="modal">
-          <h1>
-            Username and/or password incorrect. Please provide correct
-            credentials.
-          </h1>
-          <button className="pill-btn blue" onClick={() => setModalOpen(false)}>
+          <h2>{modelContent}</h2>
+          <button
+            className="pill-btn blue"
+            onClick={() => {
+              setModalOpen(false);
+              setLoader(["none", "block", "none"]);
+            }}
+          >
             Ok
           </button>
         </div>
@@ -44,16 +53,28 @@ const LogIn = () => {
       }
     );
     const data = await res.json();
-    sessionStorage.setItem(
-      "accessToken",
-      JSON.stringify(`${data["token"]["accessToken"]}`)
-    );
-    sessionStorage.setItem("user", JSON.stringify(data["user"]));
-    prevUrl > 50 ? history.go(-1) : history.push("/campaigns");
+    console.log(data);
+    if (data["error"]) {
+      setLoader(["none", "block", "none"]);
+      if (data["error"] === "some account details are not correct") {
+        setModelContent(
+          `We could not find an account associated with this email. Please Create an account first.`
+        );
+
+        setModalOpen(true);
+      }
+    } else {
+      sessionStorage.setItem(
+        "accessToken",
+        JSON.stringify(`${data["token"]["accessToken"]}`)
+      );
+      sessionStorage.setItem("user", JSON.stringify(data["user"]));
+      prevUrl > 50 ? history.go(-1) : history.push("/campaigns");
+    }
   };
 
   function handleSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     fetch("https://love-your-city-app.herokuapp.com/login", {
       method: "POST",
       body: JSON.stringify({
@@ -84,19 +105,41 @@ const LogIn = () => {
     <section className="log-in">
       <Header />
       {modalOpen && <Modal />}
-      <div className="container log-in-container">
+      <div
+        className="container log-in-container"
+        style={{ justifyContent: "center" }}
+      >
         <h1 className="log-in-h1">Log In</h1>
+        <div
+          onClick={() => setLoader(["block", "none", "none"])}
+          style={{ display: loader[1] }}
+        >
+          <GoogleLogin
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            buttonText="Login with Google"
+            onSuccess={handleLogin}
+            onFailure={handleLogin}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
+        <div style={{ display: loader[0] }}>
+          <LinearProgress />
+        </div>
+        <div style={{ display: loader[0] }}>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            buttonText="Signing In ... "
+            onSuccess={handleLogin}
+            onFailure={handleLogin}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
+        <div style={{ display: loader[2] }}>
+          <CircularProgress />
+          <div style={{ color: "white" }}>Logging in...</div>
+        </div>
 
-        <GoogleLogin
-          width={10}
-          clientId={process.env.REACT_APP_CLIENT_ID}
-          buttonText="Log In with Google"
-          onSuccess={handleLogin}
-          onFailure={handleLogin}
-          cookiePolicy={"single_host_origin"}
-        />
-
-        <form>
+        <form style={{ display: loader[1] }}>
           <input
             type="email"
             placeholder="Enter email"
@@ -120,12 +163,24 @@ const LogIn = () => {
             required
           />
           <button
-            onClick={handleSubmit}
+            onClick={() => {
+              handleSubmit();
+              setLoader(["none", "none", "block"]);
+            }}
             type="submit"
             className="pill-btn blue"
           >
             Log in
           </button>
+
+          <Link to="/sign-up">
+            <p style={{ color: "white" }}>
+              Have no account?{" "}
+              <span style={{ color: "#159CFE", textDecoration: "underline" }}>
+                SignUp here
+              </span>
+            </p>
+          </Link>
         </form>
       </div>
     </section>
