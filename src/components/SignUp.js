@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Redirect, useHistory } from "react-router";
 import Header from "./Header";
 import GoogleLogin from "react-google-login";
+import dotenv from "dotenv";
+dotenv.config();
 
 const SignUp = () => {
   let history = useHistory();

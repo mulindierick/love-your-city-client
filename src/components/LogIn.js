@@ -90,7 +90,9 @@ const LogIn = () => {
 
         <GoogleLogin
           width={10}
-          clientId={process.env.REACT_APP_CLIENT_ID}
+          clientId={
+            "653745629109-dguc0iu5j22uua4o57uubt32ju7nv4g9.apps.googleusercontent.com"
+          }
           buttonText="Log In with Google"
           onSuccess={handleLogin}
           onFailure={handleLogin}
