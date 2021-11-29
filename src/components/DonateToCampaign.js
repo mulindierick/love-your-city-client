@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import Header from "./Header";
+import LinearProgress from "@mui/material/LinearProgress";
+import Stack from "@mui/material/Stack";
 
 const Modal = () => {
   // const history = useHistory()
@@ -189,11 +191,7 @@ const DonateToCampaign = () => {
       item["email"] = email;
     });
 
-    // console.log(campaignItems);
 
-    // check if donate items greate or equal to campaign items.
-    // if not all donations of all items for the first time.
-    // else filter out all donations with zero donated items.
     if (campaign["donations"].length >= campaign["campaign"].length) {
       campaignItems = campaignItems.filter((item) => {
         return item.donation > 0;
@@ -209,14 +207,7 @@ const DonateToCampaign = () => {
       donationsTotal = donationsTotal.reduce((prev, curr) => prev + curr);
     }
 
-    // console.log(donationsTotal);
-    // console.log("donate items", campaignItems);
 
-    // let token = JSON.parse(sessionStorage.getItem("accessToken"));
-    // let user = JSON.parse(sessionStorage.getItem("user"));
-    // !user
-    //   ? history.push("/log-in")
-    //   :
     campaignItems.length > 0 && donationsTotal > 0
       ? fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
           method: "POST",
@@ -346,7 +337,7 @@ const DonateToCampaign = () => {
           </div>
           <form className="donate" onSubmit={handleSubmit}>
             <h3>Support this Campaign</h3>
-            {campaignItems ? (
+            {campaignItems.length !== 0 ? (
               campaignItems.map((item, index) => {
                 return (
                   <div key={index} className="choose-donation">
@@ -423,7 +414,16 @@ const DonateToCampaign = () => {
                 );
               })
             ) : (
-              <></>
+              <>
+                <Stack sx={{ width: "100%", color: "grey.100" }} spacing={0}>
+                  <LinearProgress color="inherit" />
+                  <LinearProgress color="inherit" />
+                  <LinearProgress color="inherit" />
+                  <LinearProgress color="inherit" />
+                  <LinearProgress color="inherit" />
+                  <LinearProgress color="inherit" />
+                </Stack>
+              </>
             )}
 
             {/* protected */}

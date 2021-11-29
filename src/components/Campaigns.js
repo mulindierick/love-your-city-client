@@ -4,6 +4,7 @@ import Campaign from "../components/Campaign";
 import { useContext } from "react";
 import { CampaignContext } from "../contexts/CampaignContext";
 import Header from "./Header";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Campaigns = () => {
   const { campaigns, setCampaigns } = useContext(CampaignContext);
@@ -30,19 +31,30 @@ const Campaigns = () => {
             // console.log(data)
 
             // Sorting Campaign Data on Front End
-            let fullCampaignData = data.campaigns
+            let fullCampaignData = data.campaigns;
 
-            fullCampaignData.forEach(el => {
-              let specificItems = data.campaign_items.filter(item => item.campaign_title === el.campaign_title)
-              let specificDonations = data.donation_items.filter(item => item.campaign_title === el.campaign_title)
-              let specificDonationTotal = data.donations_total.filter(item => item.campaign_title === el.campaign_title)
-              let specificItemTotal = data.item_total.filter(item => item.campaign_title === el.campaign_title)
+            fullCampaignData.forEach((el) => {
+              let specificItems = data.campaign_items.filter(
+                (item) => item.campaign_title === el.campaign_title
+              );
+              let specificDonations = data.donation_items.filter(
+                (item) => item.campaign_title === el.campaign_title
+              );
+              let specificDonationTotal = data.donations_total.filter(
+                (item) => item.campaign_title === el.campaign_title
+              );
+              let specificItemTotal = data.item_total.filter(
+                (item) => item.campaign_title === el.campaign_title
+              );
 
-              el["campaignItems"] = specificItems
-              el["donationItems"] = specificDonations
-              el["totalItems"] = parseInt(specificItemTotal[0].total)
-              el["donationTotal"] = specificDonationTotal.length !== 0 ? parseInt(specificDonationTotal[0].total) : 0
-            })
+              el["campaignItems"] = specificItems;
+              el["donationItems"] = specificDonations;
+              el["totalItems"] = parseInt(specificItemTotal[0].total);
+              el["donationTotal"] =
+                specificDonationTotal.length !== 0
+                  ? parseInt(specificDonationTotal[0].total)
+                  : 0;
+            });
 
             setCampaigns(fullCampaignData);
           })
@@ -51,7 +63,7 @@ const Campaigns = () => {
 
   return (
     <div className="campaigns-page">
-       <Header/>
+      <Header />
       <div className="campaigns-header">
         <div className="ch-1">
           <h4>Monitor Your Campaigns</h4>
@@ -69,7 +81,9 @@ const Campaigns = () => {
             return <Campaign key={index} campaign={campaign} />;
           })
         ) : (
-          <div></div>
+          <>
+            <CircularProgress disableShrink />
+          </>
         )}
       </div>
     </div>
