@@ -79,6 +79,15 @@ button.disabled {
   cursor: unset;
 }
 
+button.clear-btn {
+  margin: 1rem 1rem 1rem 0;
+  color: white;
+  background-color: var(--black-accent);
+}
+button.clear-btn:hover,
+button.clear-btn:focus {
+  background-color: black;
+}
 button.blue {
   background-color: var(--light-blue);
   color: var(--white);

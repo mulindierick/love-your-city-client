@@ -46,12 +46,12 @@ const RegisterCampaign = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const storedName = sessionStorage.getItem("campName") || "";
-  const storedDesc = sessionStorage.getItem("campDesc") || "";
-  const storedType = sessionStorage.getItem("campType") || "General Support";
-  const storedAddress = sessionStorage.getItem("deliveryAddress") || "";
-  const storedEndDate = sessionStorage.getItem("endDate") || "";
-  // const storedItems = JSON.parse(sessionStorage.getItem("campaignItems")) || []
+  const storedName = localStorage.getItem("campName") || "";
+  const storedDesc = localStorage.getItem("campDesc") || "";
+  const storedType = localStorage.getItem("campType") || "General Support";
+  const storedAddress = localStorage.getItem("deliveryAddress") || "";
+  const storedEndDate = localStorage.getItem("endDate") || "";
+  // const storedItems = JSON.parse(localStorage.getItem("campaignItems")) || []
 
   // Form Item State
   const today = new Date();
@@ -117,13 +117,13 @@ const RegisterCampaign = () => {
     // console.log(campaignData);
     setPreviewData(campaignData);
 
-    sessionStorage.setItem("campName", campName);
-    sessionStorage.setItem("campDesc", campDesc);
-    sessionStorage.setItem("campType", campType);
-    sessionStorage.setItem("deliveryAddress", deliveryAddress);
-    sessionStorage.setItem("endDate", returnedEndDate);
+    localStorage.setItem("campName", campName);
+    localStorage.setItem("campDesc", campDesc);
+    localStorage.setItem("campType", campType);
+    localStorage.setItem("deliveryAddress", deliveryAddress);
+    localStorage.setItem("endDate", returnedEndDate);
     // console.log(JSON.stringify([...campaignItems]))
-    // sessionStorage.setItem("campaignItems", JSON.stringify([...campaignItems]))
+    // localStorage.setItem("campaignItems", JSON.stringify([...campaignItems]))
 
     history.push("/preview");
   };
@@ -345,6 +345,28 @@ const RegisterCampaign = () => {
           </div>
 
           <div>
+            <button 
+              className="pill-btn clear-btn" 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+
+                localStorage.removeItem("campName");
+                localStorage.removeItem("campDesc");
+                localStorage.removeItem("campType");
+                localStorage.removeItem("deliveryAddress");
+                localStorage.removeItem("endDate");
+
+                setCampName("")
+                setCampDesc("")
+                setCampType("General Support")
+                setEndDate("")
+                setReturnedEndDate(null)
+                setDeliveryAddress("")
+              }}
+            >
+              Clear Campaign Information
+            </button>
             {isValid ? (
               <button
                 type="submit"

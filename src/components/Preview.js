@@ -45,6 +45,11 @@ export const Preview = () => {
             .then((res) => res.json())
             .then((data) => {
                 setModalOpen(true)
+                localStorage.removeItem("campName");
+                localStorage.removeItem("campDesc");
+                localStorage.removeItem("campType");
+                localStorage.removeItem("deliveryAddress");
+                localStorage.removeItem("endDate");
             })
             .catch((e) => {
                 setModal2Open(true)
