@@ -49,6 +49,7 @@ const RegisterCampaign = () => {
   const storedName = localStorage.getItem("campName") || "";
   const storedDesc = localStorage.getItem("campDesc") || "";
   const storedType = localStorage.getItem("campType") || "General Support";
+  const storedNum = localStorage.getItem("contactNum") || "";
   const storedAddress = localStorage.getItem("deliveryAddress") || "";
   const storedEndDate = localStorage.getItem("endDate") || "";
   // const storedItems = JSON.parse(localStorage.getItem("campaignItems")) || []
@@ -58,6 +59,7 @@ const RegisterCampaign = () => {
   const [campName, setCampName] = useState(storedName);
   const [campDesc, setCampDesc] = useState(storedDesc);
   const [campType, setCampType] = useState(storedType);
+  const [contactNum, setContactNum] = useState(storedNum)
   const [endDate, setEndDate] = useState(storedEndDate);
   const [returnedEndDate, setReturnedEndDate] = useState(null);
   const [deliveryAddress, setDeliveryAddress] = useState(storedAddress);
@@ -111,6 +113,7 @@ const RegisterCampaign = () => {
       campType,
       returnedEndDate,
       deliveryAddress,
+      contactNum,
       campaignItems,
     };
 
@@ -121,6 +124,7 @@ const RegisterCampaign = () => {
     localStorage.setItem("campDesc", campDesc);
     localStorage.setItem("campType", campType);
     localStorage.setItem("deliveryAddress", deliveryAddress);
+    localStorage.setItem("contactNum", contactNum);
     localStorage.setItem("endDate", returnedEndDate);
     // console.log(JSON.stringify([...campaignItems]))
     // localStorage.setItem("campaignItems", JSON.stringify([...campaignItems]))
@@ -136,7 +140,8 @@ const RegisterCampaign = () => {
       endDate &&
       deliveryAddress &&
       campaignItems.length > 0 &&
-      returnedEndDate !== null
+      returnedEndDate !== null &&
+      contactNum.length === 10
     )
       setIsValid(true);
     else setIsValid(false);
@@ -147,6 +152,7 @@ const RegisterCampaign = () => {
     deliveryAddress,
     campaignItems,
     returnedEndDate,
+    contactNum
   ]);
 
   // Validation for returning date string in correct format
@@ -241,6 +247,21 @@ const RegisterCampaign = () => {
                 </MenuItem>
               </Select>
             </FormControl>
+          </div>
+          <div className="input-div">
+            <label htmlFor="end-date">Contact Number</label>
+            {/* <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"> */}
+            <input
+              className="campaign-input"
+              name="contact-num"
+              type="tel"
+              // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              pattern="[0-9]{10}"
+              minLength="10"
+              maxLength="10"
+              value={contactNum}
+              onChange={(e) => setContactNum(e.target.value)}
+            />
           </div>
           <div className="input-div">
             <label htmlFor="end-date">End Date</label>

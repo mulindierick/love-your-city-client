@@ -21,6 +21,7 @@ export const Preview = () => {
     const [modalOpen, setModalOpen] = useState(false)
     const [modal2Open, setModal2Open] = useState(false)
     const email = JSON.parse(sessionStorage.getItem("user")).email
+    console.log(email)
 
     const Modal2 = () => {
         return <div className="modal-bg">
@@ -122,6 +123,10 @@ export const Preview = () => {
                             <div className="email">
                                 <p className="header">Campaign Owner Email</p>
                                 <p>{email}</p>
+                            </div>
+                            <div className="contact">
+                                <p className="header">Contact Number</p>
+                                <p>{previewData.contactNum}</p>
                             </div>
                         </div>
                         </div>
