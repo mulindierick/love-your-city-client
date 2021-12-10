@@ -3,50 +3,54 @@ import { useHistory } from "react-router-dom";
 import Header from "./Header";
 import moment from "moment";
 import { CampaignContext } from "../contexts/CampaignContext";
-
-const Modal = () => {
-  const history = useHistory();
-
-  return (
-    <div className="modal-bg">
-      <div className="modal">
-        <h1>Your Campaign has been created</h1>
-        <button
-          className="pill-btn blue"
-          onClick={() => history.push("/campaigns")}
-        >
-          Return
-        </button>
-      </div>
-    </div>
-  );
-};
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 export const Preview = () => {
   const { previewData } = useContext(CampaignContext);
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
-  const [modal2Open, setModal2Open] = useState(false);
   const email = JSON.parse(sessionStorage.getItem("user")).email;
-  console.log(email);
+  const [error, setError] = useState("success");
+  let [modelContent, setModelContent] = useState(
+    `Your Campaign has been created`
+  );
 
-  const Modal2 = () => {
+  function BasicAlerts() {
     return (
-      <div className="modal-bg">
-        <div className="modal">
-          <h1>
-            Your campaign name is already in use. Please provide a new one.
-          </h1>
-          <button
-            className="pill-btn blue"
-            onClick={() => history.push("/register-campaign")}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
+          <Alert
+            variant="filled"
+            severity={error}
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  if (modelContent === "Your Campaign has been created") {
+                    setModalOpen(false);
+                    history.push("/campaigns");
+                  } else {
+                    setModalOpen(false);
+                    history.push("/register-campaign");
+                  }
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
           >
-            Return
-          </button>
-        </div>
+            {modelContent}
+          </Alert>
+        </Stack>
       </div>
     );
-  };
+  }
 
   const goLive = () => {
     const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
@@ -69,7 +73,12 @@ export const Preview = () => {
         localStorage.removeItem("endDate");
       })
       .catch((e) => {
-        setModal2Open(true);
+        console.log(e);
+        setModelContent(
+          "Your campaign name is already in use. Please provide a unique name."
+        );
+        setError("error");
+        setModalOpen(true);
       });
   };
 
@@ -79,14 +88,13 @@ export const Preview = () => {
 
   return (
     <div className="preview">
-      {modalOpen && <Modal />}
-      {modal2Open && <Modal2 />}
       <Header />
 
       {previewData !== null ? (
         <div className="preview-data">
           <div className="sh-header preview-header">
             <h3> {previewData.campName}</h3>
+            {modalOpen && <BasicAlerts />}
           </div>
           <div className="sc-buttons">
             <button className="cb cb-1 share-3" onClick={() => goLive()}>

@@ -8,78 +8,66 @@ import moment from "moment";
 import Header from "./Header";
 import LinearProgress from "@mui/material/LinearProgress";
 import Stack from "@mui/material/Stack";
-
-const Modal = () => {
-  // const history = useHistory()
-
-  return (
-    <div className="modal-bg">
-      <div className="modal">
-        <h1>Thank you for your donation</h1>
-        <button
-          className="pill-btn blue"
-          onClick={() => window.location.reload()}
-        >
-          Ok
-        </button>
-      </div>
-    </div>
-  );
-};
-const Modal2 = () => {
-  // const history = useHistory()
-
-  return (
-    <div className="modal-bg">
-      <div className="modal">
-        <h1>Your Donation is empty</h1>
-        <button
-          className="pill-btn blue"
-          onClick={() => window.location.reload()}
-        >
-          Ok
-        </button>
-      </div>
-    </div>
-  );
-};
+import Alert from "@mui/material/Alert";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const DonateToCampaign = () => {
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
+  let { id } = useParams();
+  let history = useHistory();
+
   let [firstName, setFirstName] = useState("");
   let [secondName, setSecondName] = useState("");
   let [email, setEmail] = useState("");
 
+  let [modelContent, setModelContent] = useState(`Link Copied`);
+  let [error, setError] = useState("success");
+
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalOpen2, setModalOpen2] = useState(false);
-  const [modalOpen3, setModalOpen3] = useState(false);
 
-  const Modal3 = () => {
-    // const history = useHistory()
-
-    return (
-      <div className="modal-bg">
-        <div className="modal">
-          <h1>Link Copied</h1>
-          <button
-            className="pill-btn blue"
-            onClick={() => setModalOpen3(false)}
-          >
-            Ok
-          </button>
-        </div>
-      </div>
-    );
+  const errorDonating = () => {
+    setError("error");
+    setModelContent(`Your Donation is empty`);
+    setModalOpen(true);
   };
 
-  // console.log(campaign);
-  let { id } = useParams();
-  let history = useHistory();
+  function BasicAlerts() {
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
+          <Alert
+            variant="filled"
+            severity={error}
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  if (modelContent === "Link Copied") {
+                    setModalOpen(false);
+                  } else if (modelContent === "Your Donation is empty") {
+                    window.location.reload();
+                  } else {
+                    window.location.reload();
+                  }
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
+          >
+            {modelContent}
+          </Alert>
+        </Stack>
+      </div>
+    );
+  }
 
   // fetch campaign information
   useEffect(() => {
-    // let token = JSON.parse(sessionStorage.getItem("accessToken"));
-    // let user = JSON.parse(sessionStorage.getItem("user"));
     setPrevUrl(window.location.href.length);
 
     fetch(` https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
@@ -191,7 +179,6 @@ const DonateToCampaign = () => {
       item["email"] = email;
     });
 
-
     if (campaign["donations"].length >= campaign["campaign"].length) {
       campaignItems = campaignItems.filter((item) => {
         return item.donation > 0;
@@ -207,7 +194,6 @@ const DonateToCampaign = () => {
       donationsTotal = donationsTotal.reduce((prev, curr) => prev + curr);
     }
 
-
     campaignItems.length > 0 && donationsTotal > 0
       ? fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
           method: "POST",
@@ -219,25 +205,23 @@ const DonateToCampaign = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            setModelContent(`Thank you for your donation`);
             setModalOpen(true);
           })
           .catch((e) => {
             console.log(e);
           })
-      : setModalOpen2(true);
+      : errorDonating();
   }
 
   return (
     <React.Fragment>
-      {modalOpen3 && <Modal3 />}
-      {modalOpen2 && <Modal2 />}
-      {modalOpen && <Modal />}
       <Header />
 
       <div className="sh-group">
         <div className="sh-header">
           <h1> {campaign ? campaign["campaign"][0].campaign_title : ""}</h1>
-          {/* <h4>Hosted by: Erick Mulindi</h4> */}
+          {modalOpen && <BasicAlerts />}
         </div>
         <div className="donate-and-campaign">
           <div className="sh-details-group">
@@ -316,27 +300,12 @@ const DonateToCampaign = () => {
                   <p>{campaign ? campaign["user"][0].email : ""}</p>
                 </div>
               </div>
-              {/* <div>
-                <p className="share-1">Share this Campaign:</p>
-                <p className="share-2">{id}</p>
-                <button
-                  // className="share-3 share-4"
-                  className="pill-btn blue"
-                  onClick={() => {
-                    navigator.clipboard.writeText(
-                      `https://www.loveyourcity.app/donate/${id}`
-                    );
-                    setModalOpen3(true)
-                    
-                  }}
-                >
-                  Copy link
-                </button>
-              </div> */}
             </div>
           </div>
+
           <form className="donate" onSubmit={handleSubmit}>
             <h3>Support this Campaign</h3>
+
             {campaignItems.length !== 0 ? (
               campaignItems.map((item, index) => {
                 return (
@@ -482,10 +451,10 @@ const DonateToCampaign = () => {
                   navigator.clipboard.writeText(
                     `https://www.loveyourcity.app/donate/${id}`
                   );
-                  setModalOpen3(true);
+                  setModalOpen(true);
                 }}
               >
-                Copy link
+                Copy Link
               </div>
             </div>
           </form>

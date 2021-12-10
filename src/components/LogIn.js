@@ -8,6 +8,10 @@ import GoogleLogin from "react-google-login";
 import LinearProgress from "@mui/material/LinearProgress";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const LogIn = () => {
   const { prevUrl } = useContext(CampaignContext);
@@ -19,25 +23,38 @@ const LogIn = () => {
     useState(`Your username or password is incorrect. Please provide correct
   credentials`);
   let [loader, setLoader] = useState(["none", "block", "none"]);
+  let [error, setError] = useState("success");
 
-  const Modal = () => {
+  function BasicAlerts() {
     return (
-      <div className="modal-bg">
-        <div className="modal">
-          <h2>{modelContent}</h2>
-          <button
-            className="pill-btn blue"
-            onClick={() => {
-              setModalOpen(false);
-              setLoader(["none", "block", "none"]);
-            }}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
+          <Alert
+            variant="filled"
+            severity={error}
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setModalOpen(false);
+                  setLoader(["none", "block", "none"]);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
           >
-            Ok
-          </button>
-        </div>
+            {modelContent}
+          </Alert>
+        </Stack>
       </div>
     );
-  };
+  }
+
+
 
   const handleLogin = async (googleData) => {
     const res = await fetch(
@@ -59,7 +76,7 @@ const LogIn = () => {
         setModelContent(
           `We could not find an account associated with this email. Please Create an account first.`
         );
-
+        setError("error")
         setModalOpen(true);
       }
     } else {
@@ -98,13 +115,16 @@ const LogIn = () => {
       })
       .catch((e) => {
         console.log(e);
+        setLoader(["none", "block", "none"]);
+        setError("error")
         setModalOpen(true);
       });
   }
   return (
     <section className="log-in">
       <Header />
-      {modalOpen && <Modal />}
+      {modalOpen && <BasicAlerts />}
+
       <div
         className="container log-in-container"
         style={{ justifyContent: "center" }}

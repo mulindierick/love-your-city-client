@@ -5,46 +5,51 @@ import { useHistory, useParams } from "react-router-dom";
 import LoopRoundedIcon from "@material-ui/icons/LoopRounded";
 import moment from "moment";
 import Header from "./Header";
-// import FacebookIcon from "@material-ui/icons/Facebook";
-// import TwitterIcon from "@material-ui/icons/Twitter";
-// import LinkedInIcon from "@material-ui/icons/LinkedIn";
-// import WhatsAppIcon from "@material-ui/icons/WhatsApp";
-
-
-
-
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const ShowCampaign = () => {
   let history = useHistory();
   let { id: cId } = useParams();
   const { campaign, setCampaign } = useContext(CampaignContext);
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalOpen2, setModalOpen2] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
+  let [error, setError] = useState("success");
+  let [modelContent, setModelContent] = useState(`Link Copied`);
 
-
-
-  const Modal = () => {
-    const history = useHistory()
-  
-    return <div className="modal-bg">
-        <div className="modal">
-            <h1>Campaign Deleted</h1>
-            <button className="pill-btn blue" onClick={() => history.push("/campaigns")}>Ok</button>
-        </div>
-    </div>
+  function BasicAlerts() {
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
+          <Alert
+            variant="filled"
+            severity={error}
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  if (modelContent === "Link Copied") {
+                    setModalOpen(false);
+                  } else {
+                    setModalOpen(false);
+                    history.push("/campaigns");
+                  }
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
+          >
+            {modelContent}
+          </Alert>
+        </Stack>
+      </div>
+    );
   }
-
-  const Modal2 = () => {
-    // const history = useHistory()
-  
-    return <div className="modal-bg">
-        <div className="modal">
-            <h1>Link Copied</h1>
-            <button className="pill-btn blue" onClick={() => setModalOpen2(false)}>Ok</button>
-        </div>
-    </div>
-  }
-
 
   let itemInfo = null;
   if (!campaign) {
@@ -81,10 +86,13 @@ const ShowCampaign = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            setModalOpen(true)
+            setModelContent("Campaign Deleted");
+            setModalOpen(true);
           })
           .catch((e) => {
             console.log(e);
+            setError("error");
+            setModalOpen(true);
           });
   }
 
@@ -113,9 +121,8 @@ const ShowCampaign = () => {
 
   return (
     <React.Fragment>
-      { modalOpen && <Modal />}
-      {modalOpen2 && <Modal2 />}
       <Header />
+      {modalOpen && <BasicAlerts />}
       <div className="sh-group">
         {campaign ? (
           <>
@@ -130,7 +137,7 @@ const ShowCampaign = () => {
                   navigator.clipboard.writeText(
                     `https://www.loveyourcity.app/donate/${cId}`
                   );
-                  setModalOpen2(true)
+                  setModalOpen(true);
                   // alert("Link Copied");
                 }}
               >
