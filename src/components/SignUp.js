@@ -6,6 +6,10 @@ import GoogleLogin from "react-google-login";
 import LinearProgress from "@mui/material/LinearProgress";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const SignUp = () => {
   let history = useHistory();
@@ -15,28 +19,39 @@ const SignUp = () => {
   let [url, setUrl] = useState("error");
   let [modalOpen, setModalOpen] = useState(false);
   let [loader, setLoader] = useState(["none", "block", "none"]);
+  let [error, setError] = useState("success");
   let [modelContent, setModelContent] =
     useState(`An account with similar username or email already exists. Please
   provide a different username and email`);
 
-  const Modal = () => {
+  function BasicAlerts() {
     return (
-      <div className="modal-bg">
-        <div className="modal">
-          <h2>{modelContent}</h2>
-          <button
-            className="pill-btn blue"
-            onClick={() => {
-              setModalOpen(false);
-              setLoader(["none", "block", "none"]);
-            }}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
+          <Alert
+            variant="filled"
+            severity={error}
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setModalOpen(false);
+                  setLoader(["none", "block", "none"]);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
           >
-            Ok
-          </button>
-        </div>
+            {modelContent}
+          </Alert>
+        </Stack>
       </div>
     );
-  };
+  }
 
   const handleSignUp = async (googleData) => {
     const res = await fetch(
@@ -59,6 +74,7 @@ const SignUp = () => {
         `An account with a similar email already exists. Log In instead`
       );
       setModalOpen(true);
+      setError("error");
       setLoader(["none", "block", "none"]);
     }
   };
@@ -83,14 +99,18 @@ const SignUp = () => {
         setPassword("");
         setUsername("");
         setUrl(Object.keys(data)[0]);
-        if (Object.keys(data)[0] === "error") setModalOpen(true);
+        if (Object.keys(data)[0] === "error") {
+          setLoader(["none", "block", "none"]);
+          setError("error");
+          setModalOpen(true);
+        }
       })
       .catch((e) => console.log(e));
   }
   return (
     <section className="sign-up">
       <Header />
-      {modalOpen && <Modal />}
+      {modalOpen && <BasicAlerts />}
       <div className="container sign-up-container">
         <h1 className="sign-up-h1">Sign Up</h1>
         <div style={{ display: loader[0] }}>
@@ -162,7 +182,7 @@ const SignUp = () => {
       {url === "error" ? (
         <Redirect to="/sign-up" />
       ) : (
-        <Redirect to="/campaigns" />
+        <Redirect to="/log-in" />
       )}
     </section>
   );
