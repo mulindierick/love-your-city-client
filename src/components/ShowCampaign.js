@@ -15,7 +15,7 @@ const ShowCampaign = () => {
   let { id: cId } = useParams();
   const { campaign, setCampaign } = useContext(CampaignContext);
   const [modalOpen, setModalOpen] = useState(false);
-  const [donationUpdateState, setDonationUpdateState] = useState([])
+  const [donationUpdateState, setDonationUpdateState] = useState([]);
   let [error, setError] = useState("success");
   let [modelContent, setModelContent] = useState(`Link Copied`);
 
@@ -98,63 +98,70 @@ const ShowCampaign = () => {
   }
 
   const changeUpdateItems = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    let inputValue = parseInt(e.target.value)
-    let maxValue = parseInt(e.target.max)
-    let donationId = e.target.dataset.id
-    let tempDonationUpdateState = [...donationUpdateState]
-    let hasValue = false
-    
+    let inputValue = parseInt(e.target.value);
+    let maxValue = parseInt(e.target.max);
+    let donationId = e.target.dataset.id;
+    let tempDonationUpdateState = [...donationUpdateState];
+    let hasValue = false;
+
     if (inputValue === 0 || isNaN(inputValue)) {
-      tempDonationUpdateState = tempDonationUpdateState.filter((el) => el.donationId !== donationId)
-      return setDonationUpdateState([...tempDonationUpdateState])
+      tempDonationUpdateState = tempDonationUpdateState.filter(
+        (el) => el.donationId !== donationId
+      );
+      return setDonationUpdateState([...tempDonationUpdateState]);
     }
-    if (inputValue > maxValue) e.target.value = parseInt(maxValue)
+    if (inputValue > maxValue) e.target.value = parseInt(maxValue);
 
     tempDonationUpdateState = tempDonationUpdateState.map((el) => {
       if (donationId === el.donationId) {
-        hasValue = true 
+        hasValue = true;
         return {
           donationId: el.donationId,
-          updatedDonationValue: parseInt(e.target.value)
-        } 
-      }
-      else return el
-    })
+          updatedDonationValue: parseInt(e.target.value),
+        };
+      } else return el;
+    });
 
-    if (!hasValue) tempDonationUpdateState.push({ donationId, updatedDonationValue: inputValue})
-    setDonationUpdateState([...tempDonationUpdateState])
-  } 
+    if (!hasValue)
+      tempDonationUpdateState.push({
+        donationId,
+        updatedDonationValue: inputValue,
+      });
+    setDonationUpdateState([...tempDonationUpdateState]);
+  };
 
   const updateDonations = () => {
     const donationInfo = {
       campaignId: campaign.campaign_id,
       donationUpdateState,
-    }
+    };
 
-    console.log(donationInfo)
+    console.log("heheh", donationInfo);
 
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
-    
-    fetch(`https://love-your-city-app.herokuapp.com/users/received_donations`, {
+
+    fetch(` http://localhost:5000/users/received_donations`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(donationInfo)
+      body: JSON.stringify(donationInfo),
     })
-    .then(res => res.json)
-    .then(data => {
-      setModelContent('Donations update successful!')
-      setModalOpen(true)
-    })
-    .catch(err => {
-      setModelContent('Donations update unsuccessful. Please try again later.')
-      setModalOpen(true)
-    })
-  }
+      .then((res) => res.json)
+      .then((data) => {
+        setModelContent("Donations update successful!");
+        setModalOpen(true);
+      })
+      .catch((err) => {
+        setModelContent(
+          "Donations update unsuccessful. Please try again later."
+        );
+        setModalOpen(true);
+      });
+  };
 
   // get campaign by id
   useEffect(() => {
@@ -182,7 +189,7 @@ const ShowCampaign = () => {
   return (
     <React.Fragment>
       <Header />
-      {modalOpen && <BasicAlerts />}
+
       <div className="sh-group">
         {campaign ? (
           <>
@@ -201,13 +208,13 @@ const ShowCampaign = () => {
                   // alert("Link Copied");
                 }}
               >
-                Copy Sharable link
+                Copy shareable link
               </button>
 
               <button className="cb cb-2 share-3" onClick={deleteCampaign}>
                 Delete
               </button>
-              <button className="cb cb-2 disabled">Edit</button>
+              {/* <button className="cb cb-2 disabled">Edit</button> */}
             </div>
             <div className="sh-details-group">
               <div className="sh-desc">
@@ -215,95 +222,6 @@ const ShowCampaign = () => {
                 <p>{campaign.campaign_desc}</p>
               </div>
               <div className="sh-details">
-                <h3 className="sh-desc">List of items needed</h3>
-                <div className="table-group">
-                  <div className="row header-row">
-                    <div className="col">No.</div>
-                    <div className="col">Item Name</div>
-                    <div className="col">Campaign Goal</div>
-                    <div className="col">Donated</div>
-                    <div className="col">Still Needed</div>
-                  </div>
-
-                  {itemInfo.map((mapItem, index) => {
-                    const { name, goal, donated, needed } = mapItem;
-
-                    return (
-                      <div className="row" key={index}>
-                        <div className="col">{index + 1}</div>
-                        <div className="col">{name}</div>
-                        <div className="col">{goal}</div>
-                        <div className="col">{donated}</div>
-                        <div className="col">{needed}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-                {/* <p className="share-1">Social Share:</p>
-          <div className="social-share">
-            <FacebookIcon style={{ fontSize: 40 }} />
-            <TwitterIcon style={{ fontSize: 40 }} />
-            <LinkedInIcon style={{ fontSize: 40 }} />
-            <WhatsAppIcon style={{ fontSize: 40 }} />
-          </div> */}
-                {campaign.donationItems && (
-                  <>
-                    <h3 className="sh-desc">Pledge Tracker</h3>
-                    <div className="table-group-donations">
-                      <div className="row header-row">
-                        <div className="col">Gifter</div>
-                        <div className="col">Item</div>
-                        <div className="col">Pledged</div>
-                        <div className="col">Donated</div>
-                      </div>
-    
-                      {campaign.donationItems.map((el, index) => {
-                        const {
-                          item_name: name,
-                          item_quantity: quan,
-                          email,
-                          donation_id: donationId
-                        } = el;
-    
-                        return (
-                          <div className="row" key={index}>
-                            <div className="col">{email.split("@")[0]}</div>
-                            <div className="col">{name}</div>
-                            <div className="col">{quan}</div>
-                            <div className="col">
-                              <input 
-                                className="col-input"
-                                type="number"
-                                min="0"
-                                max={quan}
-                                defaultValue={0}
-                                data-id={donationId}
-                                placeholder={`Input donated items up to ${quan}`}
-                                onChange={(e) => changeUpdateItems(e)}
-                              />
-                              {/* <button
-                                className="track-btn"
-                                // onClick={(donationId) => UpdateDonation(donationId)}
-                              >Update</button> */}
-                            </div>
-                          </div>
-                        );
-                      })}
-                      <div className="row header-row">
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col">
-                          <button
-                                className="track-btn"
-                                onClick={() => updateDonations()}
-                              >Update</button>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-
                 {campaign.donationItems && (
                   <>
                     <h3 className="sh-desc">Donations</h3>
@@ -311,7 +229,7 @@ const ShowCampaign = () => {
                       <div className="row header-row">
                         <div className="col">Gifter</div>
                         <div className="col">Item</div>
-                        <div className="col">Donated</div>
+                        <div className="col">Received Donations</div>
                         <div className="col">Donated On</div>
                       </div>
 
@@ -338,6 +256,92 @@ const ShowCampaign = () => {
                     </div>
                   </>
                 )}
+
+                {campaign.donationItems && (
+                  <>
+                    <h3 className="sh-desc">Pledge Tracker</h3>
+                    {modalOpen && <BasicAlerts />}
+                    <div className="table-group-donations">
+                      <div className="row header-row">
+                        <div className="col">Gifter</div>
+                        <div className="col">Item</div>
+                        <div className="col">Pledged</div>
+                        <div className="col">Update Pledge</div>
+                      </div>
+
+                      {campaign.donationItems.map((el, index) => {
+                        const {
+                          item_name: name,
+                          item_quantity: quan,
+                          email,
+                          donation_id: donationId,
+                        } = el;
+
+                        return (
+                          <div className="row" key={index}>
+                            <div className="col">{email.split("@")[0]}</div>
+                            <div className="col">{name}</div>
+                            <div className="col">{quan}</div>
+                            <div className="col">
+                              <input
+                                className="col-input"
+                                type="number"
+                                min="0"
+                                max={quan}
+                                defaultValue={0}
+                                data-id={donationId}
+                                placeholder={`Input received items up to ${quan}`}
+                                onChange={(e) => changeUpdateItems(e)}
+                              />
+                              {/* <button
+                                className="track-btn"
+                                // onClick={(donationId) => UpdateDonation(donationId)}
+                              >Update</button> */}
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <div className="row header-row">
+                        <div className="col"></div>
+                        <div className="col"></div>
+                        <div className="col"></div>
+                        <div className="col">
+                          <button
+                            className="track-btn"
+                            onClick={() => updateDonations()}
+                          >
+                            Update
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                <h3 className="sh-desc">List of items needed</h3>
+                <div className="table-group">
+                  <div className="row header-row">
+                    <div className="col">No.</div>
+                    <div className="col">Item Name</div>
+                    <div className="col">Campaign Goal</div>
+                    <div className="col">Pledged</div>
+                    <div className="col">Still Needed</div>
+                  </div>
+
+                  {itemInfo.map((mapItem, index) => {
+                    const { name, goal, donated, needed } = mapItem;
+
+                    return (
+                      <div className="row" key={index}>
+                        <div className="col">{index + 1}</div>
+                        <div className="col">{name}</div>
+                        <div className="col">{goal}</div>
+                        <div className="col">{donated}</div>
+                        <div className="col">{needed}</div>
+                      </div>
+                    );
+                  })}
+                </div>
 
                 <div className="table-group-2">
                   <div className="date">
