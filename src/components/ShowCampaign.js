@@ -142,7 +142,7 @@ const ShowCampaign = () => {
 
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
 
-    fetch(` http://localhost:5000/users/received_donations`, {
+    fetch(`https://love-your-city-app.herokuapp.com/users/received_donations`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
