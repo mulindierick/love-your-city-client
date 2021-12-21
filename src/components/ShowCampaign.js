@@ -15,6 +15,7 @@ const ShowCampaign = () => {
   let { id: cId } = useParams();
   const { campaign, setCampaign } = useContext(CampaignContext);
   const [modalOpen, setModalOpen] = useState(false);
+  const [donationUpdateState, setDonationUpdateState] = useState([])
   let [error, setError] = useState("success");
   let [modelContent, setModelContent] = useState(`Link Copied`);
 
@@ -94,6 +95,65 @@ const ShowCampaign = () => {
             setError("error");
             setModalOpen(true);
           });
+  }
+
+  const changeUpdateItems = (e) => {
+    e.preventDefault()
+
+    let inputValue = parseInt(e.target.value)
+    let maxValue = parseInt(e.target.max)
+    let donationId = e.target.dataset.id
+    let tempDonationUpdateState = [...donationUpdateState]
+    let hasValue = false
+    
+    if (inputValue === 0 || isNaN(inputValue)) {
+      tempDonationUpdateState = tempDonationUpdateState.filter((el) => el.donationId !== donationId)
+      return setDonationUpdateState([...tempDonationUpdateState])
+    }
+    if (inputValue > maxValue) e.target.value = parseInt(maxValue)
+
+    tempDonationUpdateState = tempDonationUpdateState.map((el) => {
+      if (donationId === el.donationId) {
+        hasValue = true 
+        return {
+          donationId: el.donationId,
+          updatedDonationValue: parseInt(e.target.value)
+        } 
+      }
+      else return el
+    })
+
+    if (!hasValue) tempDonationUpdateState.push({ donationId, updatedDonationValue: inputValue})
+    setDonationUpdateState([...tempDonationUpdateState])
+  } 
+
+  const updateDonations = () => {
+    const donationInfo = {
+      campaignId: campaign.campaign_id,
+      donationUpdateState,
+    }
+
+    console.log(donationInfo)
+
+    let token = JSON.parse(sessionStorage.getItem("accessToken"));
+    
+    fetch(`https://love-your-city-app.herokuapp.com/users/received_donations`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(donationInfo)
+    })
+    .then(res => res.json)
+    .then(data => {
+      setModelContent('Donations update successful!')
+      setModalOpen(true)
+    })
+    .catch(err => {
+      setModelContent('Donations update unsuccessful. Please try again later.')
+      setModalOpen(true)
+    })
   }
 
   // get campaign by id
@@ -188,6 +248,64 @@ const ShowCampaign = () => {
           </div> */}
                 {campaign.donationItems && (
                   <>
+                    <h3 className="sh-desc">Pledge Tracker</h3>
+                    <div className="table-group-donations">
+                      <div className="row header-row">
+                        <div className="col">Gifter</div>
+                        <div className="col">Item</div>
+                        <div className="col">Pledged</div>
+                        <div className="col">Donated</div>
+                      </div>
+    
+                      {campaign.donationItems.map((el, index) => {
+                        const {
+                          item_name: name,
+                          item_quantity: quan,
+                          email,
+                          donation_id: donationId
+                        } = el;
+    
+                        return (
+                          <div className="row" key={index}>
+                            <div className="col">{email.split("@")[0]}</div>
+                            <div className="col">{name}</div>
+                            <div className="col">{quan}</div>
+                            <div className="col">
+                              <input 
+                                className="col-input"
+                                type="number"
+                                min="0"
+                                max={quan}
+                                defaultValue={0}
+                                data-id={donationId}
+                                placeholder={`Input donated items up to ${quan}`}
+                                onChange={(e) => changeUpdateItems(e)}
+                              />
+                              {/* <button
+                                className="track-btn"
+                                // onClick={(donationId) => UpdateDonation(donationId)}
+                              >Update</button> */}
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <div className="row header-row">
+                        <div className="col"></div>
+                        <div className="col"></div>
+                        <div className="col"></div>
+                        <div className="col">
+                          <button
+                                className="track-btn"
+                                onClick={() => updateDonations()}
+                              >Update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {campaign.donationItems && (
+                  <>
                     <h3 className="sh-desc">Donations</h3>
                     <div className="table-group-donations">
                       <div className="row header-row">
@@ -200,7 +318,8 @@ const ShowCampaign = () => {
                       {campaign.donationItems.map((el, index) => {
                         const {
                           item_name: name,
-                          item_quantity: quan,
+                          // item_quantity: quan,
+                          donations_received: quan,
                           email,
                           created_at: date,
                         } = el;
@@ -232,6 +351,10 @@ const ShowCampaign = () => {
                   <div className="email">
                     <p className="header">Campaign Owner Email</p>
                     <p>{campaign.email}</p>
+                  </div>
+                  <div className="contact">
+                    <p className="header">Contact Number</p>
+                    <p>{campaign.contact}</p>
                   </div>
                 </div>
               </div>

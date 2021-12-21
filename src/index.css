@@ -984,3 +984,40 @@ button.btn-back {
     display: none;
   }
 }
+
+
+/* Tracker Styles */
+.col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .col-tracker {
+  background-color: var(--light-blue-accent);
+  color: var(--white);
+  padding: 0.5rem;
+  border-radius: var(--pill-border-radius);
+} */
+
+.col-input {
+  width: 100%;
+  max-width: 270px;
+  display: block;
+  padding: 1rem;
+  background-color: var(--white);
+  border: 5px solid var(--light-blue-accent);
+  outline: none;
+  border-radius: var(--pill-border-radius);
+}
+
+.track-btn {
+  border: none;
+  border-radius: var(--pill-border-radius);
+  outline: none;
+  cursor: pointer;
+
+  background-color: var(--light-blue);
+  color: var(--white);
+  padding: 1rem 2rem;
+}
