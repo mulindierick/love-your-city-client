@@ -116,7 +116,7 @@ const SignUp = () => {
         <div style={{ display: loader[0] }}>
           <LinearProgress />
         </div>
-        <div style={{ display: loader[0] }}>
+        {/* <div style={{ display: loader[0] }}>
           <GoogleLogin
             clientId={process.env.REACT_APP_CLIENT_ID}
             buttonText="Signing up ..."
@@ -124,8 +124,8 @@ const SignUp = () => {
             onFailure={handleSignUp}
             cookiePolicy={"single_host_origin"}
           />
-        </div>
-        <div
+        </div> */}
+        {/* <div
           onClick={() => setLoader(["block", "none", "none"])}
           style={{ display: loader[1] }}
         >
@@ -136,7 +136,7 @@ const SignUp = () => {
             onFailure={handleSignUp}
             cookiePolicy={"single_host_origin"}
           />
-        </div>
+        </div> */}
         <div style={{ display: loader[2] }}>
           <CircularProgress />
           <div style={{ color: "white" }}>Signing up...</div>

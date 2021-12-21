@@ -130,7 +130,7 @@ const LogIn = () => {
         style={{ justifyContent: "center" }}
       >
         <h1 className="log-in-h1">Log In</h1>
-        <div
+        {/* <div
           onClick={() => setLoader(["block", "none", "none"])}
           style={{ display: loader[1] }}
         >
@@ -141,11 +141,11 @@ const LogIn = () => {
             onFailure={handleLogin}
             cookiePolicy={"single_host_origin"}
           />
-        </div>
-        <div style={{ display: loader[0] }}>
+        </div> */}
+        {/* <div style={{ display: loader[0] }}>
           <LinearProgress />
-        </div>
-        <div style={{ display: loader[0] }}>
+        </div> */}
+        {/* <div style={{ display: loader[0] }}>
           <GoogleLogin
             clientId={process.env.REACT_APP_CLIENT_ID}
             buttonText="Signing In ... "
@@ -153,7 +153,7 @@ const LogIn = () => {
             onFailure={handleLogin}
             cookiePolicy={"single_host_origin"}
           />
-        </div>
+        </div> */}
         <div style={{ display: loader[2] }}>
           <CircularProgress />
           <div style={{ color: "white" }}>Logging in...</div>
