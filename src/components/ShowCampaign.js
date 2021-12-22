@@ -18,6 +18,7 @@ const ShowCampaign = () => {
   const [donationUpdateState, setDonationUpdateState] = useState([]);
   let [error, setError] = useState("success");
   let [modelContent, setModelContent] = useState(`Link Copied`);
+  console.log(campaign)
 
   function BasicAlerts() {
     return (
@@ -227,7 +228,7 @@ const ShowCampaign = () => {
                     <h3 className="sh-desc">Donations</h3>
                     <div className="table-group-donations">
                       <div className="row header-row">
-                        <div className="col">Gifter</div>
+                        <div className="col">Donor</div>
                         <div className="col">Item</div>
                         <div className="col">Received Donations</div>
                         <div className="col">Donated On</div>
@@ -263,7 +264,7 @@ const ShowCampaign = () => {
                     {modalOpen && <BasicAlerts />}
                     <div className="table-group-donations">
                       <div className="row header-row">
-                        <div className="col">Gifter</div>
+                        <div className="col">Donor</div>
                         <div className="col">Item</div>
                         <div className="col">Pledged</div>
                         <div className="col">Update Pledge</div>

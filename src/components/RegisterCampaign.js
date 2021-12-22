@@ -289,7 +289,7 @@ const RegisterCampaign = () => {
 
           {/* Registry */}
           <div className="registry-div">
-            <h6>Add Items you wish to be Donated</h6>
+            <h6>Add items to be donated</h6>
             <div className="registry-input-div">
               <div style={{ display: "inline-block", width: "43%" }}>
                 <input
