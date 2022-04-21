@@ -13,6 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 
 const DonateToCampaign = () => {
+  const [showDonateBtn, setShowDonateBtn] = useState(true)
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
   let { id } = useParams();
   let history = useHistory();
@@ -34,34 +35,36 @@ const DonateToCampaign = () => {
 
   function BasicAlerts() {
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
-          <Alert
-            variant="filled"
-            severity={error}
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  if (modelContent === "Link Copied") {
-                    setModalOpen(false);
-                  } else if (modelContent === "Your Donation is empty") {
-                    window.location.reload();
-                  } else {
-                    window.location.reload();
-                  }
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-            sx={{ mb: 2 }}
-          >
-            {modelContent}
-          </Alert>
-        </Stack>
+      <div className="modal-bg">
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
+            <Alert
+              variant="filled"
+              severity={error}
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    if (modelContent === "Link Copied") {
+                      setModalOpen(false);
+                    } else if (modelContent === "Your Donation is empty") {
+                      window.location.reload();
+                    } else {
+                      window.location.reload();
+                    }
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              {modelContent}
+            </Alert>
+          </Stack>
+        </div>
       </div>
     );
   }
@@ -116,6 +119,7 @@ const DonateToCampaign = () => {
 
   // handle donation increase
   function incr(e) {
+    setShowDonateBtn(false)
     e.preventDefault();
     // console.log("incr", e.currentTarget.dataset.item);
     let itemName = e.currentTarget.dataset.item;

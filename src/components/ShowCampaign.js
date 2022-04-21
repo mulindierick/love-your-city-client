@@ -22,33 +22,35 @@ const ShowCampaign = () => {
 
   function BasicAlerts() {
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
-          <Alert
-            variant="filled"
-            severity={error}
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  if (modelContent === "Link Copied") {
-                    setModalOpen(false);
-                  } else {
-                    setModalOpen(false);
-                    history.push("/campaigns");
-                  }
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-            sx={{ mb: 2 }}
-          >
-            {modelContent}
-          </Alert>
-        </Stack>
+      <div className="modal-bg">
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Stack sx={{ width: "40%", alignContent: "center" }} spacing={2}>
+            <Alert
+              variant="filled"
+              severity={error}
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    if (modelContent === "Link Copied") {
+                      setModalOpen(false);
+                    } else {
+                      setModalOpen(false);
+                      history.push("/campaigns");
+                    }
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              {modelContent}
+            </Alert>
+          </Stack>
+        </div>
       </div>
     );
   }
