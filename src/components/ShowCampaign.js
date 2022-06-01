@@ -282,7 +282,7 @@ const ShowCampaign = () => {
 
                         return (
                           <div className="row" key={index}>
-                            <div className="col">{email.split("@")[0]}</div>
+                            <div className="col">{email}</div>
                             <div className="col">{name}</div>
                             <div className="col">{quan}</div>
                             <div className="col">
