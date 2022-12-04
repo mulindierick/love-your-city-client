@@ -55,7 +55,7 @@ export const Preview = () => {
   const goLive = () => {
     const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
 
-    fetch(`https://love-your-city-app.herokuapp.com/campaigns`, {
+    fetch(`https://web-production-6a96.up.railway.app/campaigns`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,

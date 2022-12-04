@@ -13,7 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 
 const DonateToCampaign = () => {
-  const [showDonateBtn, setShowDonateBtn] = useState(true)
+  const [showDonateBtn, setShowDonateBtn] = useState(true);
   const { campaign, setCampaign, setPrevUrl } = useContext(CampaignContext);
   let { id } = useParams();
   let history = useHistory();
@@ -73,7 +73,7 @@ const DonateToCampaign = () => {
   useEffect(() => {
     setPrevUrl(window.location.href.length);
 
-    fetch(` https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
+    fetch(` https://web-production-6a96.up.railway.app/campaigns/${id}`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ const DonateToCampaign = () => {
   useEffect(() => {
     // let token = JSON.parse(sessionStorage.getItem("accessToken"));
     // let user = JSON.parse(sessionStorage.getItem("user"));
-    fetch(`https://love-your-city-app.herokuapp.com/campaigns/items/${id}`, {
+    fetch(`https://web-production-6a96.up.railway.app/campaigns/items/${id}`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`,
@@ -119,7 +119,7 @@ const DonateToCampaign = () => {
 
   // handle donation increase
   function incr(e) {
-    setShowDonateBtn(false)
+    setShowDonateBtn(false);
     e.preventDefault();
     // console.log("incr", e.currentTarget.dataset.item);
     let itemName = e.currentTarget.dataset.item;
@@ -199,7 +199,7 @@ const DonateToCampaign = () => {
     }
 
     campaignItems.length > 0 && donationsTotal > 0
-      ? fetch(`https://love-your-city-app.herokuapp.com/campaigns/${id}`, {
+      ? fetch(`https://web-production-6a96.up.railway.app/campaigns/${id}`, {
           method: "POST",
           body: JSON.stringify(campaignItems),
           headers: {

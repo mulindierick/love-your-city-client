@@ -54,11 +54,9 @@ const LogIn = () => {
     );
   }
 
-
-
   const handleLogin = async (googleData) => {
     const res = await fetch(
-      "https://love-your-city-app.herokuapp.com/login/google",
+      "https://web-production-6a96.up.railway.app/login/google",
       {
         method: "POST",
         body: JSON.stringify({
@@ -76,7 +74,7 @@ const LogIn = () => {
         setModelContent(
           `We could not find an account associated with this email. Please Create an account first.`
         );
-        setError("error")
+        setError("error");
         setModalOpen(true);
       }
     } else {
@@ -92,7 +90,7 @@ const LogIn = () => {
   function handleSubmit(e) {
     e.preventDefault();
     setLoader(["none", "none", "block"]);
-    fetch("https://love-your-city-app.herokuapp.com/login", {
+    fetch("https://web-production-6a96.up.railway.app/login", {
       method: "POST",
       body: JSON.stringify({
         password: password,
@@ -116,7 +114,7 @@ const LogIn = () => {
       .catch((e) => {
         console.log(e);
         setLoader(["none", "block", "none"]);
-        setError("error")
+        setError("error");
         setModalOpen(true);
       });
   }

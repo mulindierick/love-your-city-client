@@ -13,12 +13,12 @@ const Campaigns = () => {
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
     let user = JSON.parse(sessionStorage.getItem("user"));
 
-    // https://love-your-city-app.herokuapp.com
+    // https://web-production-6a96.up.railway.app
     // http://localhost:5000
     !user
       ? history.push("/log-in")
       : fetch(
-          `https://love-your-city-app.herokuapp.com/users/${user["user_id"]}`,
+          `https://web-production-6a96.up.railway.app/users/${user["user_id"]}`,
           {
             method: "GET",
             headers: {

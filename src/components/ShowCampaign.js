@@ -18,7 +18,7 @@ const ShowCampaign = () => {
   const [donationUpdateState, setDonationUpdateState] = useState([]);
   let [error, setError] = useState("success");
   let [modelContent, setModelContent] = useState(`Link Copied`);
-  console.log(campaign)
+  console.log(campaign);
 
   function BasicAlerts() {
     return (
@@ -82,7 +82,7 @@ const ShowCampaign = () => {
     e.preventDefault();
     !user
       ? history.push("/log-in")
-      : fetch(`https://love-your-city-app.herokuapp.com/campaigns/${cId}`, {
+      : fetch(`https://web-production-6a96.up.railway.app/campaigns/${cId}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -145,14 +145,17 @@ const ShowCampaign = () => {
 
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
 
-    fetch(`https://love-your-city-app.herokuapp.com/users/received_donations`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(donationInfo),
-    })
+    fetch(
+      `https://web-production-6a96.up.railway.app/users/received_donations`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(donationInfo),
+      }
+    )
       .then((res) => res.json)
       .then((data) => {
         setModelContent("Donations update successful!");
