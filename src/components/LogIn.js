@@ -56,7 +56,7 @@ const LogIn = () => {
 
   const handleLogin = async (googleData) => {
     const res = await fetch(
-      "https://web-production-6a96.up.railway.app/login/google",
+      "https://render-lyc-app.onrender.com/login/google",
       {
         method: "POST",
         body: JSON.stringify({
@@ -90,7 +90,7 @@ const LogIn = () => {
   function handleSubmit(e) {
     e.preventDefault();
     setLoader(["none", "none", "block"]);
-    fetch("https://web-production-6a96.up.railway.app/login", {
+    fetch("https://render-lyc-app.onrender.com/login", {
       method: "POST",
       body: JSON.stringify({
         password: password,

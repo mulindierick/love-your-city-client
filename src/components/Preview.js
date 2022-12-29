@@ -55,7 +55,7 @@ export const Preview = () => {
   const goLive = () => {
     const accessToken = JSON.parse(sessionStorage.getItem("accessToken"));
 
-    fetch(`https://web-production-6a96.up.railway.app/campaigns`, {
+    fetch(`https://render-lyc-app.onrender.com/campaigns`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,

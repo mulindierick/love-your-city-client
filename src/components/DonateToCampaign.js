@@ -73,7 +73,7 @@ const DonateToCampaign = () => {
   useEffect(() => {
     setPrevUrl(window.location.href.length);
 
-    fetch(` https://web-production-6a96.up.railway.app/campaigns/${id}`, {
+    fetch(` https://render-lyc-app.onrender.com/campaigns/${id}`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ const DonateToCampaign = () => {
   useEffect(() => {
     // let token = JSON.parse(sessionStorage.getItem("accessToken"));
     // let user = JSON.parse(sessionStorage.getItem("user"));
-    fetch(`https://web-production-6a96.up.railway.app/campaigns/items/${id}`, {
+    fetch(`https://render-lyc-app.onrender.com/campaigns/items/${id}`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`,
@@ -199,7 +199,7 @@ const DonateToCampaign = () => {
     }
 
     campaignItems.length > 0 && donationsTotal > 0
-      ? fetch(`https://web-production-6a96.up.railway.app/campaigns/${id}`, {
+      ? fetch(`https://render-lyc-app.onrender.com/campaigns/${id}`, {
           method: "POST",
           body: JSON.stringify(campaignItems),
           headers: {

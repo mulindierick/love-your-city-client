@@ -13,19 +13,16 @@ const Campaigns = () => {
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
     let user = JSON.parse(sessionStorage.getItem("user"));
 
-    // https://web-production-6a96.up.railway.app
+    // https://render-lyc-app.onrender.com
     // http://localhost:5000
     !user
       ? history.push("/log-in")
-      : fetch(
-          `https://web-production-6a96.up.railway.app/users/${user["user_id"]}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+      : fetch(`https://render-lyc-app.onrender.com/users/${user["user_id"]}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
           .then((res) => res.json())
           .then((data) => {
             // console.log(data)

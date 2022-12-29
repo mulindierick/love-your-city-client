@@ -82,7 +82,7 @@ const ShowCampaign = () => {
     e.preventDefault();
     !user
       ? history.push("/log-in")
-      : fetch(`https://web-production-6a96.up.railway.app/campaigns/${cId}`, {
+      : fetch(`https://render-lyc-app.onrender.com/campaigns/${cId}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -145,17 +145,14 @@ const ShowCampaign = () => {
 
     let token = JSON.parse(sessionStorage.getItem("accessToken"));
 
-    fetch(
-      `https://web-production-6a96.up.railway.app/users/received_donations`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(donationInfo),
-      }
-    )
+    fetch(`https://render-lyc-app.onrender.com/users/received_donations`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(donationInfo),
+    })
       .then((res) => res.json)
       .then((data) => {
         setModelContent("Donations update successful!");

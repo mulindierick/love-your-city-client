@@ -55,7 +55,7 @@ const SignUp = () => {
 
   const handleSignUp = async (googleData) => {
     const res = await fetch(
-      "https://web-production-6a96.up.railway.app/users/google",
+      "https://render-lyc-app.onrender.com/users/google",
       {
         method: "POST",
         body: JSON.stringify({
@@ -82,7 +82,7 @@ const SignUp = () => {
   function handleSubmit(e) {
     e.preventDefault();
     setLoader(["none", "none", "block"]);
-    fetch("https://web-production-6a96.up.railway.app/users", {
+    fetch("https://render-lyc-app.onrender.com/users", {
       method: "POST",
       body: JSON.stringify({
         name: username,
